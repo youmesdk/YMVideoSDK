@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/multiroom_info_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="温馨提示：点击钮进入频道，再次点击退出频道，长按开关麦" />
+
+    <TextView
+        android:id="@+id/sdk_info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="房间信息" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/multiroom_universe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主播频道" />
+
+            <TextView
+                android:id="@+id/multiroom_universe_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/multiroom_universe_speak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#ff0000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/multiroom_world"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="组队频道1" />
+
+            <TextView
+            android:id="@+id/multiroom_world_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+            <TextView
+                android:id="@+id/multiroom_world_speak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#ff0000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/multiroom_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="组队频道2" />
+
+            <TextView
+                android:id="@+id/multiroom_country_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/multiroom_country_speak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#ff0000" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/multiroom_host_ctrl_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="播开始"
+                android:onClick="onHostCtrlClick" />
+
+            <Button
+                android:id="@+id/multiroom_viewer_ctrl_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="看开始"
+                android:onClick="onViewerCtrlClick" />
+
+            <TextView
+                android:id="@+id/multiroom_host_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="主播时间(秒)" />
+
+            <EditText
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/multiroom_host_time_et"
+                android:text="0" />
+                </LinearLayout>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/unmaskUserIdBtn"
+                android:text="听该用户"
+                android:onClick="onUnmaskUserVoice" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/maskUserIdBtn"
+                android:text="不听该用户"
+                android:onClick="onMaskUserVoice" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/maskUserIdEt"
+                android:text="ym_" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/multiroom_speak_to_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所有频道讲话"
+            android:onClick="onSpeakToAll" />
+
+        <Button
+            android:id="@+id/multiroom_leave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+            android:text="退出多频道" />
+
+        </LinearLayout>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/multiroom_error_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="#ff0000" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:inputType="none"
+        android:textIsSelectable="true"
+        android:scrollbars="vertical"
+        android:ems="10"
+        android:id="@+id/multiroom_common_msg"
+        android:hint="message"
+        android:textSize="12sp" />
+</LinearLayout>

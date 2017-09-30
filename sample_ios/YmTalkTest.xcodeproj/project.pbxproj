@@ -1,0 +1,720 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2048A1551D34A0520099190B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048A1541D34A0520099190B /* main.m */; };
+		2048A1581D34A0520099190B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048A1571D34A0520099190B /* AppDelegate.m */; };
+		2048A15B1D34A0520099190B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048A15A1D34A0520099190B /* ViewController.m */; };
+		2048A15E1D34A0520099190B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2048A15C1D34A0520099190B /* Main.storyboard */; };
+		2048A1601D34A0520099190B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2048A15F1D34A0520099190B /* Assets.xcassets */; };
+		2048A1631D34A0520099190B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2048A1611D34A0520099190B /* LaunchScreen.storyboard */; };
+		2048A16E1D34A0520099190B /* VoiceTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048A16D1D34A0520099190B /* VoiceTestTests.m */; };
+		2048A1791D34A0520099190B /* VoiceTestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048A1781D34A0520099190B /* VoiceTestUITests.m */; };
+		2048A18B1D34A1AA0099190B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2048A18A1D34A1AA0099190B /* SystemConfiguration.framework */; };
+		2048A18D1D34A1B20099190B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2048A18C1D34A1B20099190B /* CoreTelephony.framework */; };
+		2048A18F1D34A1BF0099190B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2048A18E1D34A1BF0099190B /* AVFoundation.framework */; };
+		2048A1911D34A1CA0099190B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2048A1901D34A1CA0099190B /* AudioToolbox.framework */; };
+		2091D5AA1D40D5C000F8D738 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2091D5A91D40D5C000F8D738 /* CFNetwork.framework */; };
+		20CBA6B71D34DE72000EAF5D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20CBA6B61D34DE72000EAF5D /* CoreFoundation.framework */; };
+		20F5DC3C1D34C6E200E650C6 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F5DC3B1D34C6E200E650C6 /* libz.1.2.5.tbd */; };
+		20F5DC3E1D34C6F200E650C6 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F5DC3D1D34C6F200E650C6 /* libresolv.9.tbd */; };
+		20F5DC401D34C70100E650C6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F5DC3F1D34C70100E650C6 /* libsqlite3.0.tbd */; };
+		AF0E5CED1F74EFC700D2FC8B /* AudioQueuePlay.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0E5CEC1F74EFC700D2FC8B /* AudioQueuePlay.m */; };
+		AF1C16081F54F1C300CF6B19 /* CameraCaptureDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1C16071F54F1C300CF6B19 /* CameraCaptureDemo.m */; };
+		AF2716891F6F6D5900EEA829 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2716881F6F6D5900EEA829 /* VideoToolbox.framework */; };
+		BEA4ABE61F1324F100286656 /* YMVoiceService.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEA4ABE51F1324F100286656 /* YMVoiceService.mm */; };
+		BEA4ABE91F13278100286656 /* libYouMeCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA4ABE81F13278100286656 /* libYouMeCommon.a */; };
+		BEA5D5DF1F7E1A9000679BDF /* ParamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5D5DE1F7E1A9000679BDF /* ParamViewController.m */; };
+		BEEDDFB71F6911B80089C80D /* libyoume_voice_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEDDFB61F6911B80089C80D /* libyoume_voice_engine.a */; };
+		D02357D41D6BFE1100F2EB71 /* kanong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D02357D31D6BFE1100F2EB71 /* kanong.mp3 */; };
+		D065189C1DE2D7E8005ABE42 /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = D065189B1DE2D7E8005ABE42 /* ExportOptions.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2048A16A1D34A0520099190B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2048A1481D34A0520099190B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2048A14F1D34A0520099190B;
+			remoteInfo = VoiceTest;
+		};
+		2048A1751D34A0520099190B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2048A1481D34A0520099190B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2048A14F1D34A0520099190B;
+			remoteInfo = VoiceTest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2048A1501D34A0520099190B /* YmTalkTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YmTalkTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2048A1541D34A0520099190B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2048A1561D34A0520099190B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2048A1571D34A0520099190B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2048A1591D34A0520099190B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2048A15A1D34A0520099190B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2048A15D1D34A0520099190B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2048A15F1D34A0520099190B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2048A1621D34A0520099190B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2048A1641D34A0520099190B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2048A1691D34A0520099190B /* YmTalkTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YmTalkTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2048A16D1D34A0520099190B /* VoiceTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceTestTests.m; sourceTree = "<group>"; };
+		2048A16F1D34A0520099190B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2048A1741D34A0520099190B /* YmTalkTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YmTalkTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2048A1781D34A0520099190B /* VoiceTestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceTestUITests.m; sourceTree = "<group>"; };
+		2048A17A1D34A0520099190B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2048A1881D34A19C0099190B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2048A18A1D34A1AA0099190B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2048A18C1D34A1B20099190B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2048A18E1D34A1BF0099190B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2048A1901D34A1CA0099190B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2091D5A91D40D5C000F8D738 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		20CBA6B61D34DE72000EAF5D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		20DF0C3A1D34D3C100C96592 /* VoiceEngineCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceEngineCallback.h; sourceTree = "<group>"; };
+		20F5DC3B1D34C6E200E650C6 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		20F5DC3D1D34C6F200E650C6 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
+		20F5DC3F1D34C70100E650C6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		AF0E5CEB1F74EFC700D2FC8B /* AudioQueuePlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioQueuePlay.h; sourceTree = "<group>"; };
+		AF0E5CEC1F74EFC700D2FC8B /* AudioQueuePlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioQueuePlay.m; sourceTree = "<group>"; };
+		AF1C16061F54F1C300CF6B19 /* CameraCaptureDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraCaptureDemo.h; sourceTree = "<group>"; };
+		AF1C16071F54F1C300CF6B19 /* CameraCaptureDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraCaptureDemo.m; sourceTree = "<group>"; };
+		AF2716881F6F6D5900EEA829 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		AFA74E8C1F4FE08C009CBC5B /* libyoume_voice_engine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyoume_voice_engine.a; path = "../../youme_voice_engine/xcode/YouMeVoiceEngine/build/Debug-iphoneos/libyoume_voice_engine.a"; sourceTree = "<group>"; };
+		AFA74E8F1F4FE0B8009CBC5B /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libswscale.a; sourceTree = "<group>"; };
+		AFA74E901F4FE0B8009CBC5B /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libavcodec.a; sourceTree = "<group>"; };
+		AFA74E911F4FE0B8009CBC5B /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libavformat.a; sourceTree = "<group>"; };
+		AFA74E921F4FE0B8009CBC5B /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libavutil.a; sourceTree = "<group>"; };
+		AFA74E931F4FE0B8009CBC5B /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libx264.a; sourceTree = "<group>"; };
+		AFB21CF11F7E4C5200958932 /* YMEngineService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMEngineService.h; path = SDK/include/YMEngineService.h; sourceTree = "<group>"; };
+		AFB21CF21F7E4C5200958932 /* IYouMeCInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IYouMeCInterface.h; path = SDK/include/IYouMeCInterface.h; sourceTree = "<group>"; };
+		AFB21CF31F7E4C5200958932 /* YMFrameCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMFrameCallback.h; path = SDK/include/YMFrameCallback.h; sourceTree = "<group>"; };
+		AFB21CF41F7E4C5200958932 /* IYouMeVideoCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IYouMeVideoCallback.h; path = SDK/include/IYouMeVideoCallback.h; sourceTree = "<group>"; };
+		AFB21CF51F7E4C5200958932 /* OpenGLView20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLView20.h; path = SDK/include/OpenGLView20.h; sourceTree = "<group>"; };
+		BEA4ABE41F1324F100286656 /* YMVoiceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMVoiceService.h; sourceTree = "<group>"; };
+		BEA4ABE51F1324F100286656 /* YMVoiceService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YMVoiceService.mm; sourceTree = "<group>"; };
+		BEA4ABE81F13278100286656 /* libYouMeCommon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libYouMeCommon.a; path = SDK/libs/libYouMeCommon.a; sourceTree = "<group>"; };
+		BEA5D5DD1F7E1A9000679BDF /* ParamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParamViewController.h; sourceTree = "<group>"; };
+		BEA5D5DE1F7E1A9000679BDF /* ParamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParamViewController.m; sourceTree = "<group>"; };
+		BEEDDFB61F6911B80089C80D /* libyoume_voice_engine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyoume_voice_engine.a; path = SDK/libs/libyoume_voice_engine.a; sourceTree = "<group>"; };
+		D00D99271DE050FF00C324E7 /* IYouMeVoiceEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IYouMeVoiceEngine.h; path = SDK/include/IYouMeVoiceEngine.h; sourceTree = "<group>"; };
+		D00D99281DE050FF00C324E7 /* YouMeConstDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouMeConstDefine.h; path = SDK/include/YouMeConstDefine.h; sourceTree = "<group>"; };
+		D02357D31D6BFE1100F2EB71 /* kanong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = kanong.mp3; path = Resources/kanong.mp3; sourceTree = "<group>"; };
+		D065189B1DE2D7E8005ABE42 /* ExportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
+		D091622B1E0D17250016C64C /* IYouMeEventCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IYouMeEventCallback.h; path = SDK/include/IYouMeEventCallback.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2048A14D1D34A0520099190B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF2716891F6F6D5900EEA829 /* VideoToolbox.framework in Frameworks */,
+				2091D5AA1D40D5C000F8D738 /* CFNetwork.framework in Frameworks */,
+				20CBA6B71D34DE72000EAF5D /* CoreFoundation.framework in Frameworks */,
+				20F5DC401D34C70100E650C6 /* libsqlite3.0.tbd in Frameworks */,
+				20F5DC3E1D34C6F200E650C6 /* libresolv.9.tbd in Frameworks */,
+				BEA4ABE91F13278100286656 /* libYouMeCommon.a in Frameworks */,
+				BEEDDFB71F6911B80089C80D /* libyoume_voice_engine.a in Frameworks */,
+				20F5DC3C1D34C6E200E650C6 /* libz.1.2.5.tbd in Frameworks */,
+				2048A1911D34A1CA0099190B /* AudioToolbox.framework in Frameworks */,
+				2048A18F1D34A1BF0099190B /* AVFoundation.framework in Frameworks */,
+				2048A18D1D34A1B20099190B /* CoreTelephony.framework in Frameworks */,
+				2048A18B1D34A1AA0099190B /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2048A1661D34A0520099190B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2048A1711D34A0520099190B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2048A1471D34A0520099190B = {
+			isa = PBXGroup;
+			children = (
+				D02357D01D6B3AAD00F2EB71 /* Music */,
+				D02357BE1D682B1D00F2EB71 /* SDKInclude */,
+				D02357BD1D682ADD00F2EB71 /* Frameworks */,
+				2048A1521D34A0520099190B /* VoiceTest */,
+				2048A16C1D34A0520099190B /* VoiceTestTests */,
+				2048A1771D34A0520099190B /* VoiceTestUITests */,
+				2048A1511D34A0520099190B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2048A1511D34A0520099190B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2048A1501D34A0520099190B /* YmTalkTest.app */,
+				2048A1691D34A0520099190B /* YmTalkTest.xctest */,
+				2048A1741D34A0520099190B /* YmTalkTest.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2048A1521D34A0520099190B /* VoiceTest */ = {
+			isa = PBXGroup;
+			children = (
+				D065189B1DE2D7E8005ABE42 /* ExportOptions.plist */,
+				2048A1561D34A0520099190B /* AppDelegate.h */,
+				BEA5D5DD1F7E1A9000679BDF /* ParamViewController.h */,
+				BEA5D5DE1F7E1A9000679BDF /* ParamViewController.m */,
+				2048A1571D34A0520099190B /* AppDelegate.m */,
+				2048A1591D34A0520099190B /* ViewController.h */,
+				2048A15A1D34A0520099190B /* ViewController.m */,
+				2048A15C1D34A0520099190B /* Main.storyboard */,
+				2048A15F1D34A0520099190B /* Assets.xcassets */,
+				2048A1641D34A0520099190B /* Info.plist */,
+				2048A1531D34A0520099190B /* Supporting Files */,
+				AF1C16061F54F1C300CF6B19 /* CameraCaptureDemo.h */,
+				AF1C16071F54F1C300CF6B19 /* CameraCaptureDemo.m */,
+				AF0E5CEB1F74EFC700D2FC8B /* AudioQueuePlay.h */,
+				AF0E5CEC1F74EFC700D2FC8B /* AudioQueuePlay.m */,
+			);
+			path = VoiceTest;
+			sourceTree = "<group>";
+		};
+		2048A1531D34A0520099190B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2048A1541D34A0520099190B /* main.m */,
+				BEA4ABE41F1324F100286656 /* YMVoiceService.h */,
+				BEA4ABE51F1324F100286656 /* YMVoiceService.mm */,
+				20DF0C3A1D34D3C100C96592 /* VoiceEngineCallback.h */,
+				2048A1611D34A0520099190B /* LaunchScreen.storyboard */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2048A16C1D34A0520099190B /* VoiceTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				2048A16D1D34A0520099190B /* VoiceTestTests.m */,
+				2048A16F1D34A0520099190B /* Info.plist */,
+			);
+			path = VoiceTestTests;
+			sourceTree = "<group>";
+		};
+		2048A1771D34A0520099190B /* VoiceTestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2048A1781D34A0520099190B /* VoiceTestUITests.m */,
+				2048A17A1D34A0520099190B /* Info.plist */,
+			);
+			path = VoiceTestUITests;
+			sourceTree = "<group>";
+		};
+		AFA74E8E1F4FE09A009CBC5B /* ffmpeg */ = {
+			isa = PBXGroup;
+			children = (
+				AFA74E8F1F4FE0B8009CBC5B /* libswscale.a */,
+				AFA74E901F4FE0B8009CBC5B /* libavcodec.a */,
+				AFA74E911F4FE0B8009CBC5B /* libavformat.a */,
+				AFA74E921F4FE0B8009CBC5B /* libavutil.a */,
+				AFA74E931F4FE0B8009CBC5B /* libx264.a */,
+			);
+			name = ffmpeg;
+			sourceTree = "<group>";
+		};
+		AFB21CF71F7E4C8B00958932 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				AFA74E8C1F4FE08C009CBC5B /* libyoume_voice_engine.a */,
+				AFA74E8E1F4FE09A009CBC5B /* ffmpeg */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
+		D02357BD1D682ADD00F2EB71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFB21CF71F7E4C8B00958932 /* test */,
+				AF2716881F6F6D5900EEA829 /* VideoToolbox.framework */,
+				BEEDDFB61F6911B80089C80D /* libyoume_voice_engine.a */,
+				BEA4ABE81F13278100286656 /* libYouMeCommon.a */,
+				20F5DC3F1D34C70100E650C6 /* libsqlite3.0.tbd */,
+				20F5DC3D1D34C6F200E650C6 /* libresolv.9.tbd */,
+				20F5DC3B1D34C6E200E650C6 /* libz.1.2.5.tbd */,
+				2048A1881D34A19C0099190B /* libz.tbd */,
+				2048A1901D34A1CA0099190B /* AudioToolbox.framework */,
+				2048A18E1D34A1BF0099190B /* AVFoundation.framework */,
+				2048A18C1D34A1B20099190B /* CoreTelephony.framework */,
+				2048A18A1D34A1AA0099190B /* SystemConfiguration.framework */,
+				2091D5A91D40D5C000F8D738 /* CFNetwork.framework */,
+				20CBA6B61D34DE72000EAF5D /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D02357BE1D682B1D00F2EB71 /* SDKInclude */ = {
+			isa = PBXGroup;
+			children = (
+				AFB21CF21F7E4C5200958932 /* IYouMeCInterface.h */,
+				AFB21CF41F7E4C5200958932 /* IYouMeVideoCallback.h */,
+				AFB21CF51F7E4C5200958932 /* OpenGLView20.h */,
+				AFB21CF11F7E4C5200958932 /* YMEngineService.h */,
+				AFB21CF31F7E4C5200958932 /* YMFrameCallback.h */,
+				D091622B1E0D17250016C64C /* IYouMeEventCallback.h */,
+				D00D99271DE050FF00C324E7 /* IYouMeVoiceEngine.h */,
+				D00D99281DE050FF00C324E7 /* YouMeConstDefine.h */,
+			);
+			name = SDKInclude;
+			sourceTree = "<group>";
+		};
+		D02357D01D6B3AAD00F2EB71 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				D02357D31D6BFE1100F2EB71 /* kanong.mp3 */,
+			);
+			name = Music;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2048A14F1D34A0520099190B /* YmTalkTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2048A17D1D34A0520099190B /* Build configuration list for PBXNativeTarget "YmTalkTest" */;
+			buildPhases = (
+				2048A14C1D34A0520099190B /* Sources */,
+				2048A14D1D34A0520099190B /* Frameworks */,
+				2048A14E1D34A0520099190B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YmTalkTest;
+			productName = VoiceTest;
+			productReference = 2048A1501D34A0520099190B /* YmTalkTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2048A1681D34A0520099190B /* YmTalkTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2048A1801D34A0520099190B /* Build configuration list for PBXNativeTarget "YmTalkTestTests" */;
+			buildPhases = (
+				2048A1651D34A0520099190B /* Sources */,
+				2048A1661D34A0520099190B /* Frameworks */,
+				2048A1671D34A0520099190B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2048A16B1D34A0520099190B /* PBXTargetDependency */,
+			);
+			name = YmTalkTestTests;
+			productName = VoiceTestTests;
+			productReference = 2048A1691D34A0520099190B /* YmTalkTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2048A1731D34A0520099190B /* YmTalkTestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2048A1831D34A0520099190B /* Build configuration list for PBXNativeTarget "YmTalkTestUITests" */;
+			buildPhases = (
+				2048A1701D34A0520099190B /* Sources */,
+				2048A1711D34A0520099190B /* Frameworks */,
+				2048A1721D34A0520099190B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2048A1761D34A0520099190B /* PBXTargetDependency */,
+			);
+			name = YmTalkTestUITests;
+			productName = VoiceTestUITests;
+			productReference = 2048A1741D34A0520099190B /* YmTalkTest.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2048A1481D34A0520099190B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Youme;
+				TargetAttributes = {
+					2048A14F1D34A0520099190B = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = NUZXKA7782;
+					};
+					2048A1681D34A0520099190B = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 2048A14F1D34A0520099190B;
+					};
+					2048A1731D34A0520099190B = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 2048A14F1D34A0520099190B;
+					};
+				};
+			};
+			buildConfigurationList = 2048A14B1D34A0520099190B /* Build configuration list for PBXProject "YmTalkTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2048A1471D34A0520099190B;
+			productRefGroup = 2048A1511D34A0520099190B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2048A14F1D34A0520099190B /* YmTalkTest */,
+				2048A1681D34A0520099190B /* YmTalkTestTests */,
+				2048A1731D34A0520099190B /* YmTalkTestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2048A14E1D34A0520099190B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2048A1631D34A0520099190B /* LaunchScreen.storyboard in Resources */,
+				D065189C1DE2D7E8005ABE42 /* ExportOptions.plist in Resources */,
+				2048A1601D34A0520099190B /* Assets.xcassets in Resources */,
+				D02357D41D6BFE1100F2EB71 /* kanong.mp3 in Resources */,
+				2048A15E1D34A0520099190B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2048A1671D34A0520099190B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2048A1721D34A0520099190B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2048A14C1D34A0520099190B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEA5D5DF1F7E1A9000679BDF /* ParamViewController.m in Sources */,
+				AF0E5CED1F74EFC700D2FC8B /* AudioQueuePlay.m in Sources */,
+				AF1C16081F54F1C300CF6B19 /* CameraCaptureDemo.m in Sources */,
+				2048A15B1D34A0520099190B /* ViewController.m in Sources */,
+				2048A1581D34A0520099190B /* AppDelegate.m in Sources */,
+				BEA4ABE61F1324F100286656 /* YMVoiceService.mm in Sources */,
+				2048A1551D34A0520099190B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2048A1651D34A0520099190B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2048A16E1D34A0520099190B /* VoiceTestTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2048A1701D34A0520099190B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2048A1791D34A0520099190B /* VoiceTestUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2048A16B1D34A0520099190B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2048A14F1D34A0520099190B /* YmTalkTest */;
+			targetProxy = 2048A16A1D34A0520099190B /* PBXContainerItemProxy */;
+		};
+		2048A1761D34A0520099190B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2048A14F1D34A0520099190B /* YmTalkTest */;
+			targetProxy = 2048A1751D34A0520099190B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2048A15C1D34A0520099190B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2048A15D1D34A0520099190B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2048A1611D34A0520099190B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2048A1621D34A0520099190B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2048A17B1D34A0520099190B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2048A17C1D34A0520099190B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2048A17E1D34A0520099190B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_DEBUG_INFORMATION_LEVEL = default;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: me you (Z5JLD7ST65)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = NUZXKA7782;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/SDK/include\"";
+				INFOPLIST_FILE = VoiceTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SDK/libs",
+					"$(PROJECT_DIR)/../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youme.talk.test;
+				PRODUCT_NAME = YmTalkTest;
+				PROVISIONING_PROFILE = "53f8085d-714e-4a52-b309-70b178c9d49e";
+				PROVISIONING_PROFILE_SPECIFIER = YoumeDemoTest;
+				STRIP_INSTALLED_PRODUCT = YES;
+				STRIP_STYLE = all;
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Debug;
+		};
+		2048A17F1D34A0520099190B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_DEBUG_INFORMATION_LEVEL = default;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: me you (NUZXKA7782)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = NUZXKA7782;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/SDK/include\"";
+				INFOPLIST_FILE = VoiceTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SDK/libs",
+					"$(PROJECT_DIR)/../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youme.talk.test;
+				PRODUCT_NAME = YmTalkTest;
+				PROVISIONING_PROFILE = "76b8ed1b-e185-47f7-add7-1a5960534ec5";
+				PROVISIONING_PROFILE_SPECIFIER = adhocdemo;
+				STRIP_INSTALLED_PRODUCT = YES;
+				STRIP_STYLE = all;
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Release;
+		};
+		2048A1811D34A0520099190B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = VoiceTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kilo.VoiceTestTests;
+				PRODUCT_NAME = YmTalkTest;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YmTalkTest.app/YmTalkTest";
+			};
+			name = Debug;
+		};
+		2048A1821D34A0520099190B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = VoiceTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kilo.VoiceTestTests;
+				PRODUCT_NAME = YmTalkTest;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YmTalkTest.app/YmTalkTest";
+			};
+			name = Release;
+		};
+		2048A1841D34A0520099190B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = VoiceTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kilo.VoiceTestUITests;
+				PRODUCT_NAME = YmTalkTest;
+				TEST_TARGET_NAME = VoiceTest;
+			};
+			name = Debug;
+		};
+		2048A1851D34A0520099190B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = VoiceTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kilo.VoiceTestUITests;
+				PRODUCT_NAME = YmTalkTest;
+				TEST_TARGET_NAME = VoiceTest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2048A14B1D34A0520099190B /* Build configuration list for PBXProject "YmTalkTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2048A17B1D34A0520099190B /* Debug */,
+				2048A17C1D34A0520099190B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2048A17D1D34A0520099190B /* Build configuration list for PBXNativeTarget "YmTalkTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2048A17E1D34A0520099190B /* Debug */,
+				2048A17F1D34A0520099190B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2048A1801D34A0520099190B /* Build configuration list for PBXNativeTarget "YmTalkTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2048A1811D34A0520099190B /* Debug */,
+				2048A1821D34A0520099190B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2048A1831D34A0520099190B /* Build configuration list for PBXNativeTarget "YmTalkTestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2048A1841D34A0520099190B /* Debug */,
+				2048A1851D34A0520099190B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2048A1481D34A0520099190B /* Project object */;
+}

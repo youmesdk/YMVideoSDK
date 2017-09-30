@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="im.youme.talk.sample.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/server_setting_layout"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serverModeSpinner"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Debug模式"
+            android:id="@+id/debugSwitch"
+            android:checked="false"
+            android:layout_alignTop="@+id/serverModeSpinner"
+            android:layout_toRightOf="@id/serverModeSpinner"
+            android:layout_toEndOf="@id/serverModeSpinner"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="20dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ip_port_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/server_setting_layout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="IP:"
+            android:id="@+id/ipTag"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="192.168.0.0."
+            android:id="@+id/ipET"
+            android:layout_alignTop="@+id/ipTag"
+            android:layout_toRightOf="@id/ipTag"
+            android:layout_toEndOf="@id/ipTag"
+            android:layout_marginTop="-10dp"
+            android:inputType="phone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="port:"
+            android:id="@+id/portTag"
+            android:layout_alignTop="@+id/ipET"
+            android:layout_toRightOf="@id/ipET"
+            android:layout_toEndOf="@id/ipET"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5000"
+            android:id="@+id/portET"
+            android:layout_alignTop="@+id/portTag"
+            android:layout_toRightOf="@id/portTag"
+            android:layout_toEndOf="@id/portTag"
+            android:layout_marginTop="-10dp"
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/server_region_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/ip_port_layout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务器区域:"
+            android:id="@+id/serverRegionTag"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serverRegionSpinner"
+            android:layout_toRightOf="@+id/serverRegionTag"
+            android:layout_alignTop="@+id/serverRegionTag"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="-5dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ext"
+            android:id="@+id/extServerRegionET"
+            android:layout_alignTop="@+id/serverRegionSpinner"
+            android:layout_toRightOf="@id/serverRegionSpinner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="-10dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/refresh_server_setting_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/server_region_layout"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="刷新服务器设置"
+            android:id="@+id/refreshServerSettingsBtn"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:onClick="onRefreshServerSettingsClick" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_id_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/refresh_server_setting_layout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="32dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="    用户ID:"
+            android:id="@+id/userIDTag"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userID"
+            android:text="youme_1"
+            android:layout_alignBottom="@+id/userIDTag"
+            android:layout_toRightOf="@+id/userIDTag"
+            android:layout_toEndOf="@+id/userIDTag" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/room_id_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/user_id_layout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="32dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="    房间ID:"
+            android:id="@+id/roomIDTag"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/roomID"
+            android:text="2418"
+            android:layout_alignTop="@+id/roomIDTag"
+            android:layout_toRightOf="@+id/roomIDTag"
+            android:layout_toEndOf="@+id/roomIDTag" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mobile_network_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/room_id_layout"
+        android:orientation="horizontal">
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="允许使用3G/4G"
+            android:id="@+id/mobileSwitch"
+            android:checked="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/room_mode_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/mobile_network_layout"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主播模式"
+            android:id="@+id/btn_host_mode"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:onClick="onHostClick"
+            android:layout_toStartOf="@+id/btn_multi_mode" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="听众模式"
+            android:id="@+id/btn_listener_mode"
+            android:onClick="onListenerClick"
+            android:layout_below="@+id/btn_host_mode"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_talker_mode"
+            android:layout_toRightOf="@+id/btn_host_mode"
+            android:layout_alignBottom="@+id/btn_host_mode"
+            android:layout_alignTop="@+id/btn_host_mode"
+            android:text="普通房间"
+            android:onClick="onNormalClick" />
+
+        <Button
+            android:text="多房间模式"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_multi_mode"
+            android:layout_toRightOf="@+id/btn_listener_mode"
+            android:layout_alignBottom="@+id/btn_listener_mode"
+            android:layout_alignTop="@+id/btn_listener_mode"
+            android:onClick="onMultiRoomClick" />
+
+        <Button
+            android:text="随机测试"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_random_test"
+            android:layout_toRightOf="@+id/btn_multi_mode"
+            android:layout_alignBottom="@+id/btn_multi_mode"
+            android:layout_alignTop="@+id/btn_multi_mode"
+            android:onClick="onRandomTestClick" />
+
+        <Button
+            android:id="@+id/btn_play_dump_pcm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btn_listener_mode"
+            android:layout_alignRight="@+id/btn_listener_mode"
+            android:layout_below="@+id/btn_listener_mode"
+            android:text="开始播放"
+            android:onClick="onPlayDumpPcm" />
+
+        <Button
+            android:id="@+id/btn_stop_dump_pcm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/btn_play_dump_pcm"
+            android:layout_toRightOf="@+id/btn_play_dump_pcm"
+            android:layout_alignRight="@+id/btn_multi_mode"
+            android:text="停止播放"
+            android:onClick="onStopPlayDumpPcm" />
+
+        <Spinner
+            android:id="@+id/spinnerPcmPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_random_test"
+            android:layout_toRightOf="@+id/btn_stop_dump_pcm"
+            android:layout_alignLeft="@+id/btn_random_test"
+            android:layout_alignBottom="@+id/btn_stop_dump_pcm"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tips_layout"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/room_mode_layout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Hello!"
+            android:id="@+id/tipTag"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

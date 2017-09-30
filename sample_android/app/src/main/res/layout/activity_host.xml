@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="im.youme.talk.sample.HostActivity">
+
+    <Button
+        android:id="@+id/btnInviteTest"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/hostLeaveChannelBtn"
+        android:layout_alignBottom="@+id/hostLeaveChannelBtn"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:layout_toEndOf="@+id/hostLeaveChannelBtn"
+        android:layout_toRightOf="@+id/hostLeaveChannelBtn"
+        android:onClick="onInviteMicTestClick"
+        android:text="连麦测试" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hostTitleEt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="title1"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="italic"
+        android:textSize="20px"
+        android:editable="false" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="耳机监听"
+        android:id="@+id/hostMonitorSwitch"
+        android:checked="false"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/hostTitleEt" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="混响音效"
+        android:id="@+id/hostReverbSwitch"
+        android:checked="false"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/hostMonitorSwitch"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="背景乐"
+        android:id="@+id/hostBgmSwitch"
+        android:checked="false"
+        android:layout_below="@+id/hostReverbSwitch"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hostBgmSeekBar"
+        android:layout_toRightOf ="@+id/hostBgmSwitch"
+        android:layout_alignTop="@+id/hostBgmSwitch"
+        android:layout_alignBottom="@+id/hostBgmSwitch"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="100" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="100"
+        android:id="@+id/hostBgmVolumeTv"
+        android:layout_alignTop="@+id/hostBgmSeekBar"
+        android:layout_alignBottom="@+id/hostBgmSeekBar"
+        android:layout_alignParentRight="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="背景乐暂停"
+        android:id="@+id/hostBgmPauseSwitch"
+        android:checked="false"
+        android:layout_below="@+id/hostBgmSwitch"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="麦克风"
+        android:id="@+id/hostMicSwitch"
+        android:checked="true"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/hostBgmPauseSwitch"
+        android:layout_alignParentLeft="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="扬声器"
+        android:id="@+id/hostSpeakerSwitch"
+        android:checked="true"
+        android:layout_below="@+id/hostMicSwitch"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true" />
+
+    <SeekBar
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/hostVolumeSeekBar"
+        android:layout_toRightOf="@+id/hostSpeakerSwitch"
+        android:layout_alignTop="@+id/hostSpeakerSwitch"
+        android:layout_alignBottom="@+id/hostSpeakerSwitch"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:max="100"
+        android:indeterminate="false"
+        android:progress="100"  />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="100"
+        android:id="@+id/hostVolumeTagTv"
+        android:layout_alignTop="@+id/hostVolumeSeekBar"
+        android:layout_alignBottom="@+id/hostVolumeSeekBar"
+        android:layout_alignParentRight="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="暂停通话"
+        android:id="@+id/hostPauseSwitch"
+        android:checked="false"
+        android:textOff = "否"
+        android:textOn="是"
+        android:layout_below="@+id/hostSpeakerSwitch"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="21dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加入频道"
+        android:id="@+id/hostJoinChannelBtn"
+        android:onClick="onJoinChannelClick"
+        android:layout_below="@id/hostPauseSwitch"
+        android:layout_alignLeft="@id/hostPauseSwitch" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="离开频道"
+        android:id="@+id/hostLeaveChannelBtn"
+        android:onClick="onLeaveChannelClick"
+        android:layout_toRightOf="@id/hostJoinChannelBtn"
+        android:layout_alignTop="@id/hostJoinChannelBtn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/hostTipsTv"
+        android:text="tips"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:editable="false"
+        android:textColor="@color/colorAccent"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="返回主页"
+        android:id="@+id/hostReturnBtn"
+        android:onClick="onReturnClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="实时视频"
+        android:id="@+id/room_video_capturer"
+        android:layout_below="@+id/hostJoinChannelBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/hostLeaveChannelBtn"
+        android:layout_toStartOf="@+id/hostLeaveChannelBtn" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="视频渲染"
+        android:id="@+id/room_video_renderer"
+        android:layout_below="@+id/hostLeaveChannelBtn"
+        android:layout_toRightOf="@+id/room_video_capturer"
+        android:layout_alignRight="@+id/hostLeaveChannelBtn"
+        android:layout_alignEnd="@+id/hostLeaveChannelBtn" />
+
+</RelativeLayout>

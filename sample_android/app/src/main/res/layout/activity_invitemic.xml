@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="im.youme.talk.sample.InvitemicActivity">
+
+    <Switch
+        android:id="@+id/InviteMicSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnInviteInit"
+        android:layout_alignBottom="@+id/btnInviteInit"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button"
+        android:checked="true"
+        android:text="麦克风" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="onReturnClick"
+        android:text="返回上页" />
+
+    <Button
+        android:id="@+id/btnInviteInit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onInviteInitClick"
+        android:text="连麦初始化"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:id="@+id/user_id_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/btnInviteInit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/btnInviteAsk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:onClick="onInviteAskClick"
+            android:text="邀请连麦" />
+
+        <TextView
+            android:id="@+id/userIDTag"
+            android:layout_width="60dp"
+            android:layout_height="32dp"
+            android:layout_alignBaseline="@+id/btnInviteAsk"
+            android:layout_alignBottom="@+id/btnInviteAsk"
+            android:layout_toRightOf="@+id/btnInviteAsk"
+            android:text="    用户ID:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/edtUserID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/userIDTag"
+            android:layout_alignBottom="@+id/userIDTag"
+            android:layout_toRightOf="@+id/userIDTag"
+            android:singleLine="true"
+            android:text="youme_2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/room_mode_layout"
+        android:layout_width="310dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/user_id_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/btnInviteAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:onClick="onInviteAcceptClick"
+            android:text="同意连麦" />
+
+        <Button
+            android:id="@+id/btnInviteStop"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnInviteReject"
+            android:layout_alignBottom="@+id/btnInviteReject"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:onClick="onInviteStopClick"
+            android:text="结束连麦" />
+
+        <Button
+            android:id="@+id/btnInviteReject"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnInviteAccept"
+            android:layout_alignBottom="@+id/btnInviteAccept"
+            android:layout_centerHorizontal="true"
+            android:onClick="onInviteRejectClick"
+            android:text="拒绝连麦" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lblInviteInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/room_mode_layout"
+        android:layout_marginTop="20dp"
+        android:text="连麦信息"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/lblRoomMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="房间广播"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/room_mode_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="53dp" />
+
+    <TextView
+        android:id="@+id/lblInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="其他信息"
+        android:layout_below="@+id/lblRoomMsg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "fa837761-b011-4839-9757-7ed91606020c++9063",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "fa837761-b011-4839-9757-7ed91606020c++9063" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "fa837761-b011-4839-9757-7ed91606020c++9063" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DFF1D917-672D-43DA-899A-F195C5F04D29",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "fa837761-b011-4839-9757-7ed91606020c++9063" : "SDKTest\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "VoiceTest",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "trunk\/ios\/YoumeIOSDemo\/VoiceTest.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/code.nxit.us:9888\/repos\/hellocat",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "fa837761-b011-4839-9757-7ed91606020c++9063"
+    }
+  ]
+}
