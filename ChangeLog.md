@@ -1,8 +1,8 @@
 # ChangeLog汇总
 
-# 版本3.0.0.163
+# 版本3.0.0.164
 ## 修改内容：
-1. 修改某些分辨率，ios硬编码， android硬解码 会有绿边的问题。
+1. 修改某些分辨率，ios硬编码， android硬解码 会有绿边的问题，解决和七牛SDK录音冲突问题；
 2. 增加硬编码开关
 3. 增加码率设置接口
 4. IOS， Android， Demo增加参数设置页面。（ 点击页面右上角“参数”按钮，需在第一次进入房间前修改。）
@@ -10,8 +10,8 @@
 6. 增加视频分辨率放大支持（支持传输分辨率大于采集分辨率）
 7. 提高视频分辨率质量
 8. 修复low quality的时候ios上面录音断音的问题
-9. 增加开始导入视频通知，第一次调用inputVideoFrame时会通知房间内其它用户YOUME_EVENT_OTHERS_VIDEO_INPUT_START事件
-10.增加停止导入视频接口stopInputVideoFrame，调用会通知房间内其它用户YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP事件，并重置开始导入视频的状态
+9. 增加开始导入视频通知，第一次调用 inputVideoFrame 时会通知房间内其它用户 YOUME_EVENT_OTHERS_VIDEO_INPUT_START 事件
+10.增加停止导入视频接口 stopInputVideoFrame ，调用会通知房间内其它用户 YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP 事件，并重置开始导入视频的状态
 
 ## 接口变更
 ### IOS
@@ -61,7 +61,7 @@
 
 ```
 
-#### 停止导入视频
+#### 停止导入视频
 
 ```Objective-c
 /**
@@ -70,8 +70,8 @@
 *
 *  @return None
 *
-*  @note: 停止导入视频，房间内其它用户会收到YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP通知
-*  @warning:需要在进房间之后设置
+*  @note: 停止导入视频，房间内其它用户会收到 YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP 通知
+*  @warning:需要在进房间之后设置
 */
 - (void)stopInputVideoFrame;
 ```
@@ -133,7 +133,7 @@
 	
 ```
 
-#### 停止导入视频
+#### 停止导入视频
 
 ```java
     /**
@@ -142,8 +142,8 @@
      *
      *  @return None
      *
-     *  @note: 停止导入视频，房间内其它用户会收到YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP通知
-     *  @warning:需要在进房间之后设置
+     *  @note: 停止导入视频，房间内其它用户会收到 YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP 通知
+     *  @warning:需要在进房间之后设置
      */
      public static native void stopInputVideoFrame( );
 ```
