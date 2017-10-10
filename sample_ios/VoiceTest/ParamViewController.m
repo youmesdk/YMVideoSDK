@@ -41,11 +41,6 @@
     {
         _tf_width.enabled = false ;
         _tf_height.enabled = false ;
-
-        _tf_interval.enabled = false ;
-
-        _tf_bitrate.enabled = false ;
-        _tf_farendLevel.enabled = false ;
         
         _tf_open_hw.enabled = false ;
         _tf_high_audio.enabled = false ;

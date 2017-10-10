@@ -102,7 +102,17 @@ public class AudioRecorderSample
         }
         Log.d(TAG, "getMinBufferSize = "+mMinBufferSize+" bytes");
 
-        mAudioRecord = new AudioRecord(mMicSource, mSamplerate, channelCfg, pcmType, mMinBufferSize);
+        try
+        {
+            mAudioRecord = new AudioRecord(mMicSource, mSamplerate, channelCfg, pcmType, mMinBufferSize);
+        }
+        catch (IllegalArgumentException e) {
+            Log.e(TAG, "AudioRecord initialize fail !");
+            mInitStatus = AudioRecord.STATE_UNINITIALIZED;
+            mInitSuceed = false;
+            return;
+        }
+
         if (mAudioRecord.getState() == AudioRecord.STATE_UNINITIALIZED) { // AudioRecord.STATE_UNINITIALIZED = 0, AudioRecord.STATE_INITIALIZED = 1
             Log.e(TAG, "AudioRecord initialize fail !");
             mInitStatus = AudioRecord.STATE_UNINITIALIZED;
