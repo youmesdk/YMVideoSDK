@@ -10,9 +10,34 @@
 #import "YMVoiceService.h"
 #import "YMEngineService.h"
 #import "OpenGLView20.h"
-
+#import "LFLiveKit.h"
+#import "libyuv.h"
 
 #import "ParamViewController.h"
+
+#define MIX_WIDTH 320
+#define MIX_HEIGHT 480
+//推流地址，观看也是同一个地址，可以用软件 mpv或者VLC 观看
+#define PUSH_ADDRESS @"rtmp://185.185.41.21:1935/live/livestream"
+
+inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
+    if (elapsed_milli <= 0) {
+        return @"N/A";
+    }
+    
+    if (bytes <= 0) {
+        return @"0 KB/s";
+    }
+    
+    float bytes_per_sec = ((float)bytes) * 1000.f /  elapsed_milli;
+    if (bytes_per_sec >= 1000 * 1000) {
+        return [NSString stringWithFormat:@"%.2f MB/s", ((float)bytes_per_sec) / 1000 / 1000];
+    } else if (bytes_per_sec >= 1000) {
+        return [NSString stringWithFormat:@"%.1f KB/s", ((float)bytes_per_sec) / 1000];
+    } else {
+        return [NSString stringWithFormat:@"%ld B/s", (long)bytes_per_sec];
+    }
+}
 
 @implementation  ParamSetting
 
@@ -20,7 +45,7 @@
 
 @end
 
-@interface ViewController () <ICameraRecordDelegate>
+@interface ViewController () <ICameraRecordDelegate,LFLiveSessionDelegate>
 // OpenGL ES
 @property (nonatomic , strong)  OpenGLView20* mGL20View;
 
@@ -30,6 +55,10 @@
 @property (retain, nonatomic) IBOutlet UIView *videoGroup;
 @property (retain, nonatomic) CameraCaptureDemo  *cameraCapture;
 
+@property (nonatomic, strong) LFLiveDebug *debugInfo;
+@property (nonatomic, strong) LFLiveSession *session;
+
+@property (nonatomic,assign) BOOL startPush;
 @end
 
 @implementation ViewController
@@ -43,6 +72,87 @@ NSString* strAppSecret = @"y1sepDnrmgatu/G8rx1nIKglCclvuA5tAvC0vXwlfZKOvPZfaUYOT
 const int ANCHOR_SPEAKER_MODE = 2;
 const int NOT_INROOM_MODE = 5;
 const int CHANGE_SERVER_MODE = 6;
+
+#pragma mark -- LFStreamingSessionDelegate
+/** live status changed will callback */
+- (void)liveSession:(nullable LFLiveSession *)session liveStateDidChange:(LFLiveState)state {
+    NSLog(@"liveStateDidChange: %ld", state);
+    switch (state) {
+        case LFLiveReady:
+            NSLog( @"未连接");
+            break;
+        case LFLivePending:
+            NSLog(  @"连接中");
+            break;
+        case LFLiveStart:
+            NSLog( @"已连接");
+            break;
+        case LFLiveError:
+            NSLog( @"连接错误");
+            break;
+        case LFLiveStop:
+            NSLog( @"未连接");
+            break;
+        default:
+            break;
+    }
+}
+
+/** live debug info callback */
+- (void)liveSession:(nullable LFLiveSession *)session debugInfo:(nullable LFLiveDebug *)debugInfo {
+    NSLog(@"debugInfo uploadSpeed: %@", formatedSpeed(debugInfo.currentBandwidth, debugInfo.elapsedMilli));
+}
+
+/** callback socket errorcode */
+- (void)liveSession:(nullable LFLiveSession *)session errorCode:(LFLiveSocketErrorCode)errorCode {
+    NSLog(@"errorCode: %ld", errorCode);
+}
+
+- (CVPixelBufferRef)i420FrameToPixelBuffer:(const uint8*)data width:(int)width height:(int)height
+{
+    if (data == nil) {
+        return NULL;
+    }
+    CVPixelBufferRef pixelBuffer = NULL;
+    NSDictionary *pixelBufferAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           [NSDictionary dictionary], (id)kCVPixelBufferIOSurfacePropertiesKey, nil];
+    CVReturn result = CVPixelBufferCreate(kCFAllocatorDefault,
+                                          width,
+                                          height,
+                                          kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange,
+                                          (__bridge CFDictionaryRef)pixelBufferAttributes,
+                                          &pixelBuffer);
+    
+    if (result != kCVReturnSuccess) {
+        NSLog(@"Failed to create pixel buffer: %d", result);
+        return NULL;
+    }
+    result = CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    
+    if (result != kCVReturnSuccess) {
+        CFRelease(pixelBuffer);
+        NSLog(@"Failed to lock base address: %d", result);
+        return NULL;
+    }
+    uint8 *dstY = (uint8 *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    int dstStrideY = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+    uint8* dstUV = (uint8*)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+    int dstStrideUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+    
+    int ret = I420ToNV12((const uint8*)data, width,
+                                    data+(width*height), (width+1) / 2,
+                                    data+(width*height) + (width+1) / 2 * ((height+1) / 2), (width+1) / 2,
+                                     dstY, dstStrideY, dstUV, dstStrideUV,
+                                     width, height);
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    if (ret) {
+        NSLog(@"Error converting I420 VideoFrame to NV12: %d", result);
+        CFRelease(pixelBuffer);
+        return NULL;
+    }
+    
+    return pixelBuffer;
+}
 
 -(id)init
 {
@@ -62,17 +172,39 @@ const int CHANGE_SERVER_MODE = 6;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.userList = [NSMutableArray new];
-
+    self.startPush = NO;
+   
+    /***   默认分辨率368 ＊ 640  音频：44.1 iphone6以上48  双声道  方向竖屏 ***/
+    LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
+    videoConfiguration.videoSize = CGSizeMake(MIX_WIDTH, MIX_HEIGHT);
+    videoConfiguration.videoBitRate = 800*1024;
+    videoConfiguration.videoMaxBitRate = 1000*1024;
+    videoConfiguration.videoMinBitRate = 500*1024;
+    videoConfiguration.videoFrameRate = 15;
+    videoConfiguration.videoMaxKeyframeInterval = 48;
+    videoConfiguration.outputImageOrientation = UIInterfaceOrientationPortrait;
+    videoConfiguration.autorotate = NO;
+    videoConfiguration.sessionPreset = LFCaptureSessionPreset720x1280;
+    
+    LFLiveAudioConfiguration *audioConfig = [LFLiveAudioConfiguration new];
+    audioConfig.audioSampleRate =LFLiveAudioSampleRate_48000Hz;
+    audioConfig.numberOfChannels = 1;
+    
+    _session = [[LFLiveSession alloc] initWithAudioConfiguration:audioConfig videoConfiguration:videoConfiguration captureType:LFLiveInputMaskAll];
+    _session.delegate = self;
+    _session.showDebugInfo = NO;
+    _session.preView = nil;
     
     //默认参数
     params = [[ParamSetting alloc]init];
-    params->videoWidth = 240;
-    params->videoHeight = 320;
+    params->videoWidth = 480;
+    params->videoHeight = 640;
     params->reportInterval = 5000;
-    params->bitRate = 300;
+    params->bitRate = 1200;
     params->farendLevel = 10;
     params->bHWEnable = true;
     params->bHighAudio = true ;
+    params->push = false;
     
     enterdRoom = false;
     
@@ -271,7 +403,7 @@ const int CHANGE_SERVER_MODE = 6;
             self.mBInitOK = TRUE;
             mTips = @"SDK验证成功!";
             //设置服务器区域，在请求进入频道前调用生效
-            [[YMVoiceService getInstance] setServerRegion:(int)RTC_CN_SERVER regionName:@"" bAppend:false];
+            [[YMVoiceService getInstance] setServerRegion:RTC_CN_SERVER regionName:@"" bAppend:false];
             break;
         case YOUME_EVENT_INIT_FAILED:
             //SDK验证失败
@@ -329,13 +461,14 @@ const int CHANGE_SERVER_MODE = 6;
         //通知主线程刷新
         dispatch_async (dispatch_get_main_queue (), ^{
             //设置混流画布
-            [[YMEngineService getInstance] setMixVideoWidth:320 Height:480];
-            [[YMEngineService getInstance] addMixOverlayVideoUserId: _localUserId.text PosX:0 PosY:0 PosZ:0 Width:320 Height:480];
+            [[YMEngineService getInstance] setMixVideoWidth:MIX_WIDTH Height:MIX_HEIGHT];
+            [[YMEngineService getInstance] addMixOverlayVideoUserId: _localUserId.text PosX:0 PosY:0 PosZ:0 Width:MIX_WIDTH Height:MIX_HEIGHT];
             
             _buttonSpeaker.enabled = true;
             _buttonLeaveRoom.enabled = true;
-            [[YMVoiceService getInstance] setSpeakerMute:false];
+            [[YMVoiceService getInstance] setSpeakerMute:true];
             [self.tfTips setText:mTips];
+            
         });
         
         NSLog(mTips);
@@ -439,7 +572,13 @@ const int CHANGE_SERVER_MODE = 6;
     [handle writeData:[NSData dataWithBytes:data length:len]];
     [handle closeFile];
      */
+    // 播放
 //    [record play:[NSData dataWithBytes:data length:len]];
+    //推流
+    if( self.startPush ){
+        // Create a CM Sample Buffer
+        [self.session pushAudio:[NSData dataWithBytes:data length:len]];
+    }
 }
 
 //非混流远端数据回调
@@ -447,7 +586,7 @@ const int CHANGE_SERVER_MODE = 6;
 //    NSLog(@"onVideoFrameCallback is called.%lld",timestamp);
     int index = [self.userList indexOfObject:userId];
     if( index>-1 && index < 2){ //demo只做了两个远端渲染组件
-        const char* pTmpBuffer = malloc(len);
+        const char* pTmpBuffer = (const char *)malloc(len);
         memcpy(pTmpBuffer, data, len);
         dispatch_async (dispatch_get_main_queue (), ^{
             if(index==0){
@@ -463,10 +602,15 @@ const int CHANGE_SERVER_MODE = 6;
 // 混流数据回调，必须要设置了setMixVideoWidth 和 addMixOverlayVideoUserId 才会有这个回调
 - (void)onVideoFrameMixedCallback: (void*) data len:(int)len width:(int)width height:(int)height fmt:(int)fmt timestamp:(uint64_t)timestamp {
     //    NSLog(@"onVideoFrameMixedCallback is called,ts:%lld",timestamp);
-    const char* pTmpBuffer = malloc(len);
+    
+    const char* pTmpBuffer = (const char *)malloc(len);
     memcpy(pTmpBuffer, data, len);
     dispatch_async (dispatch_get_main_queue (), ^{
         [self.mGL20View3_mix displayYUV420pData:pTmpBuffer width:width height:height];
+        if(self.startPush){
+            CVPixelBufferRef buff = [self i420FrameToPixelBuffer:(const uint8*)pTmpBuffer width:width height:height];
+            [self.session pushVideo:buff];
+        }
         free(pTmpBuffer);
     });
 }
@@ -519,7 +663,7 @@ const int CHANGE_SERVER_MODE = 6;
 }
 
 - (IBAction)onClickButtonAddMixing:(id)sender {
-    [[YMEngineService getInstance] addMixOverlayVideoUserId: _localUserId.text PosX:0 PosY:0 PosZ:0 Width:320 Height:480];
+    [[YMEngineService getInstance] addMixOverlayVideoUserId: _localUserId.text PosX:0 PosY:0 PosZ:0 Width:MIX_WIDTH Height:MIX_HEIGHT];
 }
 
 - (IBAction)onClickButtonRemoveMixing:(id)sender {
@@ -565,12 +709,23 @@ const int CHANGE_SERVER_MODE = 6;
         
         //[[YMVoiceService getInstance] startCapture];
         mCameraEnable = true;
+        if( params->push ){
+            //启动推流
+            LFLiveStreamInfo *streamInfo = [LFLiveStreamInfo new];
+            streamInfo.url = PUSH_ADDRESS;
+            [self.session startLive:streamInfo];
+            self.startPush = YES;
+        }
     }
 }
 
 - (IBAction)onClickButtonStopCamera:(id)sender {
     NSLog(@"onClickButtonCamera is called.");
     if (mCameraEnable) {
+        if( params->push || self.startPush ){
+            [self.session stopLive];
+            self.startPush = NO;
+        }
         mCameraEnable= false;
         [self stopVideoCapture];
     }
@@ -638,6 +793,5 @@ const int CHANGE_SERVER_MODE = 6;
         [[YMEngineService getInstance] inputVideoFrame:buffer Len:bufferSize Width:width Height:height Fmt:Fmt Rotation:rotationDegree Mirror:mirror Timestamp:recordTime];
     }
 }
-
 
 @end

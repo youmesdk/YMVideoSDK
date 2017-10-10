@@ -9,21 +9,21 @@
 5. inputVideo，inputAudio增加在进入房间后才有效的保护。
 6. 增加视频分辨率放大支持（支持传输分辨率大于采集分辨率）
 7. 提高视频分辨率质量
-8. 修复low quality的时候ios上面录音断音的问题
+8. 修复low quality的时候 ios 上面录音断音的问题
 9. 增加开始导入视频通知，第一次调用 inputVideoFrame 时会通知房间内其它用户 YOUME_EVENT_OTHERS_VIDEO_INPUT_START 事件
-10.增加停止导入视频接口 stopInputVideoFrame ，调用会通知房间内其它用户 YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP 事件，并重置开始导入视频的状态
+10. 增加停止导入视频接口 stopInputVideoFrame，调用会通知房间内其它用户 YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP 事件，并重置开始导入视频的状态
 
 ## 接口变更
 ### IOS
 #### 设置及获取视频码率
 
-```Objective-c
+``` Objective-c
 /**
  *  功能描述: 设置视频数据上行的基准码率
  *  @param bitrate: 单位kbit/s
  *
  *  @return None
- *
+ *x
  *  @note: 设置的是基准码率，如果网络较差，可能在此基础上进行动态调整。
  *  @warning:需要在进房间之前设置
  */
@@ -39,7 +39,7 @@
 
 #### 设置和获取是否允许硬编码
 
-```Objective-c
+``` Objective-c
 /**
  *  功能描述: 设置视频数据是否同意开启硬编硬解
  *  @param bEnable: true:开启，false:不开启
@@ -63,7 +63,7 @@
 
 #### 停止导入视频
 
-```Objective-c
+``` Objective-c
 /**
 *  功能描述: 停止导入视频
 *  @param None
@@ -89,7 +89,7 @@
 ### Android
 #### 设置及获取视频码率
 
-```java
+``` java
 /**
 	 *  功能描述: 设置视频数据上行的基准码率
 	 *  @param bitrate: 单位kbit/s
@@ -111,7 +111,7 @@
 
 #### 设置和获取是否允许硬编码
 	
-```java
+``` java
 	/**
 	 *  功能描述: 设置视频数据是否同意开启硬编硬解
 	 *  @param bEnable: true:开启，false:不开启
@@ -135,7 +135,7 @@
 
 #### 停止导入视频
 
-```java
+``` java
     /**
      *  功能描述: 停止导入视频
      *  @param None
@@ -143,7 +143,7 @@
      *  @return None
      *
      *  @note: 停止导入视频，房间内其它用户会收到 YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP 通知
-     *  @warning:需要在进房间之后设置
+     *  @warning:需要在进房间之后设置
      */
      public static native void stopInputVideoFrame( );
 ```

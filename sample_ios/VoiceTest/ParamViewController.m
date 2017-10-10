@@ -35,6 +35,7 @@
     
     _tf_open_hw.on = params->bHWEnable;
     _tf_high_audio.on = params->bHighAudio;
+    _push_stream.on = params->push;
     
     if( bInited )
     {
@@ -68,6 +69,7 @@
         
         params->bHWEnable = _tf_open_hw.on;
         params->bHighAudio = _tf_high_audio.on;
+        params->push = _push_stream.on;
     }
     
     [self dismissViewControllerAnimated: TRUE completion:nil];

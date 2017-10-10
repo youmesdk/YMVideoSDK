@@ -22,6 +22,7 @@
     int farendLevel;
     bool bHWEnable;
     bool bHighAudio;
+    bool push;
     
 }
 @end
@@ -129,6 +130,7 @@
 
 - (void) startRecord;
 -  (void) stopRecord;
+
 
 @end
 

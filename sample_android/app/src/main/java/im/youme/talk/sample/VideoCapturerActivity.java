@@ -78,6 +78,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
     private int m_UserViewIndex = 0;
     private int[] m_UserViewIndexEn = {0, 0, 0};
 
+    private Button btn_join = null;
     private Button btn_camera_onoff = null;
     private Button btn_camera_switch = null;
     private boolean isCameraOn = false;
@@ -133,6 +134,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
         mSurfaceView.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT);
         mSurfaceView.setMirror(false);
         mSurfaceView.setVisibility(View.VISIBLE);
+
+        btn_join = (Button)findViewById( R.id.btn_join );
 
         //int render00 = VideoRenderer.addRender(user_id, mSurfaceView);
         btn_camera_onoff = (Button) findViewById(R.id.btn_camera_onoff);
@@ -350,6 +353,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                     //Demo初始化摄像头
                     CameraMgrSample.getInstance().init(VideoCapturerActivity.this);
 
+                    //btn_join.performClick();
+
                     break;
                 case YouMeConst.YouMeEvent.YOUME_EVENT_JOIN_OK:
                     if( !isJoinedRoom ){
@@ -376,6 +381,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                         //这时候允许打开摄像头进行采集
                         btn_camera_onoff.setActivated(true);
                         isJoinedRoom = true;
+
+                        //btn_camera_onoff.performClick();
                     }
                     break;
                 case YouMeConst.YouMeEvent.YOUME_EVENT_OTHERS_VIDEO_ON:

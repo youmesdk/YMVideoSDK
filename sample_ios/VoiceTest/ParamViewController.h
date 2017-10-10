@@ -28,6 +28,7 @@
 @property (retain, nonatomic) IBOutlet UISwitch *tf_open_hw;
 @property (retain, nonatomic) IBOutlet UISwitch *tf_high_audio;
 
+@property (weak, nonatomic) IBOutlet UISwitch *push_stream;
 
 
 @end
