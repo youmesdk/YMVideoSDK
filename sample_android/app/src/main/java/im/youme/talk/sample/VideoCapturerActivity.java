@@ -96,6 +96,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        YouMeManager.setSOName( "youmetalk" );
         YouMeManager.Init(this);
         super.onCreate(savedInstanceState);
         Intent intent = new Intent(this,VoiceEngineService.class);
@@ -158,6 +159,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                     CameraMgrSample.startCapture();
                     //设置音频输入采样参数
                     api.setSampleRate(YouMeConst.YOUME_SAMPLE_RATE.SAMPLE_RATE_44);
+                    //设置视频无渲染帧超时等待时间，单位毫秒
+                    api.setVideoNoFrameTimeout(5000);
                     AudioRecorderSample.initRecorder(VideoCapturerActivity.this);
                     AudioRecorderSample.startRecorder();
                     api.setSpeakerMute(false);
@@ -558,7 +561,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
         }
 
         //进入频道
-        int ret = api.joinChannelSingleMode( mUserIDEditText.getText().toString(), mRoomIDEditText.getText().toString(), YouMeConst.YouMeUserRole.YOUME_USER_HOST);
+        int ret = api.joinChannelSingleModeWithAppKey( mUserIDEditText.getText().toString(), mRoomIDEditText.getText().toString(), YouMeConst.YouMeUserRole.YOUME_USER_HOST, CommonDefines.appJoinKey );
     }
 
 

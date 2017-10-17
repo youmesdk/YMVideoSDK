@@ -107,7 +107,7 @@ public class AudioRecorderSample
             mAudioRecord = new AudioRecord(mMicSource, mSamplerate, channelCfg, pcmType, mMinBufferSize);
         }
         catch (IllegalArgumentException e) {
-            Log.e(TAG, "AudioRecord initialize fail !");
+            Log.e(TAG, "AudioRecord initialize fail :" + e.getMessage() );
             mInitStatus = AudioRecord.STATE_UNINITIALIZED;
             mInitSuceed = false;
             return;

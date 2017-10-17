@@ -16,6 +16,19 @@ public class videoSet extends AppCompatActivity {
     private Switch mQualitySwitch;
     private Switch mbHWEnableSwitch;
 
+    private int getValue( String str , int defaultValue )
+    {
+        int value = defaultValue;
+        try{
+            value = Integer.parseInt( str );
+        }
+        catch ( Exception e  )
+        {
+
+        }
+
+        return value;
+    }
     private void initComponent(){
         mVideoWidth = (EditText)findViewById(R.id.editText_videoWidth);
         mVideoHeight = (EditText)findViewById(R.id.editText_videoHeight);
@@ -48,11 +61,11 @@ public class videoSet extends AppCompatActivity {
     //点击确定按钮的响应
     public void onConfirmClick(View view){
 
-        VideoCapturerActivity._videoWidth = Integer.parseInt(mVideoWidth.getText().toString());
-        VideoCapturerActivity._videoHeight = Integer.parseInt(mVideoHeight.getText().toString());
-        VideoCapturerActivity._reportInterval = Integer.parseInt(mReportInterval.getText().toString());
-        VideoCapturerActivity._bitRate = Integer.parseInt(mBitRate.getText().toString());
-        VideoCapturerActivity._farendLevel = Integer.parseInt(mFarendLevel.getText().toString());
+        VideoCapturerActivity._videoWidth = getValue(mVideoWidth.getText().toString(), 240 );
+        VideoCapturerActivity._videoHeight = getValue(mVideoHeight.getText().toString(), 320 );
+        VideoCapturerActivity._reportInterval = getValue(mReportInterval.getText().toString(), 5000 );
+        VideoCapturerActivity._bitRate = getValue(mBitRate.getText().toString(), 0 );
+        VideoCapturerActivity._farendLevel = getValue(mFarendLevel.getText().toString(), 10 );
         VideoCapturerActivity._bHighAudio = mQualitySwitch.isChecked();
         VideoCapturerActivity._bHWEnable   =mbHWEnableSwitch.isChecked();
 

@@ -59,6 +59,9 @@
     
     BOOL  enterdRoom;
     
+    int renderMaxWidth;
+    int renderMaxHeight;
+    
 @public
     ParamSetting* params;
 }
@@ -80,6 +83,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *labelVersion;
 @property (weak, nonatomic) IBOutlet UITextField *tfRoomID;
+@property (weak, nonatomic) IBOutlet UITextField *tfToken;
 
 @property (weak, nonatomic) IBOutlet UITextField *tfTips;
 

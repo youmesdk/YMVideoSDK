@@ -65,8 +65,10 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
 
 @synthesize labelState;
 
-NSString* strAppKey = @"YOUME5BE427937AF216E88E0F84C0EF148BD29B691556";
-NSString* strAppSecret = @"y1sepDnrmgatu/G8rx1nIKglCclvuA5tAvC0vXwlfZKOvPZfaUYOTkfAdUUtbziW8Z4HrsgpJtmV/RqhacllbXD3abvuXIBlrknqP+Bith9OHazsC1X96b3Inii6J7Und0/KaGf3xEzWx/t1E1SbdrbmBJ01D1mwn50O/9V0820BAAE=";
+NSString* strJoinAppKey = @"YOUME5BE427937AF216E88E0F84C0EF148BD29B691556";
+
+NSString* strAppKey = @"YOUMEBC2B3171A7A165DC10918A7B50A4B939F2A187D0";
+NSString* strAppSecret = @"r1+ih9rvMEDD3jUoU+nj8C7VljQr7Tuk4TtcByIdyAqjdl5lhlESU0D+SoRZ30sopoaOBg9EsiIMdc8R16WpJPNwLYx2WDT5hI/HsLl1NJjQfa9ZPuz7c/xVb8GHJlMf/wtmuog3bHCpuninqsm3DRWiZZugBTEj2ryrhK7oZncBAAE=";
 
 //2 主播扬声器没模式,5 离开房间,6 切换服务器
 const int ANCHOR_SPEAKER_MODE = 2;
@@ -234,8 +236,11 @@ const int CHANGE_SERVER_MODE = 6;
                                 appSecret:strAppSecret
                                  regionId:RTC_CN_SERVER
                          serverRegionName:@"cn" ];
+    
     // 设置外部输入的采样率为48k
     [[YMVoiceService getInstance] setSampleRate: SAMPLE_RATE_48 ];
+    // 设置视频无渲染帧超时等待时间，单位毫秒
+    [[YMVoiceService getInstance] setVideoNoFrameTimeout: 5000];
     //========================== END初始化YoumeService ==========================================================
     
     //==========================     Demo的简单UI      ==========================================================
@@ -245,7 +250,7 @@ const int CHANGE_SERVER_MODE = 6;
     _labelVersion.text = [strTmp stringByAppendingString:strVersion];
     
     mTips = @"No tips Now!";
-    mChannelID = @"709";
+    mChannelID = @"123";
     int value = (arc4random() % 1000) + 1;
     mLocalUserId = [NSString stringWithFormat:@"user_%d",value];
     
@@ -271,18 +276,30 @@ const int CHANGE_SERVER_MODE = 6;
     
     CGRect r = [ UIScreen mainScreen ].applicationFrame;
     
-    self.videoGroup.layer.borderWidth = 1;
-    self.videoGroup.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.videoGroup.frame = CGRectMake(5, self.videoGroup.frame.origin.y, r.size.width - 10, self.videoGroup.frame.size.height);
+
         
     CGRect tipsRect = self.tfTips.frame;
     self.tfTips.frame = CGRectMake(tipsRect.origin.x, r.size.height - 20, tipsRect.size.width, tipsRect.size.height);
     //==========================     Demo的简单UI      ==========================================================
     
     //==========================      创建渲染组件      ==========================================================
-    int renderViewHeight = 80;
-    int renderViewWidth = 80;
     int renderViewMargin = 5;
+    renderMaxWidth =  ( r.size.width - renderViewMargin * 3 ) / 2 ;
+    renderMaxHeight = ( r.size.height - renderViewMargin * 3 ) / 3  ;
+    
+    //最大的框设置成方形的把，方便后面的判断
+    renderMaxWidth = renderMaxWidth < renderMaxHeight ? renderMaxWidth : renderMaxHeight;
+    renderMaxHeight = renderMaxWidth;
+    
+    self.videoGroup.layer.borderWidth = 1;
+    self.videoGroup.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    int videoGroupHeight =  renderMaxHeight * 2  + renderViewMargin * 3 ;
+    self.videoGroup.frame = CGRectMake( 0 , r.size.height - videoGroupHeight , r.size.width, videoGroupHeight );
+    
+    int renderViewHeight = renderMaxWidth;
+    int renderViewWidth = renderMaxHeight;
+    
     
     self.mGL20View = [[OpenGLView20 alloc] initWithFrame:CGRectMake(renderViewMargin, renderViewMargin, renderViewWidth, renderViewHeight)];
     [self.videoGroup addSubview:self.mGL20View];
@@ -290,7 +307,7 @@ const int CHANGE_SERVER_MODE = 6;
     self.mGL20View2 = [[OpenGLView20 alloc] initWithFrame:CGRectMake(renderViewWidth + 2* renderViewMargin, renderViewMargin, renderViewWidth, renderViewHeight)];
     [self.videoGroup addSubview:self.mGL20View2];
     
-    self.mGL20View3_mix = [[OpenGLView20 alloc] initWithFrame:CGRectMake(2 * renderViewWidth + 3 * renderViewMargin, renderViewMargin, renderViewWidth, renderViewHeight)];
+    self.mGL20View3_mix = [[OpenGLView20 alloc] initWithFrame:CGRectMake(renderViewWidth + 2* renderViewMargin , renderViewHeight + 2* renderViewMargin, renderViewWidth, renderViewHeight)];
     [self.videoGroup addSubview:self.mGL20View3_mix];
 
 }
@@ -351,8 +368,10 @@ const int CHANGE_SERVER_MODE = 6;
         [[YMVoiceService getInstance] setFarendVoiceLevelCallback: params->farendLevel ];
     }
     
+    NSString *str = _tfToken.text;
+    [[YMVoiceService getInstance] setToken:str];
     
-    [[YMVoiceService getInstance] joinChannelSingleMode:strUserID channelID:mChannelID userRole:YOUME_USER_HOST];
+    [[YMVoiceService getInstance] joinChannelSingleMode:strUserID channelID:mChannelID userRole:YOUME_USER_HOST  joinAppKey:strJoinAppKey];
     enterdRoom = true;
     
 }
@@ -466,7 +485,7 @@ const int CHANGE_SERVER_MODE = 6;
             
             _buttonSpeaker.enabled = true;
             _buttonLeaveRoom.enabled = true;
-            [[YMVoiceService getInstance] setSpeakerMute:true];
+            [[YMVoiceService getInstance] setSpeakerMute:false];
             [self.tfTips setText:mTips];
             
         });
@@ -584,14 +603,33 @@ const int CHANGE_SERVER_MODE = 6;
 //非混流远端数据回调
 - (void)onVideoFrameCallback: (NSString*)userId data:(void*) data len:(int)len width:(int)width height:(int)height fmt:(int)fmt timestamp:(uint64_t)timestamp {
 //    NSLog(@"onVideoFrameCallback is called.%lld",timestamp);
+    
     int index = [self.userList indexOfObject:userId];
     if( index>-1 && index < 2){ //demo只做了两个远端渲染组件
         const char* pTmpBuffer = (const char *)malloc(len);
         memcpy(pTmpBuffer, data, len);
         dispatch_async (dispatch_get_main_queue (), ^{
             if(index==0){
+                if( self.mGL20View.frame.size.width == self.mGL20View.frame.size.height && width != height )
+                {
+                    float widthRate = (float)renderMaxWidth / width;
+                    float heightRate = (float)renderMaxHeight / height;
+                    float rate = widthRate > heightRate ? heightRate : widthRate;
+                    
+                    self.mGL20View.bounds = CGRectMake(0, 0, width * rate, height * rate);
+                }
+
                 [self.mGL20View displayYUV420pData:pTmpBuffer width:width height:height];
             }else{
+                if( self.mGL20View2.frame.size.width == self.mGL20View2.frame.size.height && width != height )
+                {
+                    float widthRate = (float)renderMaxWidth / width;
+                    float heightRate = (float)renderMaxHeight / height;
+                    float rate = widthRate > heightRate ? heightRate : widthRate;
+                    
+                    self.mGL20View2.bounds = CGRectMake(0, 0, width * rate, height * rate);
+                }
+                
                 [self.mGL20View2 displayYUV420pData:pTmpBuffer width:width height:height];
             }
             free(pTmpBuffer);

@@ -282,6 +282,11 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance()->joinChannelSingleMode([strUserID UTF8String],[strChannelID UTF8String], userRole);
 }
 
+- (YouMeErrorCode_t) joinChannelSingleMode:(NSString *)strUserID channelID:(NSString *)strChannelID userRole:(YouMeUserRole_t)userRole  joinAppKey:(NSString*) strJoinAppKey
+{
+    return IYouMeVoiceEngine::getInstance()->joinChannelSingleMode([strUserID UTF8String],[strChannelID UTF8String], userRole, [strJoinAppKey UTF8String]);
+}
+
 - (YouMeErrorCode)joinChannelMultiMode:(NSString *)strUserID channelID:(NSString *)strChannelID
 {
     return IYouMeVoiceEngine::getInstance()->joinChannelMultiMode([strUserID UTF8String],[strChannelID UTF8String]);
@@ -513,7 +518,6 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance ()->setVideoCodeBitrate( bitrate );
 }
 
-
 - (unsigned int) getVideoCodeBitrate
 {
     return IYouMeVoiceEngine::getInstance ()->getVideoCodeBitrate();
@@ -527,6 +531,11 @@ extern void SetServerMode(SERVER_MODE serverMode);
 - (bool) getVideoHardwareCodeEnable
 {
     return IYouMeVoiceEngine::getInstance ()->getVideoHardwareCodeEnable();
+}
+
+- (void) setVideoNoFrameTimeout:(int) timeout
+{
+    return IYouMeVoiceEngine::getInstance ()->setVideoNoFrameTimeout(timeout);
 }
 
 @end

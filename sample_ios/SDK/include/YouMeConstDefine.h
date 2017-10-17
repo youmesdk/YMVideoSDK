@@ -131,6 +131,9 @@ typedef enum YouMeEvent {
     YOUME_EVENT_OTHERS_VIDEO_SHUT_DOWN         = 208, ///< 视频断开
     YOUME_EVENT_OTHERS_VIDEO_INPUT_START       = 209, ///< 其他用户视频输入开始
     YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP        = 210, ///< 其他用户视频输入开始
+    
+    YOUME_EVENT_MEDIA_DATA_ROAD_PASS          = 211,    ///音视频数据通路连通，定时检测，一开始收到数据会收到PASS事件，之后变化的时候会发送
+    YOUME_EVENT_MEDIA_DATA_ROAD_BLOCK         = 212,    ///音视频数据通路不通
 
     YOUME_EVENT_EOF                            = 1000,
 } YouMeEvent_t;

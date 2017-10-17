@@ -1,5 +1,112 @@
 # ChangeLog汇总
 
+# 版本3.0.0.172
+## 修改内容：
+1. iosDemo添加rtmp直播推流
+2. 修正耳机插拔永远都回调拔出事件的bug
+3. Android增加开始/结束视频推数据事件
+4. 修复高音质下用aecm时无声的问题
+5. iosDemo他人视频改为按长宽比例显示，并放大显示区域
+6. 避免record采样率比playback采样率高时产生noise
+7. 设置视频无渲染帧等待超时时间
+8. 修复两个客户端进入同一房间，会收不到对方视频数据，或者过30秒才收到的问题
+9. 增加语音音频数据UDP通路是否通畅检查
+10. 加入房间，增加Appkey的额外设置
+11. 增加上行音频丢包率
+12. 修复反初始化可能需要等待5s的问题
+13. 增加Android的so名字修改接口
+14. 修改多个设置接口可以在init调用之后立刻调用。
+
+## 接口变更
+### IOS 
+#### 设置加入房间用的AppKey接口
+
+```Objective-c
+/**
+ *  功能描述:加入语音频道（单频道模式，每个时刻只能在一个语音频道里面）
+ *
+ *  @param strUserID: 用户ID，要保证全局唯一
+ *  @param strChannelID: 频道ID，要保证全局唯一
+ *  @param eUserRole: 用户角色，用于决定讲话/播放背景音乐等权限
+ *  @param strJoinAppKey: 加入房间用额外的appkey
+ *
+ *  @return 错误码，详见YouMeConstDefine.h定义
+ */
+- (YouMeErrorCode_t) joinChannelSingleMode:(NSString *)strUserID channelID:(NSString *)strChannelID userRole:(YouMeUserRole_t)userRole  joinAppKey:(NSString*) strJoinAppKey ;
+
+```
+
+#### 音视频数据通路是否通畅回调
+定时检查，时间间隔内（目前为5秒），有发送数据，服务器却没说收到，会报BLOCK。
+
+
+```Objective-c
+    YOUME_EVENT_MEDIA_DATA_ROAD_PASS          = 211,    ///音视频数据通路连通，定时检测，一开始收到数据会收到PASS事件，之后变化的时候会发送
+    YOUME_EVENT_MEDIA_DATA_ROAD_BLOCK         = 212,    ///音视频数据通路不通
+```
+
+```Objective-c
+    - (void)onYouMeEvent:(YouMeEvent_t)eventType errcode:(YouMeErrorCode_t)iErrorCode roomid:(NSString *)roomid param:(NSString *)param;
+
+```
+
+#### 设置视频无帧渲染的等待超时时间
+（YOUME_EVENT_OTHERS_VIDEO_SHUT_DOWN）
+```Objective-c
+    /**
+     *  功能描述: 设置视频无帧渲染的等待超时时间，超过这个时间会给上层回调
+     *  @param timeout: 超时时间，单位为毫秒
+     */
+    void setVideoNoFrameTimeout(int timeout);
+```
+
+### Android
+#### 设置加入房间用的AppKey接口
+
+```java
+	/**
+	 *  功能描述:加入语音频道（单频道模式，每个时刻只能在一个语音频道里面）
+	 *
+	 *  @param strUserID: 用户ID，要保证全局唯一
+	 *  @param strRoomID: 频道ID，要保证全局唯一
+	 *  @param userRole: 用户角色，用于决定讲话/播放背景音乐等权限
+	 *  @param strJoinAppKey: 加入房间用额外的appkey
+	 *
+	 *  @return 错误码，详见YouMeConstDefine.h定义
+	 */
+	public static native int joinChannelSingleModeWithAppKey (String strUserID, String strRoomID, int userRole, String strJoinAppKey );
+```
+
+#### 音视频数据通路是否通畅回调
+定时检查，时间间隔内（目前为5秒），有发送数据，服务器却没说收到，会报BLOCK。
+
+```java
+	public static final int YOUME_EVENT_MEDIA_DATA_ROAD_PASS          = 211;    ///音视频数据通路连通，定时检测，一开始收到数据会收到PASS事件，之后变化的时候会发送
+	public static final int YOUME_EVENT_MEDIA_DATA_ROAD_BLOCK         = 212;    ///音视频数据通路不通
+```
+
+```java
+    public  void onEvent (int event, int error, String room, Object param);
+```
+
+#### 设置视频无帧渲染的等待超时时间
+（YOUME_EVENT_OTHERS_VIDEO_SHUT_DOWN）
+```java
+    /**
+     *  功能描述: 设置无视频帧渲染的等待超时时间
+     *  @param timeout:单位毫秒
+     */
+     //api.setVideoNoFrameTimeout
+    public static native void setVideoNoFrameTimeout(int timeout);
+```
+
+#### 设置so名字
+```java
+//YouMeManager.setSOName
+public static boolean  setSOName( String str )
+```
+
+
 # 版本3.0.0.164
 ## 修改内容：
 1. 修改某些分辨率，ios硬编码， android硬解码 会有绿边的问题，解决和七牛SDK录音冲突问题；

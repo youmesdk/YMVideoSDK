@@ -35,6 +35,7 @@
         regionId:(YOUME_RTC_SERVER_REGION_t)regionId
            serverRegionName:(NSString*) serverRegionName;
 
+
 /**
  *  功能描述:设置身份验证的token
  *  @param token: 身份验证用token，设置空字符串，清空token值。
@@ -155,6 +156,18 @@
  *  @return 错误码，详见YouMeConstDefine.h定义
  */
 - (YouMeErrorCode_t) joinChannelMultiMode:(NSString *)strUserID channelID:(NSString *)strChannelID;
+
+/**
+ *  功能描述:加入语音频道（单频道模式，每个时刻只能在一个语音频道里面）
+ *
+ *  @param strUserID: 用户ID，要保证全局唯一
+ *  @param strChannelID: 频道ID，要保证全局唯一
+ *  @param eUserRole: 用户角色，用于决定讲话/播放背景音乐等权限
+ *  @param strJoinAppKey: 加入房间用额外的appkey
+ *
+ *  @return 错误码，详见YouMeConstDefine.h定义
+ */
+- (YouMeErrorCode_t) joinChannelSingleMode:(NSString *)strUserID channelID:(NSString *)strChannelID userRole:(YouMeUserRole_t)userRole  joinAppKey:(NSString*) strJoinAppKey ;
 
 /**
  *  功能描述：对指定频道说话
@@ -575,7 +588,11 @@
  */
 - (bool) getVideoHardwareCodeEnable;
 
-
+/**
+ *  功能描述: 设置无视频帧渲染的等待超时时间
+ *  @param timeout:单位毫秒
+ */
+- (void) setVideoNoFrameTimeout:(int) timeout;
 
 @end
 

@@ -177,11 +177,13 @@ void checkStatus(int code){
 }
 
 -(void)Start{
-    AudioOutputUnitStart(audioUnit);
+    OSStatus state = AudioOutputUnitStart(audioUnit);
+    return ;
 }
 
 -(void)Stop{
-    AudioOutputUnitStop(audioUnit);
+    OSStatus state =  AudioOutputUnitStop(audioUnit);
+    return ;
 }
 
 static OSStatus recordingCallback(void *inRefCon,

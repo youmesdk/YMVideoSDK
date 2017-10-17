@@ -191,6 +191,18 @@ public:
     YouMeErrorCode joinChannelMultiMode(const char* pUserID, const char* pChannelID);
     
     /**
+     *  功能描述:加入语音频道（单频道模式，每个时刻只能在一个语音频道里面）
+     *
+     *  @param pUserID: 用户ID，要保证全局唯一
+     *  @param pChannelID: 频道ID，要保证全局唯一
+     *  @param eUserRole: 用户角色，用于决定讲话/播放背景音乐等权限
+     *  @param pJoinAppKey: 加入房间用额外的appkey
+     *
+     *  @return 错误码，详见YouMeConstDefine.h定义
+     */
+    YouMeErrorCode joinChannelSingleMode(const char* pUserID, const char* pChannelID, YouMeUserRole_t eUserRole, const char* pJoinAppKey);
+    
+    /**
      *  功能描述：对指定频道说话
      *
      *  @param pChannelID: 频道ID，要保证全局唯一
@@ -732,6 +744,12 @@ public:
      *  @note: 实际是否开启硬解，还跟服务器配置及硬件是否支持有关，要全部支持开启才会使用硬解。并且如果硬编硬解失败，也会切换回软解。
      */
     bool getVideoHardwareCodeEnable( );
+    
+    /**
+     *  功能描述: 设置视频无帧渲染的等待超时时间，超过这个时间会给上层回调
+     *  @param timeout: 超时时间，单位为毫秒
+     */
+    void setVideoNoFrameTimeout(int timeout);
 
 #if MAC_OS
 public:
