@@ -1,5 +1,149 @@
 # ChangeLog汇总
 
+# 版本3.0.0.183
+## 修改内容：
+1. 数据上报服务器补充
+2. 完善start/stop Input的通知
+3. 增加有人被踢出房间的通知
+4. 修改码率上下限设置及当前码率获取接口
+5. 新增setExternalInputMode接口，用于设置是否使用由外部输入音视频数据的模式，对于七牛来说建议在init之前做为第一个接口调用
+6. 增加了是否在房间中的查询接口
+7. 优化了回声消除模块，可抑制啸叫的发生
+
+## 接口变更
+### IOS
+#### 码率上下限设置
+取消原来的码率设置接口，修改为上下限设置。
+
+```Objective-c
+/**
+ *  功能描述: 设置视频数据上行的码率的上下限。
+ *  @param maxBitrate: 最大码率，单位kbit/s.  0无效
+ *  @param minBitrate: 最小码率，单位kbit/s.  0无效
+ 
+ *  @return None
+ *
+ *  @warning:需要在进房间之前设置
+ */
+- (void) setVideoCodeBitrate:(unsigned int) maxBitrate  minBitrate:(unsigned int ) minBitrate;
+```
+
+#### 获取当前码率接口
+取消原来的基准码率获取接口，改为当前码率获取。
+
+```Objective-c
+/**
+ *  功能描述: 获取视频数据上行的当前码率。
+ *
+ *  @return 视频数据上行的当前码率
+ */
+- (unsigned int) getCurrentVideoCodeBitrate;
+```
+
+#### 有人被踢出房间的通知
+
+```Objective-c
+    YOUME_EVENT_OTHERS_BE_KICKED             = 67,   ///< 房间里其他人被踢出房间
+```
+
+```Objective-c
+    //param为被踢出者的userid
+    - (void)onYouMeEvent:(YouMeEvent_t)eventType errcode:(YouMeErrorCode_t)iErrorCode roomid:(NSString *)roomid param:(NSString *)param;
+
+```
+
+#### 设置是否由外部输入音视频
+用于设置是否使用由外部输入音视频数据的模式，对于七牛来说建议在init之前做为第一个接口调用
+
+```Objective-c
+/**
+ *  功能描述:   设置是否由外部输入音视频
+ *  @param bInputModeEnabled: true:外部输入模式，false:SDK内部采集模式
+ */
+- (void)setExternalInputMode:(bool)bInputModeEnabled;
+```
+
+#### 是否在房间中
+
+```Objective-c
+/**
+ *  功能描述:查询是否在某个语音频道内
+ *
+ *  @param strChannelID:要查询的频道ID
+ *
+ *  @return true——在频道内，false——没有在频道内
+ */
+- (bool) isInChannel:(NSString*) strChannelID;
+```
+
+### Android
+#### 码率上下限设置
+取消原来的码率设置接口，修改为上下限设置。
+
+```java
+	/**
+	 *  功能描述: 设置视频数据上行的码率的上下限。
+	 *  @param maxBitrate: 最大码率，单位kbit/s.  0无效
+	 *  @param minBitrate: 最小码率，单位kbit/s.  0无效
+
+	 *  @return None
+	 *
+	 *  @warning:需要在进房间之前设置
+	 */
+	public static native void setVideoCodeBitrate(  int maxBitrate,   int minBitrate);
+```
+
+#### 获取当前码率接口
+取消原来的基准码率获取接口，改为当前码率获取。
+
+```java
+	/**
+	 *  功能描述: 获取视频数据上行的当前码率。
+	 *
+	 *  @return 视频数据上行的当前码率
+	 */
+	public static native int getCurrentVideoCodeBitrate( );
+```
+
+#### 有人被踢出房间的通知
+踢人者也可以收到
+
+```java
+    public static final int  YOUME_EVENT_OTHERS_BE_KICKED             = 67;   ///< 房间里其他人被踢出房间
+```
+
+```java
+    //param为被踢出者的userid
+    public  void onEvent (int event, int error, String room, Object param);
+
+```
+
+#### 设置是否由外部输入音视频
+用于设置是否使用由外部输入音视频数据的模式，对于七牛来说建议在init之前做为第一个接口调用
+
+```java
+    /**
+     * 功能描述:   设置是否由外部输入音视频
+     * @param bInputModeEnabled: true:外部输入模式，false:SDK内部采集模式
+     */
+    public static native void setExternalInputMode( boolean bInputModeEnabled );
+```
+
+#### 是否在房间中
+
+```java
+   /**
+	*  功能描述:查询是否在某个语音频道内
+	*
+	*  @param pChannelID:要查询的频道ID
+	*
+	*  @return true——在频道内，false——没有在频道内
+	*/
+	public static native boolean isInChannel( String strChannelID );
+```
+
+
+
 # 版本3.0.0.172
 ## 修改内容：
 1. iosDemo添加rtmp直播推流

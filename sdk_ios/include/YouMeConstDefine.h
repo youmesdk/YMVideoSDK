@@ -12,15 +12,6 @@
 #ifndef cocos2d_x_sdk_YouMeErrorCode_h
 #define cocos2d_x_sdk_YouMeErrorCode_h
 
-/// 频道状态
-typedef enum ChannelState {
-    CHANNEL_STATE_JOINIING = 0,  ///< 正在加入频道
-    CHANNEL_STATE_JOINED,        ///< 已经加入频道
-    CHANNEL_STATE_LEAVING_ONE,   ///< 正在离开单个频道
-    CHANNEL_STATE_LEAVING_ALL,   ///< 正在离开所有频道
-    CHANNEL_STATE_LEAVED         ///< 已经离开频道
-} ChannelState_t;
-
 /// 用户角色
 typedef enum YouMeUserRole {
     YOUME_USER_NONE = 0,         ///< 非法用户，调用API时不能传此参数
@@ -119,6 +110,8 @@ typedef enum YouMeEvent {
     YOUME_EVENT_KICK_NOTIFY                 = 65,   ///< 被踢通知   ,param: （踢人者ID，被踢原因，被禁时间）
     
     YOUME_EVENT_FAREND_VOICE_LEVEL          = 66,   ///< 远端说话人音量大小
+    
+    YOUME_EVENT_OTHERS_BE_KICKED             = 67,   ///< 房间里其他人被踢出房间
 
     YOUME_EVENT_OTHERS_VIDEO_ON                = 200, ///< 其他用户视频流打开
     YOUME_EVENT_OTHERS_VIDEO_OFF               = 201, ///< 其他用户视频流断开

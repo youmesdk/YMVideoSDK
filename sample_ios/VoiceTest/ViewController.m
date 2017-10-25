@@ -202,16 +202,17 @@ const int CHANGE_SERVER_MODE = 6;
     params->videoWidth = 480;
     params->videoHeight = 640;
     params->reportInterval = 5000;
-    params->bitRate = 1200;
+    params->maxBitrate = 1200;
+    params->minBitrate = 600;
     params->farendLevel = 10;
     params->bHWEnable = true;
-    params->bHighAudio = true ;
+    params->bHighAudio = false ;
     params->push = false;
     
     enterdRoom = false;
     
     // 是否允许视频输入
-    mInputVideoEnable = true;
+    //mInputVideoEnable = true;
     
     firstFrame = YES;
     record = [[AudioRecordStream alloc] init ];
@@ -227,8 +228,10 @@ const int CHANGE_SERVER_MODE = 6;
     
     //默认测服
     mIsTestServer = false;
-    //[[YMVoiceService getInstance]setTestServer:true];
+    //[[YMVoiceService getInstance]setTestServer:mIsTestServer];
     
+    //========================== 设置为外部输入音视频的模式 =========================================================
+    [[YMVoiceService getInstance] setExternalInputMode:true];
     //========================== 初始化YoumeService =========================================================
     [[YMVoiceService getInstance] setAVStatisticInterval: 5000 ];
     
@@ -308,6 +311,13 @@ const int CHANGE_SERVER_MODE = 6;
     [self.videoGroup addSubview:self.mGL20View2];
     
     self.mGL20View3_mix = [[OpenGLView20 alloc] initWithFrame:CGRectMake(renderViewWidth + 2* renderViewMargin , renderViewHeight + 2* renderViewMargin, renderViewWidth, renderViewHeight)];
+    
+    float widthRate = (float)renderMaxWidth / MIX_WIDTH;
+    float heightRate = (float)renderMaxHeight / MIX_HEIGHT;
+    float rate = widthRate > heightRate ? heightRate : widthRate;
+    
+    self.mGL20View3_mix.bounds = CGRectMake(0, 0, MIX_WIDTH * rate, MIX_HEIGHT * rate);
+
     [self.videoGroup addSubview:self.mGL20View3_mix];
 
 }
@@ -349,7 +359,7 @@ const int CHANGE_SERVER_MODE = 6;
             [[YMVoiceService getInstance] setVideoNetResolutionWidth:params->videoWidth height:params->videoHeight];
         }
         [[YMVoiceService getInstance] setAVStatisticInterval: params->reportInterval];
-        [[YMVoiceService getInstance] setVideoCodeBitrate: params->bitRate];
+        [[YMVoiceService getInstance] setVideoCodeBitrate: params->maxBitrate  minBitrate:params->minBitrate];
         
         if( params->bHighAudio ){
             [[YMVoiceService getInstance] setAudioQuality:HIGH_QUALITY];
@@ -415,9 +425,6 @@ const int CHANGE_SERVER_MODE = 6;
             // TODO 设置日志级别，会被服务器下发的配置覆盖
             [[YMVoiceService getInstance] setLogLevel: LOG_INFO ];
             
-            [[YMVoiceService getInstance] setVideoCodeBitrate: 300 ];
-            [[YMVoiceService getInstance] setVideoHardwareCodeEnable: true ];
-
             // SDK验证成功
             self.mBInitOK = TRUE;
             mTips = @"SDK验证成功!";
@@ -544,7 +551,19 @@ const int CHANGE_SERVER_MODE = 6;
     } else if (eventType == YOUME_EVENT_OTHERS_VIDEO_ON) {
          dispatch_async (dispatch_get_main_queue (), ^{
              [[YMVoiceService getInstance] createRender:param];
-             [[YMEngineService getInstance] addMixOverlayVideoUserId: param PosX:10 PosY:10 PosZ:0 Width:80 Height:120];
+             
+             int posX = 10;
+             int posY = 10;
+             
+             if( mCurMixCount%3 == 1)
+             {
+                 posX = 110;
+             }
+             else if( mCurMixCount%3 == 2){
+                 posX = 210;
+             }
+             mCurMixCount++;
+             [[YMEngineService getInstance] addMixOverlayVideoUserId: param PosX:posX PosY:posY PosZ:0 Width:90 Height:120];
              [self.userList addObject:param];
          });
         
@@ -562,9 +581,10 @@ const int CHANGE_SERVER_MODE = 6;
         NSLog(@"User:%@ stop video input", param  );
     }
     else  {
-        NSString* strTmp = @"SDK回调 errcode:";
-        NSString* strErrorCode = [NSString stringWithFormat:@"%d",iErrorCode];
-        mTips = [strTmp stringByAppendingString:strErrorCode];
+        NSString* strTmp = @"Evt: %d, err:%d, param:%@ ,room:%@ ";
+
+        mTips = [NSString stringWithFormat: strTmp, eventType, iErrorCode, param, roomid ];
+
         dispatch_async (dispatch_get_main_queue (), ^{
             
             [self.tfTips setText:mTips];
@@ -714,12 +734,12 @@ const int CHANGE_SERVER_MODE = 6;
 }
 
 - (IBAction)onClickButtonAllowInputVideo:(id)sender {
-    mInputVideoEnable = true;
+    //mInputVideoEnable = true;
 }
 
 - (IBAction)onClickButtonStopInputVideo:(id)sender {
-    mInputVideoEnable = false;
-    [[YMEngineService getInstance] stopInputVideoFrame];
+    //mInputVideoEnable = false;
+    //[[YMEngineService getInstance] stopInputVideoFrame];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -766,6 +786,7 @@ const int CHANGE_SERVER_MODE = 6;
         }
         mCameraEnable= false;
         [self stopVideoCapture];
+        [[YMEngineService getInstance] stopInputVideoFrame];
     }
 }
 
@@ -827,9 +848,9 @@ const int CHANGE_SERVER_MODE = 6;
 }
 
 - (void) OnCameraCaptureData:(void*) buffer Len:(int)bufferSize Width:(int)width Height:(int)height Fmt:(int)Fmt Rotation:(int)rotationDegree Mirror:(int)mirror Timestamp:(uint64_t)recordTime{
-    if (mInputVideoEnable) {
+    //if (mInputVideoEnable) {
         [[YMEngineService getInstance] inputVideoFrame:buffer Len:bufferSize Width:width Height:height Fmt:Fmt Rotation:rotationDegree Mirror:mirror Timestamp:recordTime];
-    }
+    //}
 }
 
 @end

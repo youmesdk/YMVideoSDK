@@ -22,7 +22,8 @@
 @property (retain, nonatomic) IBOutlet UITextField *tf_width;
 @property (retain, nonatomic) IBOutlet UITextField *tf_height;
 @property (retain, nonatomic) IBOutlet UITextField *tf_interval;
-@property (retain, nonatomic) IBOutlet UITextField *tf_bitrate;
+@property (retain, nonatomic) IBOutlet UITextField *tf_maxBitrate;
+@property (retain, nonatomic) IBOutlet UITextField *tf_minBitrate;
 @property (retain, nonatomic) IBOutlet UITextField *tf_farendLevel;
 
 @property (retain, nonatomic) IBOutlet UISwitch *tf_open_hw;

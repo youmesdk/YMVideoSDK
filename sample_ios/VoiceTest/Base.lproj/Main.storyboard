@@ -223,8 +223,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="视频码率：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fD-Pn-pdO">
-                                <rect key="frame" x="34" y="186" width="87" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="视频码率:max" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fD-Pn-pdO">
+                                <rect key="frame" x="34" y="186" width="106" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -259,7 +259,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="300" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B0b-gL-oC7">
-                                <rect key="frame" x="146" y="181" width="97" height="30"/>
+                                <rect key="frame" x="153" y="181" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -341,6 +341,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="300" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ui2-tZ-gs6">
+                                <rect key="frame" x="263" y="181" width="70" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAM-Qb-8Vo">
+                                <rect key="frame" x="231" y="186" width="28" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -360,11 +374,12 @@
                     </view>
                     <connections>
                         <outlet property="push_stream" destination="5VA-eH-sfS" id="gtf-ym-cYV"/>
-                        <outlet property="tf_bitrate" destination="B0b-gL-oC7" id="mZp-NM-XlC"/>
                         <outlet property="tf_farendLevel" destination="vD6-VP-xKr" id="6L0-QC-fpL"/>
                         <outlet property="tf_height" destination="3vC-fe-8bb" id="ZhS-F8-RH2"/>
                         <outlet property="tf_high_audio" destination="xJA-6c-zDs" id="DS2-8c-cBp"/>
                         <outlet property="tf_interval" destination="ZdZ-hs-1wB" id="hf9-bt-qeN"/>
+                        <outlet property="tf_maxBitrate" destination="B0b-gL-oC7" id="Cs4-Bv-11h"/>
+                        <outlet property="tf_minBitrate" destination="ui2-tZ-gs6" id="puE-3a-tRN"/>
                         <outlet property="tf_open_hw" destination="dOg-dp-PAw" id="LMl-DT-XwE"/>
                         <outlet property="tf_width" destination="t8U-v1-nBV" id="50c-wg-Gz7"/>
                     </connections>

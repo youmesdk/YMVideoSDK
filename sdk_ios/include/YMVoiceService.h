@@ -21,6 +21,12 @@
 - (void)setTestServer:(bool) isTest;
 
 /**
+ *  功能描述:   设置是否由外部输入音视频
+ *  @param bInputModeEnabled: true:外部输入模式，false:SDK内部采集模式
+ */
+- (void)setExternalInputMode:(bool)bInputModeEnabled;
+
+/**
  *  功能描述:初始化引擎
  *
  *  @param delegate:回调地址
@@ -495,6 +501,20 @@
 - (YouMeErrorCode_t)setCaptureFrontCameraEnable:(bool)enable;
 
 /**
+ * 功能描述: 切换前置/后置摄像头
+ * @return   YOUME_SUCCESS - 成功
+ *          其他 - 具体错误码
+ */
+- (YouMeErrorCode_t)switchCamera;
+
+/**
+ * 功能描述: 权限检测结束后重置摄像头
+ * @return   YOUME_SUCCESS - 成功
+ *          其他 - 具体错误码
+ */
+- (YouMeErrorCode_t)resetCamera;
+
+/**
  * 功能描述:   向房间广播消息
  * @param channelID: 广播房间
  * @param strContent: 广播内容-文本串
@@ -553,21 +573,22 @@
 
 /**
  *  功能描述: 设置视频数据上行的基准码率
- *  @param bitrate: 单位kbit/s
+ *  @param maxBitrate: 最大码率，单位kbit/s
+ *  @param minBitrate: 最小码率，单位kbit/s
  *
  *  @return None
  *
  *  @note: 设置的是基准码率，如果网络较差，可能在此进出上进行动态调整。
  *  @warning:需要在进房间之前设置
  */
-- (void) setVideoCodeBitrate:(unsigned int) bitrate;
+- (void) setVideoCodeBitrate:(unsigned int) maxBitrate  minBitrate:(unsigned int ) minBitrate;
 
 /**
- *  功能描述: 获取视频数据上行的基准码率，没有进行设置的情况下，返回0，由SDK内部自行决定基准码率。
+ *  功能描述: 获取视频数据上行的当前码率。
  *
- *  @return 视频数据上行的基准码率, 默认为0
+ *  @return 视频数据上行的当前码率
  */
-- (unsigned int) getVideoCodeBitrate;
+- (unsigned int) getCurrentVideoCodeBitrate;
 
 /**
  *  功能描述: 设置视频数据是否同意开启硬编硬解
@@ -593,6 +614,47 @@
  *  @param timeout:单位毫秒
  */
 - (void) setVideoNoFrameTimeout:(int) timeout;
+
+/**
+ *  功能描述:判断是否初始化完成
+ *
+ *  @return true——完成，false——还未完成
+ */
+- (bool) isInited;
+
+/**
+ *  功能描述:切换身份(仅支持单频道模式，进入房间以后设置)
+ *
+ *  @param eUserRole: 用户身份
+ *
+ *  @return 错误码，详见YouMeConstDefine.h定义
+ */
+- (YouMeErrorCode_t) setUserRole:(YouMeUserRole_t) eUserRole;
+
+/**
+ *  功能描述:获取身份(仅支持单频道模式)
+ *
+ *  @return 身份定义，详见YouMeConstDefine.h定义
+ */
+- (YouMeUserRole_t) getUserRole;
+
+
+/**
+ *  功能描述:查询是否在某个语音频道内
+ *
+ *  @param strChannelID:要查询的频道ID
+ *
+ *  @return true——在频道内，false——没有在频道内
+ */
+- (bool) isInChannel:(NSString*) strChannelID;
+
+/**
+ *  功能描述:背景音乐是否在播放
+ *
+ *  @return true——正在播放，false——没有播放
+ */
+- (bool) isBackgroundMusicPlaying;
+
 
 @end
 

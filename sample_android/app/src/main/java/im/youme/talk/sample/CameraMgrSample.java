@@ -10,6 +10,8 @@ import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
+import android.opengl.GLES20;
+import android.opengl.GLES11Ext;
 import android.os.Build;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -24,6 +26,7 @@ import android.Manifest;
 import android.view.Surface;
 
 import com.youme.voiceengine.NativeEngine;
+import com.youme.voiceengine.video.GlUtil;
 
 
 @SuppressLint("NewApi")
@@ -164,7 +167,8 @@ public class CameraMgrSample {
         camera.setPreviewCallback(youmePreviewCallback);
 
         if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) && (null == svCamera)) {
-            mSurfaceTexture = new SurfaceTexture(10);
+            int textureId = GlUtil.generateTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES);
+            mSurfaceTexture = new SurfaceTexture(textureId);
             try {
                 camera.setPreviewTexture(mSurfaceTexture);
             } catch (IOException e) {

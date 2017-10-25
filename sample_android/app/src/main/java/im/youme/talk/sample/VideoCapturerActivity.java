@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.opengl.EGL14;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,10 +47,11 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
     //声明video设置块相关静态变量
     public static int _videoWidth = 240;
     public static int _videoHeight = 320;
-    public static int _bitRate = 300;
+    public static int _maxBitRate = 0;
+    public static int _minBitRate = 0;
     public static int _reportInterval = 5000;
     public static int _farendLevel = 10;
-    public static boolean _bHighAudio = true;
+    public static boolean _bHighAudio = false;
     public static boolean _bHWEnable = true;
 
 
@@ -81,6 +83,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
     private Button btn_join = null;
     private Button btn_camera_onoff = null;
     private Button btn_camera_switch = null;
+    private Button btn_open_mic = null;
     private boolean isCameraOn = false;
     private Map<Integer, String> renderMap = null;
 
@@ -90,6 +93,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
     private long  avTime = 0;
     private String  strAvTip = null ;
     private String  farendLevel = "0";
+
+    private boolean  isMicOpen = false;
 
     private int local_render_id = 0;
     private int rotation = 0;
@@ -104,6 +109,10 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
 
         //设置回调监听对象,需要implements YouMeCallBackInterface
         api.SetCallback(this);
+        //设置测试服还是正式服
+        //NativeEngine.setServerMode(NativeEngine.SERVER_MODE_TEST);
+        //设置api为外部输入音视频的模式
+        api.setExternalInputMode( true );
         //调用初始化
         api.init(CommonDefines.appKey, CommonDefines.appSecret, YouMeConst.YOUME_RTC_SERVER_REGION.RTC_CN_SERVER, "");
 
@@ -123,11 +132,14 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
         mUserIDEditText.setText(local_user_id);
 
 
+
+
         mSurfaceLayout = (PercentFrameLayout) this.findViewById(R.id.capturer_video_layout);
         mSurfaceLayout.setPosition(0,0,100,100);
         mSurfaceView = (SurfaceViewRenderer) this.findViewById(R.id.capturer_video_view);
         try {
-            mSurfaceView.init(EglBase.create().getEglBaseContext(), null);
+            mSurfaceView.init(null, null);
+            //mSurfaceView.init(EglBase.create().getEglBaseContext(), null);
         } catch (Exception e) {
             System.out.println("catch exception");
             throw e;
@@ -153,6 +165,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
 //                    VideoCapturer.StopCapturer();
                     CameraMgrSample.stopCapture();
                     AudioRecorderSample.stopRecorder();
+                    NativeEngine.stopInputVideoFrame();
                     btn_camera_onoff.setText("打开摄像头");
                 } else {
 //                    VideoCapturer.StartCapturer();
@@ -161,9 +174,6 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                     api.setSampleRate(YouMeConst.YOUME_SAMPLE_RATE.SAMPLE_RATE_44);
                     //设置视频无渲染帧超时等待时间，单位毫秒
                     api.setVideoNoFrameTimeout(5000);
-                    AudioRecorderSample.initRecorder(VideoCapturerActivity.this);
-                    AudioRecorderSample.startRecorder();
-                    api.setSpeakerMute(false);
                     btn_camera_onoff.setText("关闭摄像头");
                 }
                 isCameraOn = isCameraOn?false:true;
@@ -172,6 +182,9 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
 
         btn_camera_switch = (Button) findViewById(R.id.btn_camera_switch);
         btn_camera_switch.setOnClickListener(this);
+
+        btn_open_mic = (Button) findViewById( R.id.btn_open_mic );
+        btn_open_mic.setOnClickListener( this );
 
         tvState = (TextView) findViewById(R.id.state);
         renderMap = new HashMap<>();
@@ -209,7 +222,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                 remoteVideoLayout = (PercentFrameLayout) this.findViewById(R.id.remote_video_layout_one);
                 remoteVideoLayout.setPosition(0,0,100,100);
                 remoteVideoView = (SurfaceViewRenderer) this.findViewById(R.id.remote_video_view_one);
-                remoteVideoView.init(EglBase.create().getEglBaseContext(), null);
+                //remoteVideoView.init(EglBase.create().getEglBaseContext(), null);
+                remoteVideoView.init(null, null);
                 remoteVideoView.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT);
                 remoteVideoView.setMirror(false);
                 remoteVideoView.setVisibility(View.VISIBLE);
@@ -235,7 +249,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                 mRemoteSurfaceViewLayoutTwo = (PercentFrameLayout)this.findViewById(R.id.remote_video_layout_two);
                 mRemoteSurfaceViewLayoutTwo.setPosition(0,0,100,100);
                 mRemoteSurfaceViewTwo = (SurfaceViewRenderer) this.findViewById(R.id.remote_video_view_two);
-                mRemoteSurfaceViewTwo.init(EglBase.create().getEglBaseContext(), null);
+                //mRemoteSurfaceViewTwo.init(EglBase.create().getEglBaseContext(), null);
+                mRemoteSurfaceViewTwo.init(null, null);
                 mRemoteSurfaceViewTwo.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT);
                 mRemoteSurfaceViewTwo.setMirror(false);
                 mRemoteSurfaceViewTwo.setVisibility(View.VISIBLE);
@@ -261,7 +276,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                 mRemoteSurfaceViewLayoutThree = (PercentFrameLayout)this.findViewById(R.id.remote_video_layout_three);
                 mRemoteSurfaceViewLayoutThree.setPosition(0,0,100,100);
                 mRemoteSurfaceViewThree = (SurfaceViewRenderer) this.findViewById(R.id.remote_video_view_three);
-                mRemoteSurfaceViewThree.init(EglBase.create().getEglBaseContext(), null);
+                //mRemoteSurfaceViewThree.init(EglBase.create().getEglBaseContext(), null);
+                mRemoteSurfaceViewThree.init(null, null);
                 mRemoteSurfaceViewThree.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT);
                 mRemoteSurfaceViewThree.setMirror(false);
                 mRemoteSurfaceViewThree.setVisibility(View.VISIBLE);
@@ -358,6 +374,15 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
 
                     //btn_join.performClick();
 
+                    mRemoteSurfaceViewLayoutThree = (PercentFrameLayout)VideoCapturerActivity.this.findViewById(R.id.remote_video_layout_three);
+                    mRemoteSurfaceViewLayoutThree.setPosition(0,0,100,100);
+                    mRemoteSurfaceViewThree = (SurfaceViewRenderer) VideoCapturerActivity.this.findViewById(R.id.remote_video_view_three);
+                    //mRemoteSurfaceViewThree.init(EglBase.create().getEglBaseContext(), null);
+                    mRemoteSurfaceViewThree.init(null, null);
+                    mRemoteSurfaceViewThree.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT);
+                    mRemoteSurfaceViewThree.setMirror(false);
+                    mRemoteSurfaceViewThree.setVisibility(View.VISIBLE);
+
                     break;
                 case YouMeConst.YouMeEvent.YOUME_EVENT_JOIN_OK:
                     if( !isJoinedRoom ){
@@ -368,18 +393,12 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                         api.SetVideoCallback();
                         //设置混流回调
                         VideoMgr.setVideoFrameCallback(new videoDataCallback());
-                        VideoMgr.setMixVideoSize(320,480);
+                        VideoMgr.setMixVideoSize(360,480);
                         //String userId, int x, int y, int z, int width, int height
-                        VideoMgr.addMixOverlayVideo(local_user_id,0,0,0,320,480);
+                        VideoMgr.addMixOverlayVideo(local_user_id,0,0,0,360,480);
                         //设置远端语音音量回调
 
-                        mRemoteSurfaceViewLayoutThree = (PercentFrameLayout)VideoCapturerActivity.this.findViewById(R.id.remote_video_layout_three);
-                        mRemoteSurfaceViewLayoutThree.setPosition(0,0,100,100);
-                        mRemoteSurfaceViewThree = (SurfaceViewRenderer) VideoCapturerActivity.this.findViewById(R.id.remote_video_view_three);
-                        mRemoteSurfaceViewThree.init(EglBase.create().getEglBaseContext(), null);
-                        mRemoteSurfaceViewThree.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT);
-                        mRemoteSurfaceViewThree.setMirror(false);
-                        mRemoteSurfaceViewThree.setVisibility(View.VISIBLE);
+
 
                         //这时候允许打开摄像头进行采集
                         btn_camera_onoff.setActivated(true);
@@ -387,6 +406,9 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
 
                         //btn_camera_onoff.performClick();
                     }
+                    break;
+                case YouMeConst.YouMeEvent.YOUME_EVENT_LEAVED_ALL:
+                    isJoinedRoom = false;
                     break;
                 case YouMeConst.YouMeEvent.YOUME_EVENT_OTHERS_VIDEO_ON:
                     boolean needCreateRender = true;
@@ -500,6 +522,24 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
             case R.id.btn_camera_switch:
                 CameraMgrSample.switchCamera();
                 break;
+            case R.id.btn_open_mic:
+            {
+                if( isMicOpen == true )
+                {
+                    btn_open_mic.setText( "打开麦克风" );
+                    AudioRecorderSample.stopRecorder();
+                    isMicOpen = false;
+                }
+                else{
+                    btn_open_mic.setText( "关闭麦克风" );
+                    AudioRecorderSample.initRecorder(VideoCapturerActivity.this);
+                    AudioRecorderSample.startRecorder();
+                    api.setSpeakerMute(false);
+                    isMicOpen = true;
+                }
+
+            }
+            break;
         }
     }
 
@@ -513,22 +553,24 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
      */
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
+//        moveTaskToBack(true);
 //        super.onBackPressed();
 //        Log.i(TAG, "onBackPressed");
 //        tvState.setText("退出中...");
 //
-//        VideoCapturer.StopCapturer();
 //        VideoCapturerActivity.this.finish();
+        System.exit(0);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode==KeyEvent.KEYCODE_BACK){
             moveTaskToBack(true);
+            System.exit(0);
             return false;
         }
-        return super.onKeyDown(keyCode, event);
+        super.onKeyDown(keyCode, event);
+        return true;
     }
 
     //点击设置按钮响应
@@ -545,23 +587,29 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
     public void onJoinClick(View v){
 
         if( isJoinedRoom ){
-            return ;
+            api.leaveChannelAll() ;
+            btn_join.setText("加入频道");
         }
+        else
+        {
+            //加入频道前进行video设置
+            api.setVideoNetResolution(_videoWidth,_videoHeight);
+            api.setAVStatisticInterval(_reportInterval);
+            api.setVideoCodeBitrate(_maxBitRate, _minBitRate );
+            api.setFarendVoiceLevelCallback(_farendLevel);
+            api.setVideoHardwareCodeEnable(_bHWEnable);
+            if(_bHighAudio){
+                api.setAudioQuality(1);
+            }else {
+                api.setAudioQuality(0);
+            }
 
-        //加入频道前进行video设置
-        api.setVideoNetResolution(_videoWidth,_videoHeight);
-        api.setAVStatisticInterval(_reportInterval);
-        api.setVideoCodeBitrate(_bitRate);
-        api.setFarendVoiceLevelCallback(_farendLevel);
-        api.setVideoHardwareCodeEnable(_bHWEnable);
-        if(_bHighAudio){
-            api.setAudioQuality(1);
-        }else {
-            api.setAudioQuality(0);
+            api.setMicrophoneMute( true );
+            //进入频道
+            local_user_id =  mUserIDEditText.getText().toString();
+            int ret = api.joinChannelSingleModeWithAppKey( local_user_id, mRoomIDEditText.getText().toString(), YouMeConst.YouMeUserRole.YOUME_USER_HOST, CommonDefines.appJoinKey );
+            btn_join.setText("离开频道");
         }
-
-        //进入频道
-        int ret = api.joinChannelSingleModeWithAppKey( mUserIDEditText.getText().toString(), mRoomIDEditText.getText().toString(), YouMeConst.YouMeUserRole.YOUME_USER_HOST, CommonDefines.appJoinKey );
     }
 
 

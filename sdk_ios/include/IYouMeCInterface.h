@@ -48,6 +48,12 @@ extern "C"
     YOUME_API void youme_freeCbMessage(const XCHAR* pMsg);
     
     /**
+     * 功能描述:   设置是否由外部输入音视频
+     * @param bInputModeEnabled: true:外部输入模式，false:SDK内部采集模式
+     */
+    YOUME_API void youme_setExternalInputMode( bool bInputModeEnabled );
+    
+    /**
      * 功能描述:初始化引擎
      * 这是一个异步调用接口，如果函数返回 YOUME_SUCCESS， 则需要等待以下事件回调达到才表明初始化完成
      * YOUME_EVENT_INIT_OK - 表明初始化成功
@@ -305,6 +311,16 @@ extern "C"
 	//查询频道当前的用户列表，maxCount表明最多获取多少，-1表示获取所有
     YOUME_API int  youme_getChannelUserList( const char* pChannelID , int maxCount ,  bool  notifyMemChange );
 	
+	// 进入房间后，切换身份
+	YOUME_API int  youme_setUserRole(int userRole);
+	// 获取身份
+	YOUME_API int  youme_getUserRole();
+	// 背景音乐是否在播放
+	YOUME_API bool  youme_isBackgroundMusicPlaying();
+	// 是否初始化成功
+	YOUME_API bool  youme_isInited();
+	// 是否在某个语音房间内
+	YOUME_API bool  youme_isInChannel(const char* pChannelID);
 	//---------------------抢麦接口---------------------//
 	/**
 	* 功能描述:    抢麦相关设置（抢麦活动发起前调用此接口进行设置）

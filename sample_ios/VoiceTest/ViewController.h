@@ -18,7 +18,8 @@
     int videoWidth;
     int videoHeight;
     int reportInterval;
-    int bitRate;
+    int maxBitrate;
+    int minBitrate;
     int farendLevel;
     bool bHWEnable;
     bool bHighAudio;
@@ -46,6 +47,8 @@
     UIButton *btnStopVideo;
     UIView  *localView;
     UIImageView  *localSubView;
+    
+    int mCurMixCount;
     
 
     

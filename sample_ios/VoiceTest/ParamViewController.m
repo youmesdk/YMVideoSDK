@@ -30,7 +30,8 @@
     _tf_height.text = [NSString stringWithFormat:@"%d", params->videoHeight];
 
     _tf_interval.text = [NSString stringWithFormat:@"%d", params->reportInterval];
-    _tf_bitrate.text = [NSString stringWithFormat:@"%d", params->bitRate];
+    _tf_maxBitrate.text = [NSString stringWithFormat:@"%d", params->maxBitrate];
+    _tf_minBitrate.text = [NSString stringWithFormat:@"%d", params->minBitrate];
     _tf_farendLevel.text = [NSString stringWithFormat:@"%d", params->farendLevel];
     
     _tf_open_hw.on = params->bHWEnable;
@@ -59,7 +60,8 @@
         params->videoWidth = _tf_width.text.intValue;
         params->videoHeight = _tf_height.text.intValue;
         params->reportInterval = _tf_interval.text.intValue;
-        params->bitRate = _tf_bitrate.text.intValue;
+        params->maxBitrate = _tf_maxBitrate.text.intValue;
+        params->minBitrate = _tf_minBitrate.text.intValue;
         params->farendLevel = _tf_farendLevel.text.intValue;
         
         params->bHWEnable = _tf_open_hw.on;

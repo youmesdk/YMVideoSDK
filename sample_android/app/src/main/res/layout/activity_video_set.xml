@@ -66,16 +66,32 @@
             android:id="@+id/textView4"
             android:layout_width="162dp"
             android:layout_height="28dp"
-            android:text="视频码率："
+            android:text="视频码率：max"
             android:textAlignment="center"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/editText_bitRate"
+            android:id="@+id/editText_maxBitRate"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="3000"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="60dp"
+            android:layout_height="28dp"
+            android:text="min"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editText_minBitRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="300"
+            android:text="3000"
             android:inputType="number"/>
     </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

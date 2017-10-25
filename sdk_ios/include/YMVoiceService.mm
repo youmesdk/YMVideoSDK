@@ -176,6 +176,11 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance()->deleteRender(renderId);
 }
 
+- (void)setExternalInputMode:(bool)bInputModeEnabled
+{
+    IYouMeVoiceEngine::getInstance()->setExternalInputMode(bInputModeEnabled);
+}
+
 - (int)initSDK:(id<VoiceEngineCallback>)delegate  appkey:(NSString*)appKey  appSecret:(NSString*)appSecret
         regionId:(YOUME_RTC_SERVER_REGION)regionId  serverRegionName:(NSString*) serverRegionName
 {
@@ -481,6 +486,14 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance ()->setCaptureFrontCameraEnable(enable);
 }
 
+- (YouMeErrorCode)switchCamera{
+    return IYouMeVoiceEngine::getInstance ()->switchCamera();
+}
+
+- (YouMeErrorCode)resetCamera{
+    return IYouMeVoiceEngine::getInstance ()->resetCamera();
+}
+
 - (YouMeErrorCode_t) sendMessage:(NSString*) channelID  strContent:(NSString*) strContent  requestID:(int*) requestID{
     return IYouMeVoiceEngine::getInstance ()->sendMessage( [channelID UTF8String], [strContent UTF8String], requestID );
 }
@@ -513,14 +526,14 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance ()->setAudioQuality( quality );
 }
 
-- (void) setVideoCodeBitrate:(unsigned int) bitrate
+- (void) setVideoCodeBitrate:(unsigned int) maxBitrate  minBitrate:(unsigned int ) minBitrate
 {
-    return IYouMeVoiceEngine::getInstance ()->setVideoCodeBitrate( bitrate );
+    return IYouMeVoiceEngine::getInstance ()->setVideoCodeBitrate( maxBitrate, minBitrate );
 }
 
-- (unsigned int) getVideoCodeBitrate
+- (unsigned int) getCurrentVideoCodeBitrate
 {
-    return IYouMeVoiceEngine::getInstance ()->getVideoCodeBitrate();
+    return IYouMeVoiceEngine::getInstance ()->getCurrentVideoCodeBitrate();
 }
 
 - (void) setVideoHardwareCodeEnable:(bool) bEnable
@@ -536,6 +549,33 @@ extern void SetServerMode(SERVER_MODE serverMode);
 - (void) setVideoNoFrameTimeout:(int) timeout
 {
     return IYouMeVoiceEngine::getInstance ()->setVideoNoFrameTimeout(timeout);
+}
+
+- (bool) isInited
+{
+    return IYouMeVoiceEngine::getInstance()->isInited();
+}
+
+
+- (YouMeErrorCode_t) setUserRole:(YouMeUserRole_t) eUserRole
+{
+    return IYouMeVoiceEngine::getInstance()->setUserRole( eUserRole );
+}
+
+- (YouMeUserRole_t) getUserRole
+{
+    return IYouMeVoiceEngine::getInstance()->getUserRole();
+}
+
+
+- (bool) isInChannel:(NSString*) strChannelID
+{
+    return IYouMeVoiceEngine::getInstance()->isInChannel( [strChannelID UTF8String]);
+}
+
+- (bool) isBackgroundMusicPlaying
+{
+    return IYouMeVoiceEngine::getInstance()->isBackgroundMusicPlaying();
 }
 
 @end

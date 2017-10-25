@@ -72,6 +72,13 @@ public:
 
     YouMeErrorCode unInit ();
 
+	/**
+	*  功能描述:判断是否初始化完成
+	*
+	*  @return true——完成，false——还未完成
+	*/
+	// 是否初始化成功
+	bool isInited();
 
     /**
      *  功能描述:设置服务器区域
@@ -227,6 +234,33 @@ public:
      */
     YouMeErrorCode leaveChannelAll ();
     
+	/**
+	*  功能描述:切换身份(仅支持单频道模式，进入房间以后设置)
+	*
+	*  @param eUserRole: 用户身份
+	*
+	*  @return 错误码，详见YouMeConstDefine.h定义
+	*/
+	YouMeErrorCode setUserRole(YouMeUserRole_t eUserRole);
+
+	/**
+	*  功能描述:获取身份(仅支持单频道模式)
+	*
+	*  @return 身份定义，详见YouMeConstDefine.h定义
+	*/
+	YouMeUserRole_t getUserRole();
+
+
+	/**
+	*  功能描述:查询是否在某个语音频道内
+	*
+	*  @param pChannelID:要查询的频道ID
+	*
+	*  @return true——在频道内，false——没有在频道内
+	*/
+	// 
+	bool isInChannel(const char* pChannelID);
+
     /**
      *  功能描述:查询频道的用户列表
      *  @param channelID:要查询的频道ID
@@ -327,6 +361,13 @@ public:
      *          其他 - 具体错误码
      */
     YouMeErrorCode stopBackgroundMusic();
+
+	/**
+	*  功能描述:背景音乐是否在播放
+	*
+	*  @return true——正在播放，false——没有播放
+	*/
+	bool isBackgroundMusicPlaying();
 
     /**
      *  功能描述: 设置背景音乐播放的音量
@@ -561,6 +602,12 @@ public:
      */
 	YouMeErrorCode  sendMessage( const char* pChannelID,  const char* pContent, int* requestID );
     
+    /**
+     * 功能描述:   设置是否由外部输入音视频
+     * @param bInputModeEnabled: true:外部输入模式，false:SDK内部采集模式
+     */
+    void setExternalInputMode( bool bInputModeEnabled );
+    
 	/**
      *  功能描述: 设置是否开启视频编码器
      *  @param pFilePath: yuv文件的绝对路径
@@ -709,22 +756,22 @@ public:
     void setAudioQuality( YOUME_AUDIO_QUALITY quality );
     
     /**
-     *  功能描述: 设置视频数据上行的基准码率
-     *  @param bitrate: 单位kbit/s
-     *
+     *  功能描述: 设置视频数据上行的码率的上下限。
+     *  @param maxBitrate: 最大码率，单位kbit/s.  0无效
+     *  @param minBitrate: 最小码率，单位kbit/s.  0无效
+     
      *  @return None
      *
-     *  @note: 设置的是基准码率，如果网络较差，可能在此进出上进行动态调整。
      *  @warning:需要在进房间之前设置
      */
-    void setVideoCodeBitrate( unsigned int bitrate );
+    void setVideoCodeBitrate( unsigned int maxBitrate,  unsigned int minBitrate );
     
     /**
-     *  功能描述: 获取视频数据上行的基准码率，没有进行设置的情况下，返回0，由SDK内部自行决定基准码率。
+     *  功能描述: 获取视频数据上行的当前码率。
      *
-     *  @return 视频数据上行的基准码率, 默认为0
+     *  @return 视频数据上行的当前码率
      */
-    unsigned int getVideoCodeBitrate( );
+    unsigned int getCurrentVideoCodeBitrate( );
     
     /**
      *  功能描述: 设置视频数据是否同意开启硬编硬解
