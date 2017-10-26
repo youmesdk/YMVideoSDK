@@ -2,13 +2,14 @@
 
 # 版本3.0.0.183
 ## 修改内容：
-1. 补充时长、分辨率上报
+1. 数据上报服务器补充
 2. 完善start/stop Input的通知
 3. 增加有人被踢出房间的通知
 4. 修改码率上下限设置及当前码率获取接口
 5. 新增setExternalInputMode接口，用于设置是否使用由外部输入音视频数据的模式，对于七牛来说建议在init之前做为第一个接口调用
 6. 增加了是否在房间中的查询接口
-7. 优化了回声消除模块
+7. 增加了是否初始化成功的查询接口
+8. 优化了回声消除模块，可抑制啸叫的发生
 
 ## 接口变更
 ### IOS
@@ -76,6 +77,16 @@
 - (bool) isInChannel:(NSString*) strChannelID;
 ```
 
+#### 是否初始化成功
+```Objective-c
+/**
+ *  功能描述:判断是否初始化完成
+ *
+ *  @return true——完成，false——还未完成
+ */
+- (bool) isInited;
+```
+
 ### Android
 #### 码率上下限设置
 取消原来的码率设置接口，修改为上下限设置。
@@ -141,7 +152,15 @@
 	*/
 	public static native boolean isInChannel( String strChannelID );
 ```
-
+#### 是否初始化成功
+```java
+   /**
+	*  功能描述:判断是否初始化完成
+	*
+	*  @return true——完成，false——还未完成
+	*/
+	public static native boolean isInited();
+```
 
 
 # 版本3.0.0.172
