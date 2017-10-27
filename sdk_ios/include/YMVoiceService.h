@@ -487,11 +487,13 @@
 - (YouMeErrorCode_t)stopCapture;
 
 /**
- * 功能描述:   设置摄像头采集参数
- * @return   YOUME_SUCCESS - 成功
+ *  功能描述: 设置本地视频渲染回调的分辨率
+ *  @param width:宽
+ *  @param height:高
+ *  @return YOUME_SUCCESS - 成功
  *          其他 - 具体错误码
  */
-- (YouMeErrorCode_t)setCaptureFps:(int)nFps Width:(int)nWidth Height:(int)nHeight;
+- (YouMeErrorCode_t)setVideoLocalResolutionWidth:(int)width height:(int)height;
 
 /**
  * 功能描述:   是否启动前置摄像头
@@ -546,16 +548,16 @@
  *  @return YOUME_SUCCESS - 成功
  *          其他 - 具体错误码
  */
-- (YouMeErrorCode_t) setSampleRate:(YOUME_SAMPLE_RATE_t)sampleRate ;
+- (YouMeErrorCode_t) setSampleRate:(YOUME_SAMPLE_RATE_t)sampleRate;
 
 /**
  *  功能描述: 设置视频网络传输过程的分辨率
  *  @param width:宽
- *  @param height:
+ *  @param height:高
  *  @return YOUME_SUCCESS - 成功
  *          其他 - 具体错误码
  */
-- (YouMeErrorCode_t)setVideoNetResolutionWidth:( int) width height:(int)height ;
+- (YouMeErrorCode_t)setVideoNetResolutionWidth:(int)width height:(int)height;
 
 /**
  *  功能描述: 设置音视频统计数据时间间隔

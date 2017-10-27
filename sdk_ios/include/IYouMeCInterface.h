@@ -450,8 +450,8 @@ extern "C"
     // 切换前后摄像头
     YOUME_API int youme_switchCamera();
 
-    // 设置camera capture property
-    YOUME_API int youme_setCaptureProperty(int nFps, int nWidth, int nHeight);
+    // 设置本地视频渲染回调的分辨率
+    YOUME_API int youme_setVideoLocalResolution(int width, int height);
     
     // 设置是否前置摄像头
     YOUME_API int youme_setCaptureFrontCameraEnable(bool enable);

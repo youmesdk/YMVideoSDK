@@ -667,12 +667,13 @@ public:
     YouMeErrorCode stopCapture();
     
     /**
-     *  功能描述: 设置camera capture property
-     *  @param
+     *  功能描述: 设置本地视频渲染回调的分辨率
+     *  @param width:宽
+     *  @param height:高
      *  @return YOUME_SUCCESS - 成功
      *          其他 - 具体错误码
      */
-    YouMeErrorCode setCaptureProperty(int nFps, int nWidth, int nHeight);
+    YouMeErrorCode setVideoLocalResolution(int width, int height);
     
     /**
      *  功能描述: 设置是否前置摄像头

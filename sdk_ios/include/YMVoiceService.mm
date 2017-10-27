@@ -478,8 +478,8 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance ()->stopCapture();
 }
 
-- (YouMeErrorCode)setCaptureFps:(int)nFps Width:(int)nWidth Height:(int)nHeight{
-    return IYouMeVoiceEngine::getInstance ()->setCaptureProperty(nFps, nWidth, nHeight);
+- (YouMeErrorCode)setVideoLocalResolutionWidth:(int)width height:(int)height{
+    return IYouMeVoiceEngine::getInstance ()->setVideoLocalResolution(width, height);
 }
 
 - (YouMeErrorCode)setCaptureFrontCameraEnable:(bool)enable{
@@ -494,13 +494,13 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance ()->resetCamera();
 }
 
-- (YouMeErrorCode_t) sendMessage:(NSString*) channelID  strContent:(NSString*) strContent  requestID:(int*) requestID{
+- (YouMeErrorCode_t) sendMessage:(NSString*) channelID  strContent:(NSString*) strContent requestID:(int*)requestID{
     return IYouMeVoiceEngine::getInstance ()->sendMessage( [channelID UTF8String], [strContent UTF8String], requestID );
 }
 
-- (YouMeErrorCode_t) kickOtherFromChannel:(NSString*) userID  channelID:(NSString*)channelID   lastTime:(int) lastTime
+- (YouMeErrorCode_t) kickOtherFromChannel:(NSString*) userID  channelID:(NSString*)channelID lastTime:(int)lastTime
 {
-    return IYouMeVoiceEngine::getInstance ()->kickOtherFromChannel( [userID UTF8String],[channelID UTF8String], lastTime  );
+    return IYouMeVoiceEngine::getInstance ()->kickOtherFromChannel( [userID UTF8String], [channelID UTF8String], lastTime  );
 }
 
 - (void) setLogLevel:(YOUME_LOG_LEVEL_t) level
@@ -512,8 +512,8 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance ()->setSampleRate( sampleRate );
 }
 
-- (YouMeErrorCode_t)setVideoNetResolutionWidth:( int) width height:(int)height {
-    return IYouMeVoiceEngine::getInstance ()->setVideoNetResolution( width,height );
+- (YouMeErrorCode_t)setVideoNetResolutionWidth:(int)width height:(int)height {
+    return IYouMeVoiceEngine::getInstance ()->setVideoNetResolution( width, height );
 }
 
 - (void) setAVStatisticInterval:(int) interval
