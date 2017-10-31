@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Context;
 
 import com.youme.voiceengine.MemberChange;
 import com.youme.voiceengine.NativeEngine;
@@ -41,9 +42,12 @@ import java.util.Map;
 
 import im.youme.talk.video.PercentFrameLayout;
 import android.view.KeyEvent;
+import com.tencent.bugly.BuglyStrategy;
+import com.tencent.bugly.crashreport.CrashReport;
 
 public class VideoCapturerActivity extends Activity implements YouMeCallBackInterface, View.OnClickListener{
 
+    private static final String YOUME_BUGLY_APP_ID = "428d8b14e2";
     //声明video设置块相关静态变量
     public static int _videoWidth = 240;
     public static int _videoHeight = 320;
@@ -101,6 +105,9 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Context context = getApplicationContext();
+        CrashReport.initCrashReport(context, YOUME_BUGLY_APP_ID, true);
+        CrashReport.setAppVersion(context, "外部输入");
 //        YouMeManager.setSOName( "youmetalk" );
         YouMeManager.Init(this);
         super.onCreate(savedInstanceState);
@@ -164,14 +171,11 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                 if(isCameraOn) {
 //                    VideoCapturer.StopCapturer();
                     CameraMgrSample.stopCapture();
-                    AudioRecorderSample.stopRecorder();
-                    NativeEngine.stopInputVideoFrame();
+//                    AudioRecorderSample.stopRecorder();
                     btn_camera_onoff.setText("打开摄像头");
                 } else {
 //                    VideoCapturer.StartCapturer();
                     CameraMgrSample.startCapture();
-                    //设置音频输入采样参数
-                    api.setSampleRate(YouMeConst.YOUME_SAMPLE_RATE.SAMPLE_RATE_44);
                     //设置视频无渲染帧超时等待时间，单位毫秒
                     api.setVideoNoFrameTimeout(5000);
                     btn_camera_onoff.setText("关闭摄像头");
@@ -527,6 +531,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                 if( isMicOpen == true )
                 {
                     btn_open_mic.setText( "打开麦克风" );
+                    NativeEngine.stopInputVideoFrame();
                     AudioRecorderSample.stopRecorder();
                     isMicOpen = false;
                 }
@@ -562,16 +567,16 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
         System.exit(0);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode==KeyEvent.KEYCODE_BACK){
-            moveTaskToBack(true);
-            System.exit(0);
-            return false;
-        }
-        super.onKeyDown(keyCode, event);
-        return true;
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode==KeyEvent.KEYCODE_BACK){
+//            moveTaskToBack(true);
+//            System.exit(0);
+//            return false;
+//        }
+//        super.onKeyDown(keyCode, event);
+//        return true;
+//    }
 
     //点击设置按钮响应
     public void onSetClick(View v){
@@ -593,6 +598,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
         else
         {
             //加入频道前进行video设置
+            api.setSampleRate(YouMeConst.YOUME_SAMPLE_RATE.SAMPLE_RATE_44);
             api.setVideoNetResolution(_videoWidth,_videoHeight);
             api.setAVStatisticInterval(_reportInterval);
             api.setVideoCodeBitrate(_maxBitRate, _minBitRate );

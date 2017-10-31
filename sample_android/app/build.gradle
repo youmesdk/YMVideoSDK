@@ -1,4 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'bugly'
+
+bugly {
+    appId = '428d8b14e2' // 注册时分配的App ID
+    appKey = 'ce9a6ce2-8f24-40da-914a-12e1d7b05b19' // 注册时分配的App Key
+    debug = true
+}
 
 android {
     compileSdkVersion 25
@@ -9,6 +16,10 @@ android {
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi','armeabi-v7a','x86' //, 'x86', 'armeabi-v7a', 'x86_64'
+        }
     }
     buildTypes {
         release {
@@ -30,4 +41,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile files('libs/youme_voice_engine.jar')
+    compile files('libs/bugly_crash_release.jar')
 }

@@ -14,7 +14,12 @@ import com.youme.voiceengine.NativeEngine;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class AudioRecorderSample
 {
@@ -30,6 +35,7 @@ public class AudioRecorderSample
     private static AudioRecord   mAudioRecord;
     private static int           mMinBufferSize = 0;
     private static Thread        mRecorderThread;
+    private static Thread        mRecorderCopyThread;
     private static boolean       mIsRecorderStarted = false;
     private static boolean       mIsLoopExit = false;
     private static int           mMicSource;
@@ -43,6 +49,9 @@ public class AudioRecorderSample
     private static int           mLoopCounter = 1;
     private static boolean       mInitSuceed = false;
     private static AudioManager mAudioManager = null;
+
+    private static BlockingQueue<byte[]> audioBufferQueue;
+    private static ReentrantLock lock = new ReentrantLock();
 
     public static boolean isRecorderStarted () {
         return mIsRecorderStarted;
@@ -125,6 +134,7 @@ public class AudioRecorderSample
             Log.e(TAG, "Error record buffer overflow!");
         }
         mOutBuffer = new byte[readBufSize];
+        audioBufferQueue = new ArrayBlockingQueue<byte[]>(1);
     }
 
     public static boolean startRecorder () {
@@ -143,10 +153,13 @@ public class AudioRecorderSample
         if (mInitSuceed) {
             mAudioRecord.startRecording();
         }
+        mAudioManager.setSpeakerphoneOn(true);
 
         mIsLoopExit = false;
         mRecorderThread = new Thread(new AudioRecorderRunnable());
         mRecorderThread.start();
+        mRecorderCopyThread = new Thread(new AudioBufferCopyRunnable());
+        mRecorderCopyThread.start();
 
         mIsRecorderStarted = true;
 
@@ -159,6 +172,7 @@ public class AudioRecorderSample
         if (null != mAudioManager) {
             Log.e("AudioMgr", "mAudioManager is null");
             mAudioManager.setMode(AudioManager.MODE_NORMAL);
+            mAudioManager.setSpeakerphoneOn(true);
         }
         if (!mIsRecorderStarted) {
             return;
@@ -168,6 +182,8 @@ public class AudioRecorderSample
         try {
             mRecorderThread.interrupt();
             mRecorderThread.join(5000);
+            mRecorderCopyThread.interrupt();
+            mRecorderCopyThread.join(5000);
         }
         catch (InterruptedException e) {
             e.printStackTrace();
@@ -180,8 +196,25 @@ public class AudioRecorderSample
 
         mIsRecorderStarted = false;
         mOutBuffer = null;
+        audioBufferQueue.clear();
+        audioBufferQueue = null;
 
         Log.d(TAG, "Stop audio recorder success !");
+    }
+
+
+    private static class AudioBufferCopyRunnable implements Runnable{
+        @Override
+        public void run() {
+            try {
+                while ((!mIsLoopExit) && (!Thread.interrupted())) {
+                    byte[] buff = audioBufferQueue.take();
+                    NativeEngine.inputAudioFrame(buff, buff.length, System.currentTimeMillis());
+                }
+            }catch (Exception e) {
+                Log.e(TAG, "Recorder Copy thread exit!");
+            }
+        }
     }
 
     private static class AudioRecorderRunnable implements Runnable {
@@ -287,6 +320,17 @@ public class AudioRecorderSample
     public static void OnAudioRecorderRefresh(byte[] audBuf, int samplerate, int channelnum, int bps) {
         // Notify native layer to refresh IO buffer
 //        NativeEngine.AudioRecorderBufRefresh(audBuf, samplerate, channelnum, bps);
-        NativeEngine.inputAudioFrame(audBuf, audBuf.length, System.currentTimeMillis());
+        try {
+            byte[] copyBuff = new byte[audBuf.length];
+            System.arraycopy(audBuf,0,copyBuff,0,audBuf.length);
+//            if(audioBufferQueue.remainingCapacity()<1024){
+//                audioBufferQueue.clear();
+//            }
+//            Log.d("OnAudioRecorderRefresh",""+audioBufferQueue.remainingCapacity());
+//            audioBufferQueue.put(copyBuff);
+            NativeEngine.inputAudioFrame(audBuf, audBuf.length, System.currentTimeMillis());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

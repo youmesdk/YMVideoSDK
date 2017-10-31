@@ -12,6 +12,7 @@
 #import "OpenGLView20.h"
 #import "LFLiveKit.h"
 #import "libyuv.h"
+#import <Bugly/Bugly.h>
 
 #import "ParamViewController.h"
 
@@ -51,6 +52,10 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
 
 @property (nonatomic , strong)  OpenGLView20* mGL20View2;
 @property (nonatomic , strong)  OpenGLView20* mGL20View3_mix;
+
+@property (nonatomic , strong) OpenGLView20* mGL20ViewFullScreen;
+@property (nonatomic, assign)  int mFullScreenIndex;
+
 @property (atomic,strong) NSMutableArray *userList;
 @property (retain, nonatomic) IBOutlet UIView *videoGroup;
 @property (retain, nonatomic) CameraCaptureDemo  *cameraCapture;
@@ -176,6 +181,15 @@ const int CHANGE_SERVER_MODE = 6;
     self.userList = [NSMutableArray new];
     self.startPush = NO;
    
+    [Bugly updateAppVersion:@"外部输入"];
+    int sdkNum = [[YMVoiceService getInstance] getSDKVersion];
+    [Bugly setUserValue:[NSString stringWithFormat:@"%d",sdkNum] forKey:@"SDKNumber"];
+    int main_ver = (sdkNum >> 28) & 0xF;
+    int minor_ver = (sdkNum >> 22) & 0x3F;
+    int release_number = (sdkNum >> 14) & 0xFF;
+    int build_number = sdkNum & 0x00003FFF;
+    [Bugly setUserValue:[NSString stringWithFormat:@"video-trunk-%d.%d.%d.%d",main_ver, minor_ver, release_number, build_number] forKey:@"SDKVersion"];
+    
     /***   默认分辨率368 ＊ 640  音频：44.1 iphone6以上48  双声道  方向竖屏 ***/
     LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
     videoConfiguration.videoSize = CGSizeMake(MIX_WIDTH, MIX_HEIGHT);
@@ -222,6 +236,7 @@ const int CHANGE_SERVER_MODE = 6;
     record.recrodDelegate = self;
     _cameraCapture.cameraDataDelegate = self;
     _cameraCapture.previewParentView = self.view;
+    _mFullScreenIndex = -1;
     
     avNotifyTime = 0 ;
     mStrNotify = @"";
@@ -319,6 +334,10 @@ const int CHANGE_SERVER_MODE = 6;
     self.mGL20View3_mix.bounds = CGRectMake(0, 0, MIX_WIDTH * rate, MIX_HEIGHT * rate);
 
     [self.videoGroup addSubview:self.mGL20View3_mix];
+    
+    self.mGL20ViewFullScreen =  [[OpenGLView20 alloc] initWithFrame:CGRectMake(0, 0, r.size.width, r.size.height)];
+    [self.view addSubview:self.mGL20ViewFullScreen];
+    self.mGL20ViewFullScreen.hidden = true ;
 
 }
 
@@ -413,6 +432,28 @@ const int CHANGE_SERVER_MODE = 6;
 
 //点击空白屏幕收起编辑键盘
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    if( self.mGL20ViewFullScreen.hidden == false )
+    {
+        _mFullScreenIndex = -1;
+        self.mGL20ViewFullScreen.hidden = true;
+    }
+    else{
+        UITouch * touch = touches.anyObject;//获取触摸对象
+        CGPoint pt = [touch locationInView: self.mGL20View ];
+        if( [self.mGL20View pointInside:pt  withEvent:event ])
+        {
+            _mFullScreenIndex = 0;
+        }
+        else
+        {
+            pt = [touch locationInView: self.mGL20View2 ];
+            if ( [self.mGL20View2 pointInside: pt  withEvent:event ])
+            {
+                _mFullScreenIndex = 1;
+            }
+        }
+        
+    }
     [self.view endEditing:YES];
 }
 
@@ -629,6 +670,22 @@ const int CHANGE_SERVER_MODE = 6;
         const char* pTmpBuffer = (const char *)malloc(len);
         memcpy(pTmpBuffer, data, len);
         dispatch_async (dispatch_get_main_queue (), ^{
+            if( _mFullScreenIndex == index  )
+            {
+                if( self.mGL20ViewFullScreen.hidden == true )
+                {
+                    CGRect r = [ UIScreen mainScreen ].applicationFrame;
+                    float widthRate = (float)r.size.width / width;
+                    float heightRate = (float)r.size.height / height;
+                    float rate = widthRate > heightRate ? heightRate : widthRate;
+                    
+                    self.mGL20ViewFullScreen.bounds = CGRectMake(0, 0, width * rate, height * rate);
+                    self.mGL20ViewFullScreen.hidden = false;
+                    _mFullScreenIndex = index;
+                }
+                [self.mGL20ViewFullScreen displayYUV420pData:pTmpBuffer width:width height:height];
+            }
+            
             if(index==0){
                 if( self.mGL20View.frame.size.width == self.mGL20View.frame.size.height && width != height )
                 {
@@ -655,6 +712,7 @@ const int CHANGE_SERVER_MODE = 6;
             free(pTmpBuffer);
         });
     }
+    
 }
 
 // 混流数据回调，必须要设置了setMixVideoWidth 和 addMixOverlayVideoUserId 才会有这个回调

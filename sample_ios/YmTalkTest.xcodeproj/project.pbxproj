@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13B5632D1FA86FBF00C8DAFF /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B5632C1FA86FBE00C8DAFF /* Bugly.framework */; };
 		2048A1551D34A0520099190B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048A1541D34A0520099190B /* main.m */; };
 		2048A1581D34A0520099190B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048A1571D34A0520099190B /* AppDelegate.m */; };
 		2048A15E1D34A0520099190B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2048A15C1D34A0520099190B /* Main.storyboard */; };
@@ -253,6 +254,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13B5632C1FA86FBE00C8DAFF /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bugly.framework; path = Frameworks/Bugly.framework; sourceTree = "<group>"; };
 		2048A1501D34A0520099190B /* YmTalkTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YmTalkTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2048A1541D34A0520099190B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2048A1561D34A0520099190B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -745,6 +747,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13B5632D1FA86FBF00C8DAFF /* Bugly.framework in Frameworks */,
 				AF2716891F6F6D5900EEA829 /* VideoToolbox.framework in Frameworks */,
 				2091D5AA1D40D5C000F8D738 /* CFNetwork.framework in Frameworks */,
 				20CBA6B71D34DE72000EAF5D /* CoreFoundation.framework in Frameworks */,
@@ -1419,6 +1422,7 @@
 		D02357BD1D682ADD00F2EB71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				13B5632C1FA86FBE00C8DAFF /* Bugly.framework */,
 				AFB21CF71F7E4C8B00958932 /* test */,
 				AF2716881F6F6D5900EEA829 /* VideoToolbox.framework */,
 				BEEDDFB61F6911B80089C80D /* libyoume_voice_engine.a */,
@@ -1949,6 +1953,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = NUZXKA7782;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/SDK/include\"";
 				INFOPLIST_FILE = VoiceTest/Info.plist;
@@ -1983,6 +1988,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = NUZXKA7782;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks";
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/SDK/include\"";
 				INFOPLIST_FILE = VoiceTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
