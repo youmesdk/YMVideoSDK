@@ -2,7 +2,7 @@
 
 # 版本3.0.0.213
 ##修改内容
-1. iOS ffmpeg独立
+1. iOS ffmpeg独立为`libffmpeg3.3.a` ，包含：libavcodec libavformat libavutil
 2. Adnroid 支持arm64-v8a
 3. Bugfix：音频重采样避免音量降低
 4. Bugfix：安卓录音避免部分机型声音断续
