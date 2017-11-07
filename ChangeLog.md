@@ -1,5 +1,21 @@
 # ChangeLog汇总
 
+# 版本3.0.0.213
+##修改内容
+1. iOS ffmpeg独立
+2. Adnroid 支持arm64-v8a
+3. Bugfix：音频重采样避免音量降低
+4. Bugfix：安卓录音避免部分机型声音断续
+5. Bugfix：修改魅蓝noto3 渲染轻微变形问题
+6. Bugfix：视频连麦中离开频道可能崩溃人问题
+7. Bugfix：反初始化后调用isInRoom 会崩溃的问题修复
+8. Bugfix：远端音量计算间隔从200ms改为300ms
+9. 优化：kFilterBilinear  改为 kFilterLinear 以换取性能，iphone 7减少 3%左右cpu
+10. Demo 添加bugly监控
+
+## 接口变更
+无。
+
 # 版本3.0.0.183
 ## 修改内容：
 1. 数据上报服务器补充
