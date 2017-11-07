@@ -228,7 +228,7 @@
 		AF1C48F41F82143A00CD316E /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = AF1C482A1F82143A00CD316E /* rtmp.c */; };
 		AF1C48F81F82266D00CD316E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1C48F71F82266D00CD316E /* ViewController.m */; };
 		AF2716891F6F6D5900EEA829 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2716881F6F6D5900EEA829 /* VideoToolbox.framework */; };
-		AFDF2C801FACB11000614359 /* libffmpeg2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDF2C7F1FACB11000614359 /* libffmpeg2.3.a */; };
+		AFB61BC71FB213FE00F2D8B7 /* libffmpeg3.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB61BC61FB213FE00F2D8B7 /* libffmpeg3.3.a */; };
 		BEA4ABE61F1324F100286656 /* YMVoiceService.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEA4ABE51F1324F100286656 /* YMVoiceService.mm */; };
 		BEA4ABE91F13278100286656 /* libYouMeCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA4ABE81F13278100286656 /* libYouMeCommon.a */; };
 		BEA5D5DF1F7E1A9000679BDF /* ParamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5D5DE1F7E1A9000679BDF /* ParamViewController.m */; };
@@ -730,7 +730,7 @@
 		AFB21CF31F7E4C5200958932 /* YMFrameCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMFrameCallback.h; path = SDK/include/YMFrameCallback.h; sourceTree = "<group>"; };
 		AFB21CF41F7E4C5200958932 /* IYouMeVideoCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IYouMeVideoCallback.h; path = SDK/include/IYouMeVideoCallback.h; sourceTree = "<group>"; };
 		AFB21CF51F7E4C5200958932 /* OpenGLView20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLView20.h; path = SDK/include/OpenGLView20.h; sourceTree = "<group>"; };
-		AFDF2C7F1FACB11000614359 /* libffmpeg2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libffmpeg2.3.a; path = SDK/libs/libffmpeg2.3.a; sourceTree = "<group>"; };
+		AFB61BC61FB213FE00F2D8B7 /* libffmpeg3.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libffmpeg3.3.a; path = SDK/libs/libffmpeg3.3.a; sourceTree = "<group>"; };
 		BEA4ABE41F1324F100286656 /* YMVoiceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMVoiceService.h; sourceTree = "<group>"; };
 		BEA4ABE51F1324F100286656 /* YMVoiceService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YMVoiceService.mm; sourceTree = "<group>"; };
 		BEA4ABE81F13278100286656 /* libYouMeCommon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libYouMeCommon.a; path = SDK/libs/libYouMeCommon.a; sourceTree = "<group>"; };
@@ -751,10 +751,10 @@
 			files = (
 				13B5632D1FA86FBF00C8DAFF /* Bugly.framework in Frameworks */,
 				AF2716891F6F6D5900EEA829 /* VideoToolbox.framework in Frameworks */,
-				AFDF2C801FACB11000614359 /* libffmpeg2.3.a in Frameworks */,
 				2091D5AA1D40D5C000F8D738 /* CFNetwork.framework in Frameworks */,
 				20CBA6B71D34DE72000EAF5D /* CoreFoundation.framework in Frameworks */,
 				20F5DC401D34C70100E650C6 /* libsqlite3.0.tbd in Frameworks */,
+				AFB61BC71FB213FE00F2D8B7 /* libffmpeg3.3.a in Frameworks */,
 				20F5DC3E1D34C6F200E650C6 /* libresolv.9.tbd in Frameworks */,
 				BEA4ABE91F13278100286656 /* libYouMeCommon.a in Frameworks */,
 				BEEDDFB71F6911B80089C80D /* libyoume_voice_engine.a in Frameworks */,
@@ -1430,7 +1430,7 @@
 				AF2716881F6F6D5900EEA829 /* VideoToolbox.framework */,
 				BEEDDFB61F6911B80089C80D /* libyoume_voice_engine.a */,
 				BEA4ABE81F13278100286656 /* libYouMeCommon.a */,
-				AFDF2C7F1FACB11000614359 /* libffmpeg2.3.a */,
+				AFB61BC61FB213FE00F2D8B7 /* libffmpeg3.3.a */,
 				20F5DC3F1D34C70100E650C6 /* libsqlite3.0.tbd */,
 				20F5DC3D1D34C6F200E650C6 /* libresolv.9.tbd */,
 				20F5DC3B1D34C6E200E650C6 /* libz.1.2.5.tbd */,
