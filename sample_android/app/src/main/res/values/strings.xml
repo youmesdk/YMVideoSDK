@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YmTalkSample</string>
+    <string name="app_name">YmVideoInput</string>
     <string name="settings_name" translatable="false">AppRTC Settings</string>
     <string name="disconnect_call">Disconnect Call</string>
     <string name="room_description">

@@ -106,7 +106,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Context context = getApplicationContext();
-        CrashReport.initCrashReport(context, YOUME_BUGLY_APP_ID, true);
+        CrashReport.initCrashReport(context, YOUME_BUGLY_APP_ID, false);
         CrashReport.setAppVersion(context, "外部输入");
 //        YouMeManager.setSOName( "youmetalk" );
         YouMeManager.Init(this);
@@ -402,10 +402,12 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                         VideoMgr.addMixOverlayVideo(local_user_id,0,0,0,360,480);
                         //设置远端语音音量回调
 
-
-
                         //这时候允许打开摄像头进行采集
                         btn_camera_onoff.setActivated(true);
+
+                        //开启语音输出
+                        api.setSpeakerMute(false);
+
                         isJoinedRoom = true;
 
                         //btn_camera_onoff.performClick();
@@ -539,7 +541,6 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                     btn_open_mic.setText( "关闭麦克风" );
                     AudioRecorderSample.initRecorder(VideoCapturerActivity.this);
                     AudioRecorderSample.startRecorder();
-                    api.setSpeakerMute(false);
                     isMicOpen = true;
                 }
 
@@ -609,7 +610,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
             }else {
                 api.setAudioQuality(0);
             }
-
+            // 禁用内部输入
             api.setMicrophoneMute( true );
             //进入频道
             local_user_id =  mUserIDEditText.getText().toString();

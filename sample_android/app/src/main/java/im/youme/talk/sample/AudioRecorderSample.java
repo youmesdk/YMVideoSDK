@@ -1,15 +1,19 @@
 package im.youme.talk.sample;
 
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.audiofx.AutomaticGainControl;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
 import com.youme.voiceengine.NativeEngine;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,11 +28,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class AudioRecorderSample
 {
     private static final String  TAG = "AudioRecorderSample";
-    private static final int     DEFAULT_SOURCE = MediaRecorder.AudioSource.MIC;
     private static final int     DEFAULT_SAMPLE_RATE = 44100;
     private static final int     DEFAULT_CHANNEL_NUM = 1;
     private static final int     DEFAULT_BYTES_PER_SAMPLE = 2;
     private static final boolean DEBUG = false;
+    private static WebRtcAudioEffects effects = null;
 
     private static String        AudioName;
     private static String        AudioRecordError;
@@ -48,7 +52,9 @@ public class AudioRecorderSample
     private static int           mCounter = 1;
     private static int           mLoopCounter = 1;
     private static boolean       mInitSuceed = false;
-    private static AudioManager mAudioManager = null;
+    private static AudioManager  mAudioManager = null;
+    private static int           readBufSize = 0;
+    private static boolean       rsync = false;
 
     private static BlockingQueue<byte[]> audioBufferQueue;
     private static ReentrantLock lock = new ReentrantLock();
@@ -70,10 +76,30 @@ public class AudioRecorderSample
         mAudioManager = (AudioManager) env.getSystemService  (Context.AUDIO_SERVICE);
     }
 
+    // Creates an AudioRecord instance using AudioRecord.Builder which was added in API level 23.
+    @TargetApi(23)
+    private static AudioRecord createAudioRecordOnMarshmallowOrHigher(
+            int sampleRateInHz, int channelConfig, int bufferSizeInBytes) {
+        Log.d(TAG, "createAudioRecordOnMarshmallowOrHigher");
+        return new AudioRecord.Builder()
+                .setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION)
+                .setAudioFormat(new AudioFormat.Builder()
+                        .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                        .setSampleRate(sampleRateInHz)
+                        .setChannelMask(channelConfig)
+                        .build())
+                .setBufferSizeInBytes(bufferSizeInBytes)
+                .build();
+    }
+
     public static void initRecorder (int sampleRateInHz, int channelNum, int bytesPerSample) {
         int channelCfg;
         int pcmType;
-        mMicSource       = MediaRecorder.AudioSource.MIC;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            mMicSource = MediaRecorder.AudioSource.VOICE_COMMUNICATION;
+        }else{
+            mMicSource = MediaRecorder.AudioSource.VOICE_CALL;
+        }
         mSamplerate      = sampleRateInHz;
         mChannelNum      = channelNum;
         mBytesPerSample  = bytesPerSample;
@@ -102,8 +128,11 @@ public class AudioRecorderSample
                 pcmType = AudioFormat.ENCODING_PCM_16BIT;
                 break;
         }
+        readBufSize = 2048;//mSamplerate * mChannelNum * mBytesPerSample / 100 * 2; // 20ms data
+        mOutBuffer = new byte[readBufSize];
+        audioBufferQueue = new ArrayBlockingQueue<byte[]>(10);
 
-        mMinBufferSize = AudioRecord.getMinBufferSize(mSamplerate, channelCfg, pcmType);
+        mMinBufferSize = AudioRecord.getMinBufferSize(mSamplerate, channelCfg, pcmType) * 2;
         if (mMinBufferSize == AudioRecord.ERROR_BAD_VALUE) { // AudioRecord.ERROR_BAD_VALUE = -2
             Log.e(TAG, "Invalid parameter !");
             mInitStatus = AudioRecord.ERROR_BAD_VALUE;
@@ -113,7 +142,20 @@ public class AudioRecorderSample
 
         try
         {
-            mAudioRecord = new AudioRecord(mMicSource, mSamplerate, channelCfg, pcmType, mMinBufferSize);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // Use AudioRecord.Builder to create the AudioRecord instance if we are on API level 23 or
+                // higher.
+                mAudioRecord = createAudioRecordOnMarshmallowOrHigher(
+                        mSamplerate, channelCfg, mMinBufferSize);
+            } else {
+                // Use default constructor for API levels below 23.
+                mAudioRecord = new AudioRecord(mMicSource, mSamplerate, channelCfg, pcmType, mMinBufferSize);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                effects = WebRtcAudioEffects.create();
+                effects.setAEC(true);
+                effects.enable(mAudioRecord.getAudioSessionId());
+            }
         }
         catch (IllegalArgumentException e) {
             Log.e(TAG, "AudioRecord initialize fail :" + e.getMessage() );
@@ -129,12 +171,12 @@ public class AudioRecorderSample
             mInitSuceed = false;
         }
 
-        int readBufSize = mSamplerate * mChannelNum * mBytesPerSample / 100 * 2; // 20ms data
+
         if (mInitSuceed && (readBufSize > mMinBufferSize)) {
             Log.e(TAG, "Error record buffer overflow!");
         }
-        mOutBuffer = new byte[readBufSize];
-        audioBufferQueue = new ArrayBlockingQueue<byte[]>(1);
+        
+
     }
 
     public static boolean startRecorder () {
@@ -150,6 +192,7 @@ public class AudioRecorderSample
                 mAudioManager.setMode(AudioManager.MODE_IN_CALL);
             }
         }
+
         if (mInitSuceed) {
             mAudioRecord.startRecording();
         }
@@ -158,8 +201,10 @@ public class AudioRecorderSample
         mIsLoopExit = false;
         mRecorderThread = new Thread(new AudioRecorderRunnable());
         mRecorderThread.start();
-        mRecorderCopyThread = new Thread(new AudioBufferCopyRunnable());
-        mRecorderCopyThread.start();
+        if(rsync) {
+            mRecorderCopyThread = new Thread(new AudioBufferCopyRunnable());
+            mRecorderCopyThread.start();
+        }
 
         mIsRecorderStarted = true;
 
@@ -182,8 +227,10 @@ public class AudioRecorderSample
         try {
             mRecorderThread.interrupt();
             mRecorderThread.join(5000);
-            mRecorderCopyThread.interrupt();
-            mRecorderCopyThread.join(5000);
+            if(rsync) {
+                mRecorderCopyThread.interrupt();
+                mRecorderCopyThread.join(5000);
+            }
         }
         catch (InterruptedException e) {
             e.printStackTrace();
@@ -198,6 +245,10 @@ public class AudioRecorderSample
         mOutBuffer = null;
         audioBufferQueue.clear();
         audioBufferQueue = null;
+        if(effects!=null) {
+            effects.release();
+            effects = null;
+        }
 
         Log.d(TAG, "Stop audio recorder success !");
     }
@@ -238,7 +289,7 @@ public class AudioRecorderSample
             try {
                 while ((!mIsLoopExit) && (!Thread.interrupted())) {
 
-                    int readBufSize = mSamplerate * mChannelNum * mBytesPerSample / 100 * 2; // 20ms data
+                    //int readBufSize = mSamplerate * mChannelNum * mBytesPerSample / 100 * 2; // 20ms data
                     if (mInitSuceed && (readBufSize > mMinBufferSize)) {
                         Log.e(TAG, "Error record buffer overflow!");
                     }
@@ -321,14 +372,18 @@ public class AudioRecorderSample
         // Notify native layer to refresh IO buffer
 //        NativeEngine.AudioRecorderBufRefresh(audBuf, samplerate, channelnum, bps);
         try {
-            byte[] copyBuff = new byte[audBuf.length];
-            System.arraycopy(audBuf,0,copyBuff,0,audBuf.length);
-//            if(audioBufferQueue.remainingCapacity()<1024){
-//                audioBufferQueue.clear();
-//            }
-//            Log.d("OnAudioRecorderRefresh",""+audioBufferQueue.remainingCapacity());
-//            audioBufferQueue.put(copyBuff);
-            NativeEngine.inputAudioFrame(audBuf, audBuf.length, System.currentTimeMillis());
+            if(rsync) {
+                byte[] copyBuff = new byte[audBuf.length];
+                System.arraycopy(audBuf,0,copyBuff,0,audBuf.length);
+                if(audioBufferQueue.remainingCapacity()<8){
+                    Log.d("OnAudioRecorderRefresh",""+audioBufferQueue.remainingCapacity());
+                    audioBufferQueue.clear();
+                }
+//                Log.d("OnAudioRecorderRefresh",""+audioBufferQueue.remainingCapacity());
+                audioBufferQueue.put(copyBuff);
+            }else {
+                NativeEngine.inputAudioFrame(audBuf, audBuf.length, System.currentTimeMillis());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
