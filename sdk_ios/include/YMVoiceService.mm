@@ -9,6 +9,7 @@
 
 #import "YMVoiceService.h"
 #import "IYouMeVoiceEngine.h"
+#import "YMEngineService.h"
 
 @implementation MemberChangeOC
 
@@ -40,6 +41,11 @@ void YouMeVoiceImp::onEvent(const YouMeEvent event, const YouMeErrorCode error, 
     }
     if(event == YOUME_EVENT_JOIN_OK){
         IYouMeVoiceEngine::getInstance()->setVideoCallback(this);
+    }
+    else if(event == YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP)
+    {
+        //合流窗口变黑，七牛需求
+        [[YMEngineService getInstance] hangupMixOverlayVideo:[NSString stringWithCString:param encoding:NSUTF8StringEncoding]];
     }
     [delegate onYouMeEvent:event errcode:error
                     roomid:[NSString stringWithCString:room encoding:NSUTF8StringEncoding]
@@ -514,6 +520,10 @@ extern void SetServerMode(SERVER_MODE serverMode);
 
 - (YouMeErrorCode_t)setVideoNetResolutionWidth:(int)width height:(int)height {
     return IYouMeVoiceEngine::getInstance ()->setVideoNetResolution( width, height );
+}
+
+- (YouMeErrorCode_t)setVideoNetResolutionLowWidth:(int)width height:(int)height {
+    return IYouMeVoiceEngine::getInstance ()->setVideoNetResolutionLow( width, height );
 }
 
 - (void) setAVStatisticInterval:(int) interval

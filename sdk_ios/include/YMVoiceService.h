@@ -551,13 +551,22 @@
 - (YouMeErrorCode_t) setSampleRate:(YOUME_SAMPLE_RATE_t)sampleRate;
 
 /**
- *  功能描述: 设置视频网络传输过程的分辨率
+ *  功能描述: 设置视频网络传输过程的分辨率, 第一路高分辨率
  *  @param width:宽
  *  @param height:高
  *  @return YOUME_SUCCESS - 成功
  *          其他 - 具体错误码
  */
 - (YouMeErrorCode_t)setVideoNetResolutionWidth:(int)width height:(int)height;
+
+/**
+ *  功能描述: 设置视频网络传输过程的分辨率， 第二路第分辨率，默认不发送
+ *  @param width:宽
+ *  @param height:高
+ *  @return YOUME_SUCCESS - 成功
+ *          其他 - 具体错误码
+ */
+- (YouMeErrorCode_t)setVideoNetResolutionLowWidth:(int)width height:(int)height;
 
 /**
  *  功能描述: 设置音视频统计数据时间间隔

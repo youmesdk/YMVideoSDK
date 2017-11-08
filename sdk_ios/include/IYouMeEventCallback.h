@@ -1,4 +1,4 @@
-//
+﻿//
 //  IYouMeEventCallback.h
 //  youme_voice_engine
 //

@@ -7,6 +7,7 @@
 //
 #import "YMFrameCallback.h"
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface YMEngineService : NSObject
 @property (nonatomic, retain) id<YMFrameCallback> delegate;
@@ -16,8 +17,10 @@
 - (void)setDelegate:(id<YMFrameCallback>)delegate;
 - (BOOL)inputVideoFrame:(void *)data Len:(int)len Width:(int)width Height:(int)height Fmt:(int)fmt Rotation:(int)rotation Mirror:(int)mirror Timestamp:(uint64_t)timestamp;
 - (BOOL)inputAudioFrame:(void *)data Len:(int)len Timestamp:(uint64_t)timestamp;
-- (void)stopInputVideoFrame;
+- (BOOL)inputPixelBuffer:(CVPixelBufferRef)PixelBufferRef Width:(int)width Height:(int)height Fmt:(int)fmt Rotation:(int)rotation Mirror:(int)mirror Timestamp:(uint64_t)timestamp;
 
+- (void)stopInputVideoFrame;
+- (void)hangupMixOverlayVideo:(NSString*)userId;
 /*
  * 设置合流后的总体尺寸
  * @param width
@@ -39,4 +42,6 @@
  * @param userId
  */
 - (void)removeMixOverlayVideoUserId:(NSString*)userId;
+
+
 @end

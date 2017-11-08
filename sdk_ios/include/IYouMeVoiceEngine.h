@@ -316,6 +316,21 @@ public:
 	YouMeErrorCode inputVideoFrame(void* data, int len, int width, int	height, int fmt, int rotation, int mirror, uint64_t timestamp);
     
     /**
+     * 功能描述: 视频数据输入(七牛接口，房间内其它用户会收到YOUME_EVENT_OTHERS_VIDEO_INPUT_START事件)
+     * @param data 视频帧数据(ios:CVPixelBufferRef, android:textureid);
+     * @param width 视频图像宽
+     * @param height 视频图像高
+     * @param fmt 视频格式
+     * @param rotation 视频角度
+     * @param mirror 镜像
+     * @param timestamp 时间戳
+     * @return YOUME_SUCCESS - 成功
+     *         其他 - 具体错误码
+     */
+    YouMeErrorCode inputPixelBuffer(void* data, int width, int height, int fmt, int rotation, int mirror, uint64_t timestamp);
+
+    
+    /**
      * 功能描述: 停止视频数据输入(七牛接口，在inputVideoFrame之后调用，房间内其它用户会收到YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP事件)
      * @return YOUME_SUCCESS - 成功
      *         其他 - 具体错误码
@@ -725,7 +740,7 @@ public:
     YouMeErrorCode setSampleRate( YOUME_SAMPLE_RATE sampleRate );
     
     /**
-     *  功能描述: 设置视频网络传输过程的分辨率
+     *  功能描述: 设置视频网络传输过程的分辨率,高分辨率
      *  @param width:宽
      *  @param height:高
      *  @return YOUME_SUCCESS - 成功
@@ -733,6 +748,14 @@ public:
      */
     YouMeErrorCode setVideoNetResolution( int width, int height );
     
+    /**
+     *  功能描述: 设置视频网络传输过程的分辨率，低分辨率
+     *  @param width:宽
+     *  @param height:高
+     *  @return YOUME_SUCCESS - 成功
+     *          其他 - 具体错误码
+     */
+    YouMeErrorCode setVideoNetResolutionLow( int width, int height );
     
     /**
      *  功能描述: 设置音视频统计数据时间间隔

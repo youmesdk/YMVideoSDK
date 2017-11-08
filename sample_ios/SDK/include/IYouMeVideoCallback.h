@@ -1,4 +1,4 @@
-//
+﻿//
 //  IYouMeVideoCallback.h
 //  youme_voice_engine
 //
@@ -8,7 +8,7 @@
 
 #ifndef IYouMeFrameCallback_h
 #define IYouMeFrameCallback_h
-
+#include <stdint.h>
 #include <string>
 #include "YouMeConstDefine.h"
 

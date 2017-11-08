@@ -1,4 +1,4 @@
-//
+﻿//
 //  IYouMeCInterface.hpp
 //  youme_voice_engine
 //
