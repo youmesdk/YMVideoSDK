@@ -184,14 +184,15 @@ public class AudioRecorderSample
             Log.e(TAG, "Recorder already started !");
             return false;
         }
-        if (null != mAudioManager) {
-            Log.e("AudioMgr", "mAudioManager.setMode");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-            } else {
-                mAudioManager.setMode(AudioManager.MODE_IN_CALL);
-            }
-        }
+        // 外部不需要设置 MODE_IN_COMMUNICATION
+//        if (null != mAudioManager) {
+//            Log.e("AudioMgr", "mAudioManager.setMode");
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//                mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+//            } else {
+//                mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+//            }
+//        }
 
         if (mInitSuceed) {
             mAudioRecord.startRecording();
@@ -214,11 +215,11 @@ public class AudioRecorderSample
     }
 
     public static void stopRecorder() {
-        if (null != mAudioManager) {
-            Log.e("AudioMgr", "mAudioManager is null");
-            mAudioManager.setMode(AudioManager.MODE_NORMAL);
-            mAudioManager.setSpeakerphoneOn(true);
-        }
+//        if (null != mAudioManager) {
+//            Log.e("AudioMgr", "mAudioManager is null");
+//            mAudioManager.setMode(AudioManager.MODE_NORMAL);
+//            mAudioManager.setSpeakerphoneOn(true);
+//        }
         if (!mIsRecorderStarted) {
             return;
         }

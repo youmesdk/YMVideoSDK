@@ -34,8 +34,8 @@ import com.youme.voiceengine.video.GlUtil;
 public class CameraMgrSample {
     static String tag =  CameraMgrSample.class.getSimpleName();
 
-    private final static int DEFAULE_WIDTH = 640;
-    private final static int DEFAULE_HEIGHT = 720;
+    private final static int DEFAULE_WIDTH = 1080;
+    private final static int DEFAULE_HEIGHT = 1920;
     private final static int DEFAULE_FPS = 15;
 
     private SurfaceView svCamera = null;
@@ -269,7 +269,7 @@ public class CameraMgrSample {
     };
     public static void startCapture() {
         Log.e(tag, "start capture is called");
-        isFrontCamera = true;
+        isFrontCamera = false;
         getInstance().openCamera(isFrontCamera);
     }
 

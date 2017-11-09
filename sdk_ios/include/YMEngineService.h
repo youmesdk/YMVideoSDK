@@ -20,7 +20,7 @@
 - (BOOL)inputPixelBuffer:(CVPixelBufferRef)PixelBufferRef Width:(int)width Height:(int)height Fmt:(int)fmt Rotation:(int)rotation Mirror:(int)mirror Timestamp:(uint64_t)timestamp;
 
 - (void)stopInputVideoFrame;
-- (void)hangupMixOverlayVideo:(NSString*)userId;
+
 /*
  * 设置合流后的总体尺寸
  * @param width

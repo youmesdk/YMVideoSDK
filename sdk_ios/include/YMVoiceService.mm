@@ -42,11 +42,7 @@ void YouMeVoiceImp::onEvent(const YouMeEvent event, const YouMeErrorCode error, 
     if(event == YOUME_EVENT_JOIN_OK){
         IYouMeVoiceEngine::getInstance()->setVideoCallback(this);
     }
-    else if(event == YOUME_EVENT_OTHERS_VIDEO_INPUT_STOP)
-    {
-        //合流窗口变黑，七牛需求
-        [[YMEngineService getInstance] hangupMixOverlayVideo:[NSString stringWithCString:param encoding:NSUTF8StringEncoding]];
-    }
+ 
     [delegate onYouMeEvent:event errcode:error
                     roomid:[NSString stringWithCString:room encoding:NSUTF8StringEncoding]
                      param:[NSString stringWithCString:param encoding:NSUTF8StringEncoding]];
