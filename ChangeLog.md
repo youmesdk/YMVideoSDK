@@ -1,7 +1,7 @@
 # ChangeLog汇总
 
 # 版本3.0.0.222
-## 修改内容
+##修改内容
 1. Bugfix：接收video on通知特别慢的问题；
 2. Bugfix：32位cpu兼容修正。
 3. Change：混流画布颜色从绿色改为黑色；
