@@ -171,6 +171,14 @@ extern "C"
      *  @return 无
      */
     YOUME_API void youme_setToken( const char* pToken );
+
+    /**
+     *  功能描述: 设置用户自定义Log路径
+     *  @param pFilePath Log文件的路径
+     *  @return YOUME_SUCCESS - 成功
+     *          其他 - 具体错误码
+     */
+    YOUME_API int youme_setUserLogPath(const char* pFilePath);
     
     //---------------------多人语音接口---------------------//
     

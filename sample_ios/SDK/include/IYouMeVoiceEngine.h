@@ -1,4 +1,4 @@
-/**
+﻿/**
  @file IYouMeVoiceEngine.h
  @brief 游密音频通话引擎接口
  
@@ -80,6 +80,14 @@ public:
 	// 是否初始化成功
 	bool isInited();
 
+    /**
+     *  功能描述: 设置用户自定义Log路径
+     *  @param pFilePath Log文件的路径
+     *  @return YOUME_SUCCESS - 成功
+     *          其他 - 具体错误码
+     */
+    YouMeErrorCode setUserLogPath(const char* pFilePath);
+    
     /**
      *  功能描述:设置服务器区域
      *  @param region: YOUME_RTC_SERVER_REGION枚举可选的服务器区域

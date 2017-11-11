@@ -244,7 +244,8 @@ const int CHANGE_SERVER_MODE = 6;
     //默认测服
     mIsTestServer = false;
     //[[YMVoiceService getInstance]setTestServer:mIsTestServer];
-    
+    //========================== 设置用户自定义Log路径 =========================================================
+    //[[YMVoiceService getInstance] setUserLogPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"ymrtc_userlog.txt"]];
     //========================== 设置为外部输入音视频的模式 =========================================================
     [[YMVoiceService getInstance] setExternalInputMode:true];
     //========================== 初始化YoumeService =========================================================

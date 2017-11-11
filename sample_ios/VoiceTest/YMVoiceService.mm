@@ -178,6 +178,11 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance()->deleteRender(renderId);
 }
 
+- (YouMeErrorCode_t)setUserLogPath:(NSString *)path
+{
+    return IYouMeVoiceEngine::getInstance ()->setUserLogPath([path UTF8String]);
+}
+
 - (void)setExternalInputMode:(bool)bInputModeEnabled
 {
     IYouMeVoiceEngine::getInstance()->setExternalInputMode(bInputModeEnabled);

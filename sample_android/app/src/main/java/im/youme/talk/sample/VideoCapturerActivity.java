@@ -114,6 +114,8 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
         Intent intent = new Intent(this,VoiceEngineService.class);
         startService(intent);
 
+        //设置自定义Log路径
+        //api.setUserLogPath("/sdcard/YouMe/ym_userlog.txt");
         //设置回调监听对象,需要implements YouMeCallBackInterface
         api.SetCallback(this);
         //设置测试服还是正式服

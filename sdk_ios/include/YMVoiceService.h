@@ -21,6 +21,14 @@
 - (void)setTestServer:(bool) isTest;
 
 /**
+ *  功能描述:   设置用户自定义Log路径
+ *  @param pFilePath 文件的路径
+ *
+ *  @return 错误码，详见YouMeConstDefine.h定义
+ */
+- (YouMeErrorCode_t)setUserLogPath:(NSString *)path;
+
+/**
  *  功能描述:   设置是否由外部输入音视频
  *  @param bInputModeEnabled: true:外部输入模式，false:SDK内部采集模式
  */

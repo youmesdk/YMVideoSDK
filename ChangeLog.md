@@ -1,5 +1,44 @@
 # ChangeLog汇总
 
+# 版本3.0.0.222
+##修改内容
+1. Bugfix：接收video on通知特别慢的问题；
+2. Bugfix：32位cpu兼容修正。
+3. Change：混流画布颜色从绿色改为黑色；
+4. Add：新增了设置自定义Log路径的接口；
+
+
+## 接口变更
+### IOS
+#### 自定义Log路径设置
+新增了设置自定义Log路径的接口。
+
+``` Objective-c
+/**
+ *  功能描述: 设置用户自定义Log路径
+ *  @param pFilePath 文件的路径
+ *
+ *  @return 错误码，详见YouMeConstDefine.h定义
+ */
+- (YouMeErrorCode_t)setUserLogPath:(NSString *)path;
+```
+
+### Android
+#### 自定义Log路径设置
+新增了设置自定义Log路径的接口。
+
+``` java
+    /**
+     *  功能描述: 设置用户自定义Log路径
+     *  @param filePath Log文件的路径
+     *  @return YOUME_SUCCESS - 成功
+     *          其他 - 具体错误码
+     */
+    public static native int setUserLogPath (String filePath);
+```
+
+
+
 # 版本3.0.0.213
 ##修改内容
 1. iOS ffmpeg独立为`libffmpeg3.3.a` ，包含：libavcodec libavformat libavutil
