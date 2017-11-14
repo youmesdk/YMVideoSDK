@@ -1,7 +1,35 @@
 # ChangeLog汇总
+# 版本3.0.0.225
+## 修改内容
+1. Change：增加setLogLevel设置文件参数，外部输入模式下默认不开启log
+
+## 接口变更
+### IOS
+#### 自定义日志级别
+``` Objective-c
+/**
+ *  功能描述: 设置日志等级
+ *  @param consoleLevel: 控制台日志等级
+ *  @param fileLevel: 文件日志等级
+ */
+- (void) setLogLevelforConsole:(YOUME_LOG_LEVEL_t) consoleLevel forFile:(YOUME_LOG_LEVEL_t)fileLevel;
+```
+
+### Android
+#### 设置日志等级
+增加了设置文件Level参数。
+
+``` java
+     /**
+     *  功能描述: 设置日志等级
+     *  @param consoleLevel: 控制台日志等级, 有效值参看YOUME_LOG_LEVEL
+     *  @param fileLevel: 文件日志等级, 有效值参看YOUME_LOG_LEVEL
+     */
+     public static native void  setLogLevel(  int consoleLevel, int fileLevel );
+```
 
 # 版本3.0.0.222
-##修改内容
+## 修改内容
 1. Bugfix：接收video on通知特别慢的问题；
 2. Bugfix：32位cpu兼容修正;
 3. Change：混流画布颜色从绿色改为黑色；
@@ -24,18 +52,6 @@
  */
 - (YouMeErrorCode_t)setUserLogPath:(NSString *)path;
 ```
-
-#### 设置日志等级
-增加了设置文件Level参数。
-
-``` Objective-c
-/**
- *  功能描述: 设置日志等级
- *  @param consoleLevel: 控制台日志等级
- *  @param fileLevel: 文件日志等级
- */
-- (void) setLogLevelforConsole:(YOUME_LOG_LEVEL_t) consoleLevel forFile:(YOUME_LOG_LEVEL_t)fileLevel;
-``` Objective-c
 
 
 ### Android
