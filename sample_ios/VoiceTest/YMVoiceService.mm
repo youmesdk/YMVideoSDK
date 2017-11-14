@@ -510,9 +510,9 @@ extern void SetServerMode(SERVER_MODE serverMode);
     return IYouMeVoiceEngine::getInstance ()->kickOtherFromChannel( [userID UTF8String], [channelID UTF8String], lastTime  );
 }
 
-- (void) setLogLevel:(YOUME_LOG_LEVEL_t) level
+- (void) setLogLevelforConsole:(YOUME_LOG_LEVEL_t) consoleLevel forFile:(YOUME_LOG_LEVEL_t)fileLevel
 {
-    return IYouMeVoiceEngine::getInstance ()->setLogLevel( level );
+    return IYouMeVoiceEngine::getInstance ()->setLogLevel(consoleLevel, fileLevel);
 }
 - (YouMeErrorCode_t) setSampleRate:(YOUME_SAMPLE_RATE_t)sampleRate
 {

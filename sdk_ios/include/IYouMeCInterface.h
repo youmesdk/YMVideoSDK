@@ -480,7 +480,7 @@ extern "C"
      *  功能描述: 设置日志等级
      *  @param level: 日志等级
      */
-    YOUME_API void youme_setLogLevel( int  level);
+    YOUME_API void youme_setLogLevel( int consoleLevel, int fileLevel);
     
     /**
      *  功能描述: 设置语音采样率

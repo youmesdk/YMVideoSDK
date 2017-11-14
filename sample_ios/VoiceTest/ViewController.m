@@ -244,10 +244,12 @@ const int CHANGE_SERVER_MODE = 6;
     //默认测服
     mIsTestServer = false;
     //[[YMVoiceService getInstance]setTestServer:mIsTestServer];
-    //========================== 设置用户自定义Log路径 =========================================================
-    //[[YMVoiceService getInstance] setUserLogPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"ymrtc_userlog.txt"]];
     //========================== 设置为外部输入音视频的模式 =========================================================
     [[YMVoiceService getInstance] setExternalInputMode:true];
+    //========================== 设置Log等级 =========================================================
+    //[[YMVoiceService getInstance] setLogLevelforConsole:LOG_INFO forFile:LOG_INFO];
+    //========================== 设置用户自定义Log路径 =========================================================
+    //[[YMVoiceService getInstance] setUserLogPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"ymrtc_userlog.txt"]];
     //========================== 初始化YoumeService =========================================================
     [[YMVoiceService getInstance] setAVStatisticInterval: 5000 ];
     
@@ -464,9 +466,6 @@ const int CHANGE_SERVER_MODE = 6;
     switch (eventType)
     {
         case YOUME_EVENT_INIT_OK:
-            // TODO 设置日志级别，会被服务器下发的配置覆盖
-            [[YMVoiceService getInstance] setLogLevel: LOG_INFO ];
-            
             // SDK验证成功
             self.mBInitOK = TRUE;
             mTips = @"SDK验证成功!";

@@ -735,9 +735,10 @@ public:
     
     /**
      *  功能描述: 设置日志等级
-     *  @param level: 日志等级
+     *  @param consoleLevel: 控制台日志等级
+     *  @param fileLevel: 文件日志等级
      */
-    void setLogLevel( YOUME_LOG_LEVEL  level);
+    void setLogLevel( YOUME_LOG_LEVEL consoleLevel, YOUME_LOG_LEVEL fileLevel);
     
     /**
      *  功能描述: 设置语音采样率

@@ -546,9 +546,10 @@
 
 /**
  *  功能描述: 设置日志等级
- *  @param level: 日志等级
+ *  @param consoleLevel: 控制台日志等级
+ *  @param fileLevel: 文件日志等级
  */
-- (void) setLogLevel:(YOUME_LOG_LEVEL_t) level;
+- (void) setLogLevelforConsole:(YOUME_LOG_LEVEL_t) consoleLevel forFile:(YOUME_LOG_LEVEL_t)fileLevel;
 
 /**
  *  功能描述: 设置语音采样率
