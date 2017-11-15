@@ -247,7 +247,7 @@ const int CHANGE_SERVER_MODE = 6;
     //========================== 设置为外部输入音视频的模式 =========================================================
     [[YMVoiceService getInstance] setExternalInputMode:true];
     //========================== 设置Log等级 =========================================================
-    [[YMVoiceService getInstance] setLogLevelforConsole:LOG_INFO forFile:LOG_INFO];
+    //[[YMVoiceService getInstance] setLogLevelforConsole:LOG_INFO forFile:LOG_INFO];
     //========================== 设置用户自定义Log路径 =========================================================
     //[[YMVoiceService getInstance] setUserLogPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"ymrtc_userlog.txt"]];
     //========================== 初始化YoumeService =========================================================
