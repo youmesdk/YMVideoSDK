@@ -114,14 +114,17 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
         Intent intent = new Intent(this,VoiceEngineService.class);
         startService(intent);
 
+        //设置api为外部输入音视频的模式
+        api.setExternalInputMode( true );
+        //Demo设置开启日志打印
+        api.setLogLevel(YouMeConst.YOUME_LOG_LEVEL.LOG_INFO, YouMeConst.YOUME_LOG_LEVEL.LOG_INFO);
         //设置自定义Log路径
         //api.setUserLogPath("/sdcard/YouMe/ym_userlog.txt");
         //设置回调监听对象,需要implements YouMeCallBackInterface
         api.SetCallback(this);
         //设置测试服还是正式服
         //NativeEngine.setServerMode(NativeEngine.SERVER_MODE_TEST);
-        //设置api为外部输入音视频的模式
-        api.setExternalInputMode( true );
+
         //调用初始化
         api.init(CommonDefines.appKey, CommonDefines.appSecret, YouMeConst.YOUME_RTC_SERVER_REGION.RTC_CN_SERVER, "");
 
