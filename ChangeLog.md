@@ -1,5 +1,10 @@
 # ChangeLog汇总
 
+# 版本3.0.0.231
+## 修改内容
+1. Optimize：优化视频外部输入，把输入和编码线程独立；
+2. Optimize：测底移除java对com.unity3d.player.UnityPlayer的依赖
+
 # 版本3.0.0.227
 ## 修改内容
 1. Bugfix: 移除导致网络收发包不稳定的提交

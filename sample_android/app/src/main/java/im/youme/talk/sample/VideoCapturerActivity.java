@@ -116,12 +116,15 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
 
         //设置自定义Log路径
         //api.setUserLogPath("/sdcard/YouMe/ym_userlog.txt");
+
         //设置回调监听对象,需要implements YouMeCallBackInterface
         api.SetCallback(this);
         //设置测试服还是正式服
         //NativeEngine.setServerMode(NativeEngine.SERVER_MODE_TEST);
         //设置api为外部输入音视频的模式
         api.setExternalInputMode( true );
+        //自定义日志级别
+        api.setLogLevel(YouMeConst.YOUME_LOG_LEVEL.LOG_INFO,YouMeConst.YOUME_LOG_LEVEL.LOG_INFO);
         //调用初始化
         api.init(CommonDefines.appKey, CommonDefines.appSecret, YouMeConst.YOUME_RTC_SERVER_REGION.RTC_CN_SERVER, "");
 
@@ -490,6 +493,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                     avTime = curtime;
                     strAvTip = strAvTip + msg.arg1 + "," + userId + "," + msg.arg2 + "\n";
                     avTips.setText(strAvTip );
+                    avTips.setTextColor(Color.rgb(255, 0, 0));
                     break;
                 }
                 case YouMeConst.YouMeEvent.YOUME_EVENT_FAREND_VOICE_LEVEL:
