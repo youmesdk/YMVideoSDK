@@ -1,5 +1,10 @@
 # ChangeLog汇总
 
+# 版本3.0.0.236
+## 修改内容
+1. Optimize：移除ffmepg ios 静态库debug符号，减小库大小；
+2. Optimize：修改没有addMix，无法收到远端非混流数据回调的问题。
+
 # 版本3.0.0.231
 ## 修改内容
 1. Optimize：优化视频外部输入，把输入和编码线程独立；
