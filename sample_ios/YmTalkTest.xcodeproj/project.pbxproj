@@ -233,7 +233,6 @@
 		BEA4ABE91F13278100286656 /* libYouMeCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA4ABE81F13278100286656 /* libYouMeCommon.a */; };
 		BEA5D5DF1F7E1A9000679BDF /* ParamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5D5DE1F7E1A9000679BDF /* ParamViewController.m */; };
 		BEEDDFB71F6911B80089C80D /* libyoume_voice_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEDDFB61F6911B80089C80D /* libyoume_voice_engine.a */; };
-		D02357D41D6BFE1100F2EB71 /* kanong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D02357D31D6BFE1100F2EB71 /* kanong.mp3 */; };
 		D065189C1DE2D7E8005ABE42 /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = D065189B1DE2D7E8005ABE42 /* ExportOptions.plist */; };
 /* End PBXBuildFile section */
 
@@ -720,7 +719,6 @@
 		AF74A8C21F80EB8500AD9ECB /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		AF74A8C31F80EB8500AD9ECB /* video_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video_common.h; sourceTree = "<group>"; };
 		AFA74E8C1F4FE08C009CBC5B /* libyoume_voice_engine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyoume_voice_engine.a; path = "../../youme_voice_engine/xcode/YouMeVoiceEngine/build/Debug-iphoneos/libyoume_voice_engine.a"; sourceTree = "<group>"; };
-		AFA74E8F1F4FE0B8009CBC5B /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libswscale.a; sourceTree = "<group>"; };
 		AFA74E901F4FE0B8009CBC5B /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libavcodec.a; sourceTree = "<group>"; };
 		AFA74E911F4FE0B8009CBC5B /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libavformat.a; sourceTree = "<group>"; };
 		AFA74E921F4FE0B8009CBC5B /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../../youme_voice_engine/ffmpegPlayer/libs/apple/universal/libavutil.a; sourceTree = "<group>"; };
@@ -739,7 +737,6 @@
 		BEEDDFB61F6911B80089C80D /* libyoume_voice_engine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyoume_voice_engine.a; path = SDK/libs/libyoume_voice_engine.a; sourceTree = "<group>"; };
 		D00D99271DE050FF00C324E7 /* IYouMeVoiceEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IYouMeVoiceEngine.h; path = SDK/include/IYouMeVoiceEngine.h; sourceTree = "<group>"; };
 		D00D99281DE050FF00C324E7 /* YouMeConstDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouMeConstDefine.h; path = SDK/include/YouMeConstDefine.h; sourceTree = "<group>"; };
-		D02357D31D6BFE1100F2EB71 /* kanong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = kanong.mp3; path = Resources/kanong.mp3; sourceTree = "<group>"; };
 		D065189B1DE2D7E8005ABE42 /* ExportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
 		D091622B1E0D17250016C64C /* IYouMeEventCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IYouMeEventCallback.h; path = SDK/include/IYouMeEventCallback.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1404,7 +1401,6 @@
 		AFA74E8E1F4FE09A009CBC5B /* ffmpeg */ = {
 			isa = PBXGroup;
 			children = (
-				AFA74E8F1F4FE0B8009CBC5B /* libswscale.a */,
 				AFA74E901F4FE0B8009CBC5B /* libavcodec.a */,
 				AFA74E911F4FE0B8009CBC5B /* libavformat.a */,
 				AFA74E921F4FE0B8009CBC5B /* libavutil.a */,
@@ -1463,7 +1459,6 @@
 		D02357D01D6B3AAD00F2EB71 /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				D02357D31D6BFE1100F2EB71 /* kanong.mp3 */,
 			);
 			name = Music;
 			sourceTree = "<group>";
@@ -1575,7 +1570,6 @@
 				2048A1631D34A0520099190B /* LaunchScreen.storyboard in Resources */,
 				D065189C1DE2D7E8005ABE42 /* ExportOptions.plist in Resources */,
 				2048A1601D34A0520099190B /* Assets.xcassets in Resources */,
-				D02357D41D6BFE1100F2EB71 /* kanong.mp3 in Resources */,
 				2048A15E1D34A0520099190B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
