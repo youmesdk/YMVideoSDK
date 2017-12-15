@@ -605,7 +605,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
         else
         {
             //加入频道前进行video设置
-            api.setSampleRate(YouMeConst.YOUME_SAMPLE_RATE.SAMPLE_RATE_44);
+            api.setExternalInputSampleRate(YouMeConst.YOUME_SAMPLE_RATE.SAMPLE_RATE_16,YouMeConst.YOUME_SAMPLE_RATE.SAMPLE_RATE_44);
             api.setVideoNetResolution(_videoWidth,_videoHeight);
             api.setAVStatisticInterval(_reportInterval);
             api.setVideoCodeBitrate(_maxBitRate, _minBitRate );

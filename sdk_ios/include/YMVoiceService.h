@@ -554,10 +554,11 @@
 /**
  *  功能描述: 设置语音采样率
  *  @param sampleRate: 采样率
+ *  @param mixCallbackSampleRate: 音频混流回调时的采样率
  *  @return YOUME_SUCCESS - 成功
  *          其他 - 具体错误码
  */
-- (YouMeErrorCode_t) setSampleRate:(YOUME_SAMPLE_RATE_t)sampleRate;
+- (YouMeErrorCode_t) setExternalInputSampleRate:(YOUME_SAMPLE_RATE_t)sampleRate mixedCallbackSampleRate:(YOUME_SAMPLE_RATE_t)mixedCallbackSampleRate;
 
 /**
  *  功能描述: 设置视频网络传输过程的分辨率, 第一路高分辨率

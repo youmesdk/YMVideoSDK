@@ -28,7 +28,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class AudioRecorderSample
 {
     private static final String  TAG = "AudioRecorderSample";
-    private static final int     DEFAULT_SAMPLE_RATE = 44100;
+    private static final int     DEFAULT_SAMPLE_RATE = 16000;
     private static final int     DEFAULT_CHANNEL_NUM = 1;
     private static final int     DEFAULT_BYTES_PER_SAMPLE = 2;
     private static final boolean DEBUG = false;
@@ -128,7 +128,7 @@ public class AudioRecorderSample
                 pcmType = AudioFormat.ENCODING_PCM_16BIT;
                 break;
         }
-        readBufSize = 2048;//mSamplerate * mChannelNum * mBytesPerSample / 100 * 2; // 20ms data
+        readBufSize = 1024;//mSamplerate * mChannelNum * mBytesPerSample / 100 * 2; // 20ms data
         mOutBuffer = new byte[readBufSize];
         audioBufferQueue = new ArrayBlockingQueue<byte[]>(10);
 
@@ -157,7 +157,8 @@ public class AudioRecorderSample
                 effects.enable(mAudioRecord.getAudioSessionId());
             }
         }
-        catch (IllegalArgumentException e) {
+        catch (Throwable e) {
+            e.printStackTrace();
             Log.e(TAG, "AudioRecord initialize fail :" + e.getMessage() );
             mInitStatus = AudioRecord.STATE_UNINITIALIZED;
             mInitSuceed = false;

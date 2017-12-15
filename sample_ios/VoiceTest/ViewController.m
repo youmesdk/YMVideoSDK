@@ -259,7 +259,7 @@ const int CHANGE_SERVER_MODE = 6;
                          serverRegionName:@"cn" ];
     
     // 设置外部输入的采样率为48k
-    [[YMVoiceService getInstance] setSampleRate: SAMPLE_RATE_48 ];
+    [[YMVoiceService getInstance] setExternalInputSampleRate: SAMPLE_RATE_48 mixedCallbackSampleRate:SAMPLE_RATE_48];
     // 设置视频无渲染帧超时等待时间，单位毫秒
     [[YMVoiceService getInstance] setVideoNoFrameTimeout: 5000];
     //========================== END初始化YoumeService ==========================================================

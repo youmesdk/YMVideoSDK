@@ -741,12 +741,13 @@ public:
     void setLogLevel( YOUME_LOG_LEVEL consoleLevel, YOUME_LOG_LEVEL fileLevel);
     
     /**
-     *  功能描述: 设置语音采样率
-     *  @param sampleRate:语音采样率
+     *  功能描述: 设置外部输入模式的语音采样率
+     *  @param inputSampleRate: 输入语音采样率
+     *  @param mixedCallbackSampleRate: mix后输出语音采样率
      *  @return YOUME_SUCCESS - 成功
      *          其他 - 具体错误码
      */
-    YouMeErrorCode setSampleRate( YOUME_SAMPLE_RATE sampleRate );
+    YouMeErrorCode setExternalInputSampleRate( YOUME_SAMPLE_RATE inputSampleRate, YOUME_SAMPLE_RATE mixedCallbackSampleRate);
     
     /**
      *  功能描述: 设置视频网络传输过程的分辨率,高分辨率

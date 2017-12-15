@@ -483,12 +483,13 @@ extern "C"
     YOUME_API void youme_setLogLevel( int consoleLevel, int fileLevel);
     
     /**
-     *  功能描述: 设置语音采样率
-     *  @param sampleRate:语音采样率
+     *  功能描述: 设置外部输入模式的语音采样率
+     *  @param inputSampleRate: 输入语音采样率
+     *  @param mixedCallbackSampleRate: mix后输出语音采样率
      *  @return YOUME_SUCCESS - 成功
      *          其他 - 具体错误码
      */
-    YOUME_API int youme_setSampleRate( int sampleRate );
+    YOUME_API int youme_setExternalInputSampleRate( int inputSampleRate, int mixedCallbackSampleRate);
     
 #endif
  /* IYouMeCInterface_hpp */

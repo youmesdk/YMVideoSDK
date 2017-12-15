@@ -514,9 +514,9 @@ extern void SetServerMode(SERVER_MODE serverMode);
 {
     return IYouMeVoiceEngine::getInstance ()->setLogLevel(consoleLevel, fileLevel);
 }
-- (YouMeErrorCode_t) setSampleRate:(YOUME_SAMPLE_RATE_t)sampleRate
+- (YouMeErrorCode_t) setExternalInputSampleRate:(YOUME_SAMPLE_RATE_t)sampleRate mixedCallbackSampleRate:(YOUME_SAMPLE_RATE_t)mixedCallbackSampleRate
 {
-    return IYouMeVoiceEngine::getInstance ()->setSampleRate( sampleRate );
+    return IYouMeVoiceEngine::getInstance ()->setExternalInputSampleRate(sampleRate, mixedCallbackSampleRate);
 }
 
 - (YouMeErrorCode_t)setVideoNetResolutionWidth:(int)width height:(int)height {

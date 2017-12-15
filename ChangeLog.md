@@ -1,15 +1,46 @@
 # ChangeLog汇总
 
-# 版本3.0.0.238
+# 版本3.0.1.242  2017-12-13
 ## 修改内容
-1. BugFix：修复三处内存泄露问题。
+1. Optimize：Android 内置 communication mode 设置添加保护，避免重复设置导致无效；
+2. Optimize：协议头版本号修改，区别于3.0之前的版本；
+3. 添加音频mix回调的采样率设置接口，不设置默认用setSampleRate相同的采样率。
+4. Change：setSampleRate接口变更为setExternalInputSampleRate，支持设置输入采样率和mix后的输出采样率
 
-# 版本3.0.0.236
+## 接口变更
+### IOS
+#### 设置外部输入模式的语音采样率
+``` Objective-c
+/**
+ *  功能描述: 设置外部输入模式的语音采样率
+ *  @param inputSampleRate: 输入语音采样率
+ *  @param mixedCallbackSampleRate: mix后输出语音采样率
+ *  @return YOUME_SUCCESS - 成功
+ *          其他 - 具体错误码
+ */
+- (YouMeErrorCode_t) setExternalInputSampleRate:(YOUME_SAMPLE_RATE_t)inputSampleRate mixedCallbackSampleRate:(YOUME_SAMPLE_RATE_t)mixedCallbackSampleRate;
+```
+
+### Android
+#### 设置外部输入模式的语音采样率
+``` java
+//api
+/**
+ *  功能描述: 设置外部输入模式的语音采样率
+ *  @param inputSampleRate: 输入语音采样率
+ *  @param mixedCallbackSampleRate: mix后输出语音采样率
+ *  @return YOUME_SUCCESS - 成功
+ *          其他 - 具体错误码
+ */
+public static native int setExternalInputSampleRate( int inputSampleRate, int mixedCallbackSampleRate );
+```
+
+# 版本3.0.1.236
 ## 修改内容
 1. Optimize：移除ffmepg ios 静态库debug符号，减小库大小；
 2. Optimize：修改没有addMix，无法收到远端非混流数据回调的问题。
 
-# 版本3.0.0.231
+# 版本3.0.1.231
 ## 修改内容
 1. Optimize：优化视频外部输入，把输入和编码线程独立；
 2. Optimize：测底移除java对com.unity3d.player.UnityPlayer的依赖
