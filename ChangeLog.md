@@ -1,11 +1,13 @@
 # ChangeLog汇总
 
-# 版本3.0.1.242  2017-12-13
+# 版本3.0.1.249  2017-12-19
+1. Bugfix：修改ios11 VTDecompressionSessionInvalidate 卡死引起死锁。
+
+# 版本3.0.1.246  2017-12-13
 ## 修改内容
 1. Optimize：Android 内置 communication mode 设置添加保护，避免重复设置导致无效；
 2. Optimize：协议头版本号修改，区别于3.0之前的版本；
-3. 添加音频mix回调的采样率设置接口，不设置默认用setSampleRate相同的采样率。
-4. Change：setSampleRate接口变更为setExternalInputSampleRate，支持设置输入采样率和mix后的输出采样率
+4. Change：setSampleRate接口变更为setExternalInputSampleRate，支持设置输入采样率和mix后的输出采样率。
 
 ## 接口变更
 ### IOS
