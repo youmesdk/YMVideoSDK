@@ -1,11 +1,11 @@
 # ChangeLog汇总
 
-# 版本3.0.1.246  2017-12-14
+# 版本3.0.1.242  2017-12-13
 ## 修改内容
 1. Optimize：Android 内置 communication mode 设置添加保护，避免重复设置导致无效；
 2. Optimize：协议头版本号修改，区别于3.0之前的版本；
-3. Change：setSampleRate接口变更为setExternalInputSampleRate，支持设置输入采样率和mix后的输出采样率；
-4. Bugfix：iOS 外部音频输入时，如果遇到断网重连，有可能发AudioUnit死锁问题。
+3. 添加音频mix回调的采样率设置接口，不设置默认用setSampleRate相同的采样率。
+4. Change：setSampleRate接口变更为setExternalInputSampleRate，支持设置输入采样率和mix后的输出采样率
 
 ## 接口变更
 ### IOS
