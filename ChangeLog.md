@@ -1,7 +1,8 @@
 # ChangeLog汇总
 
 # 版本3.0.1.249  2017-12-19
-1. Bugfix：修改ios11 VTDecompressionSessionInvalidate 卡死引起死锁。
+1. Bugfix：修改iOS 11 VTDecompressionSessionInvalidate 卡死引起死锁；
+2. Bugfix：修正 Android x86 ABI 运行时，远端语音输入时可能崩溃的问题(sse指令相关)。
 
 # 版本3.0.1.246  2017-12-13
 ## 修改内容
