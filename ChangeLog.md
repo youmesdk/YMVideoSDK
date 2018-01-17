@@ -1,5 +1,11 @@
 # ChangeLog汇总
 
+# 版本3.0.1.252  2018-1-7
+1. Change：客户端对频道号的字符支持添加:-/+/=。
+
+# 版本3.0.1.251  2017-12-21
+1. Bugfix：修复x86 ABI 支持SSE的cpu 运行崩溃问题。
+
 # 版本3.0.1.249  2017-12-19
 1. Bugfix：修改ios11 VTDecompressionSessionInvalidate 卡死引起死锁。
 
