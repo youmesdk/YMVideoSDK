@@ -52,7 +52,7 @@ public class AudioRecorderSample
     private static int           mCounter = 1;
     private static int           mLoopCounter = 1;
     private static boolean       mInitSuceed = false;
-    private static AudioManager  mAudioManager = null;
+
     private static int           readBufSize = 0;
     private static boolean       rsync = false;
 
@@ -73,7 +73,7 @@ public class AudioRecorderSample
 
     public static void initRecorder (Context env) {
         initRecorder(DEFAULT_SAMPLE_RATE, DEFAULT_CHANNEL_NUM, DEFAULT_BYTES_PER_SAMPLE);
-        mAudioManager = (AudioManager) env.getSystemService  (Context.AUDIO_SERVICE);
+        //mAudioManager = (AudioManager) env.getSystemService  (Context.AUDIO_SERVICE);
     }
 
     // Creates an AudioRecord instance using AudioRecord.Builder which was added in API level 23.
@@ -198,7 +198,7 @@ public class AudioRecorderSample
         if (mInitSuceed) {
             mAudioRecord.startRecording();
         }
-        mAudioManager.setSpeakerphoneOn(true);
+        //mAudioManager.setSpeakerphoneOn(true);
 
         mIsLoopExit = false;
         mRecorderThread = new Thread(new AudioRecorderRunnable());
