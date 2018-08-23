@@ -1,5 +1,12 @@
 # ChangeLog汇总
 
+# 版本3.0.1.272  2018-08-23
+1. Bugfix：修复YOUME_EVENT_FAREND_VOICE_LEVEL事件某些情况下不回调的问题
+2. Bugfix：数据上报，集合分辨率不正常问题修复
+3. Bugfix：修复外部采集退出连麦时外部的录音声音过小的问题
+4. Add：OpenGLView20添加渲染模式、video退出添加判断防止crash
+5. Bugfix：修复mixedCallback回调的数据有回声的问题
+
 # 版本3.0.1.258  2018-04-13
 1. Bugfix：修复进出房间及断开重连蓝牙时异常问题
 2. Optimize：去掉渲染边框
