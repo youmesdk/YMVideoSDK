@@ -35,7 +35,7 @@
  * @param width                  
  * @param height                  
  */
-- (void)addMixOverlayVideoUserId:(NSString*)userId PosX:(int)x PosY:(int)y PosZ:(int)z Width:(int)width Height:(int)height;
+- (void)addMixOverlayVideoUserId:(NSString*)userId PosX:(int)x PosY:(int)y PosZ:(int)z Width:(int)width Height:(int)height Pixel:(int)pixel;
 
 /**
  * remove the specified user's video from the mixing

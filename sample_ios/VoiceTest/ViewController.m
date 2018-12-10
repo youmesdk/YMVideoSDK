@@ -530,7 +530,7 @@ const int CHANGE_SERVER_MODE = 6;
         dispatch_async (dispatch_get_main_queue (), ^{
             //设置混流画布
             [[YMEngineService getInstance] setMixVideoWidth:MIX_WIDTH Height:MIX_HEIGHT];
-            [[YMEngineService getInstance] addMixOverlayVideoUserId: _localUserId.text PosX:0 PosY:0 PosZ:0 Width:MIX_WIDTH Height:MIX_HEIGHT];
+            [[YMEngineService getInstance] addMixOverlayVideoUserId: _localUserId.text PosX:0 PosY:0 PosZ:0 Width:MIX_WIDTH Height:MIX_HEIGHT Pixel:30];
             
             _buttonSpeaker.enabled = true;
             _buttonLeaveRoom.enabled = true;
@@ -605,7 +605,7 @@ const int CHANGE_SERVER_MODE = 6;
                  posX = 210;
              }
              mCurMixCount++;
-             [[YMEngineService getInstance] addMixOverlayVideoUserId: param PosX:posX PosY:posY PosZ:0 Width:90 Height:120];
+             [[YMEngineService getInstance] addMixOverlayVideoUserId: param PosX:posX PosY:posY PosZ:0 Width:90 Height:120 Pixel:20];
              [self.userList addObject:param];
          });
         
@@ -780,7 +780,7 @@ const int CHANGE_SERVER_MODE = 6;
 }
 
 - (IBAction)onClickButtonAddMixing:(id)sender {
-    [[YMEngineService getInstance] addMixOverlayVideoUserId: _localUserId.text PosX:0 PosY:0 PosZ:0 Width:MIX_WIDTH Height:MIX_HEIGHT];
+    [[YMEngineService getInstance] addMixOverlayVideoUserId: _localUserId.text PosX:0 PosY:0 PosZ:0 Width:MIX_WIDTH Height:MIX_HEIGHT Pixel:30];
 }
 
 - (IBAction)onClickButtonRemoveMixing:(id)sender {

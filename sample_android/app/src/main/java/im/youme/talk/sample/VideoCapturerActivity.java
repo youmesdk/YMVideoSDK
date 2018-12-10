@@ -404,7 +404,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                         VideoMgr.setVideoFrameCallback(new videoDataCallback());
                         VideoMgr.setMixVideoSize(360,480);
                         //String userId, int x, int y, int z, int width, int height
-                        VideoMgr.addMixOverlayVideo(local_user_id,0,0,0,360,480);
+                        VideoMgr.addMixOverlayVideo(local_user_id,0,0,0,360,480, 20);
                         //设置远端语音音量回调
 
                         //这时候允许打开摄像头进行采集
@@ -425,7 +425,7 @@ public class VideoCapturerActivity extends Activity implements YouMeCallBackInte
                     boolean needCreateRender = true;
                     m_newUserId = String.valueOf(msg.obj);
                     Log.d(TAG, "新加的user ID=" + m_newUserId);
-                    VideoMgr.addMixOverlayVideo(m_newUserId,20,40,0,240,120);
+                    VideoMgr.addMixOverlayVideo(m_newUserId,20,40,0,240,240, 40);
                     if(m_newUserId.equals(local_user_id)) {
                         updateLocalView();
                     } else {
